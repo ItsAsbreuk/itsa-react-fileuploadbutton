@@ -1,0 +1,83 @@
+$color-error-border: #FF6A6A;
+$color-error-text: #F34F4F;
+$background-color-error-text: #F9F9F9;
+$color-required-star: #FF6A6A;
+$color-help-text: #999;
+
+.itsa-fileuploadbutton {
+    position: relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin-bottom: 1.5em; /* keep space for help- and error-messages */
+}
+
+button.itsa-button.itsa-fileuploadbutton-wide {
+    padding-right: 1.7em;
+}
+
+button.itsa-button.itsa-fileuploadbutton-error {
+    box-shadow: 0 0 0 1px $color-error-border inset;
+}
+
+.itsa-fileuploadbutton-required::after {
+    content: "*";
+    position: absolute;
+    font-size: 2em;
+    top: 0.11em;
+    right: 0.2em;
+    color: $color-required-star;
+}
+
+.itsa-fileuploadbutton-feedback-success::after {
+    content: url("../img/icon-success.svg");
+    position: absolute;
+    top: 0.1em;
+    right: 0;
+}
+
+.itsa-fileuploadbutton-error input {
+    border-color: $color-error-border !important;
+    -webkit-transition: all 0.2s ease-out 0s;
+    -moz-transition: all 0.2s ease-out 0s;
+    -ms-transition: all 0.2s ease-out 0s;
+    -o-transition: all 0.2s ease-out 0s;
+    transition: all 0.2s ease-out 0s;
+}
+
+.itsa-fileuploadbutton-error-text {
+    white-space: nowrap;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    color: $color-error-text;
+    font-size: 0.8em;
+    line-height: 1em;
+    opacity: 1;
+    position: absolute;
+    z-index: 1;
+    background-color: $background-color-error-text;
+    border: 1px solid $color-error-border;
+    bottom: -1.3em;
+    left: 0;
+    padding: 0.15em 0.4em 0.1em;
+    -webkit-transition: all 0.2s ease-out 0s;
+    -moz-transition: all 0.2s ease-out 0s;
+    -ms-transition: all 0.2s ease-out 0s;
+    -o-transition: all 0.2s ease-out 0s;
+    transition: all 0.2s ease-out 0s;
+}
+
+.itsa-fileuploadbutton-help-text {
+    white-space: nowrap;
+    color: $color-help-text;
+    font-size: 0.8em;
+    bottom: -1.3em;
+    left: 1px;
+    position: absolute;
+    z-index: 1;
+    padding: 0.15em 0.4em 0.1em;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}

@@ -1,0 +1,372 @@
+{
+    "project": {
+        "name": "itsa-checkbox",
+        "description": "React-Component: iOS-stylish checkbox",
+        "logo": "https://avatars0.githubusercontent.com/u/8314644?v=3&s=84",
+        "version": "0.0.1"
+    },
+    "files": {
+        "lib/component.jsx": {
+            "name": "lib/component.jsx",
+            "modules": {
+                "component.jsx": 1
+            },
+            "classes": {
+                "Component": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "component.jsx": {
+            "name": "component.jsx",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Component": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "lib/component.jsx",
+            "line": 3,
+            "description": "Description here\n\n\n\n<i>Copyright (c) 2016 ItsAsbreuk - http://itsasbreuk.nl</i><br>\nNew BSD License - http://choosealicense.com/licenses/bsd-3-clause/",
+            "since": "2.0.0"
+        }
+    },
+    "classes": {
+        "Component": {
+            "name": "Component",
+            "shortname": "Component",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "component.jsx",
+            "namespace": "",
+            "file": "lib/component.jsx",
+            "line": 3,
+            "description": "Description here\n\n\n\n<i>Copyright (c) 2016 ItsAsbreuk - http://itsasbreuk.nl</i><br>\nNew BSD License - http://choosealicense.com/licenses/bsd-3-clause/"
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "lib/component.jsx",
+            "line": 36,
+            "description": "The Component its children",
+            "itemtype": "property",
+            "name": "children",
+            "type": "Object",
+            "since": "2.0.0",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 58,
+            "description": "Whether to autofocus the Component.",
+            "itemtype": "property",
+            "name": "autoFocus",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 67,
+            "description": "The error-message that appears when the element is wrong validated.",
+            "itemtype": "property",
+            "name": "errorMsg",
+            "type": "String",
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 76,
+            "description": "The text that should appear when the element is wrong validated.",
+            "itemtype": "property",
+            "name": "helpText",
+            "type": "String",
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 85,
+            "description": "Whether to mark the Component when successfully validated.",
+            "itemtype": "property",
+            "name": "markValidated",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 94,
+            "description": "Whether the Component should show an validate-reclamation (star)",
+            "itemtype": "property",
+            "name": "markValidated",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 103,
+            "description": "The `name` for the element.",
+            "itemtype": "property",
+            "name": "name",
+            "type": "String",
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 112,
+            "description": "The `onBlur` function, when happening on the DOM-Element.",
+            "itemtype": "property",
+            "name": "onChange",
+            "type": "Function",
+            "since": "0.1.0",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 120,
+            "description": "The `onFocus` function, when happening on the DOM-Element.",
+            "itemtype": "property",
+            "name": "onChange",
+            "type": "Function",
+            "since": "0.1.0",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 128,
+            "description": "The tabindex of the Component.",
+            "itemtype": "property",
+            "name": "type",
+            "type": "Number",
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 137,
+            "description": "Whether the property is validated right.",
+            "itemtype": "property",
+            "name": "validated",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 161,
+            "description": "Returns the number of files that are currently selected.",
+            "itemtype": "method",
+            "name": "count",
+            "return": {
+                "description": "Number of files currently selected",
+                "type": "Number"
+            },
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 201,
+            "description": "Returns the currently selected files. This is an `Array-like` object, not a true Array.",
+            "itemtype": "method",
+            "name": "getFiles",
+            "return": {
+                "description": "protected `input`-domNode",
+                "type": "Array-like"
+            },
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 212,
+            "description": "Returns the last send-files.\nThis is handy to know, because after transmission, getFiles() will return empty.\nThis is an true Array with objects of this structure: {name: xxx, size: xxx}",
+            "itemtype": "method",
+            "name": "getLastSent",
+            "return": {
+                "description": "The last sent files",
+                "type": "Array"
+            },
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 225,
+            "description": "Returns the total size of all files that are currently selected.",
+            "itemtype": "method",
+            "name": "getTotalFileSize",
+            "return": {
+                "description": "The size of all files in bytes",
+                "type": "Number"
+            },
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 245,
+            "description": "Whether there are currently files selected.",
+            "itemtype": "method",
+            "name": "hasFiles",
+            "return": {
+                "description": "Number of selected files",
+                "type": "Number"
+            },
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 293,
+            "description": "Send the selected files, by emitting the \"uploader:send\"-event.\nIf `payload.url`, `payload.url` or `payload.url` is set, then these will overrule the default\nvalues (the way they were set at initiation, or by using `setDefaults`).\nYou also can set other properties at the payload --> these will be available at the listeners.",
+            "itemtype": "method",
+            "name": "send",
+            "params": [
+                {
+                    "name": "payload",
+                    "description": "",
+                    "type": "Object",
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "url",
+                            "description": "",
+                            "type": "String",
+                            "optional": true
+                        },
+                        {
+                            "name": "params",
+                            "description": "",
+                            "type": "Object",
+                            "optional": true
+                        },
+                        {
+                            "name": "options",
+                            "description": "",
+                            "type": "Object",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "chainable": 1,
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 437,
+            "description": "React render-method --> renderes the Component.",
+            "itemtype": "method",
+            "name": "render",
+            "return": {
+                "description": "ReactComponent"
+            },
+            "since": "2.0.0",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 512,
+            "description": "Returns the size of the largest file that is currently selected.",
+            "itemtype": "method",
+            "name": "_getLargestFileSize",
+            "return": {
+                "description": "The size of the largest file in bytes",
+                "type": "Number"
+            },
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 532,
+            "description": "Default function for the `uploader:_handleClick`-event",
+            "itemtype": "method",
+            "name": "_defFnSelectFiles",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "eventobject",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "multiple",
+                            "description": "whether to support multiple selected files",
+                            "type": "Boolean",
+                            "optional": true
+                        }
+                    ]
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 668,
+            "description": "Stores the files that are sent into an internal hash, which can be read by `getLastSent()`.",
+            "itemtype": "method",
+            "name": "_storeLastSent",
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "since": "0.0.1",
+            "class": "Component",
+            "module": "component.jsx"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " lib/component.jsx:293"
+        },
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " lib/component.jsx:293"
+        },
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " lib/component.jsx:293"
+        },
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " lib/component.jsx:293"
+        }
+    ]
+}
