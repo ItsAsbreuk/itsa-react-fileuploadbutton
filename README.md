@@ -5,6 +5,8 @@ File upload-button for react, without input-element.
 With progress-status, abortable and CORS enabled.
 Support for IE8+
 
+The itsa-react-fileuploadbutton will send the files in simultaneous chuncks to the server. This results into very high-speed uploads.
+
 ## How to use:
 
 ```js
