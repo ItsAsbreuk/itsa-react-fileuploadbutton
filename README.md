@@ -27,6 +27,11 @@ You can force the `form-submit` mode, by setting the prop `formSubmitMode` `true
 Best usage is `same-origin` with `formSubmitMode`=true (which is the default). In this case the fileupload-button will act the same on every environment, with the exeption that there is no visual progress on IE<10.
 
 
+[View live example](http://projects.itsasbreuk.nl/react-components/itsa-fileuploadbutton/component.html)
+
+[API](http://projects.itsasbreuk.nl/react-components/itsa-fileuploadbutton/api/)
+
+
 ## How to use:
 
 ```js
@@ -92,10 +97,6 @@ You need the right css in order to make use of `itsa-react-fileuploadbutton`. Th
 1. You can use the css-files inside the `css`-folder, AND use the css-files of `itsa-react-button`/css
 2. You can use: `Component = require("itsa-react-fileuploadbutton/lib/component-styled.jsx");` and build your project with `webpack`. This is needed, because you need the right plugin to handle a requirement of the `scss`-file.
 
-
-[View live example](http://projects.itsasbreuk.nl/react-components/itsa-fileuploadbutton/component.html)
-
-[API](http://projects.itsasbreuk.nl/react-components/itsa-fileuploadbutton/api/)
 
 ## Setting up the server
 
