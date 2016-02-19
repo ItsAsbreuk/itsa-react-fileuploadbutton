@@ -114,7 +114,8 @@ var Hapi = require('hapi'),
     fileUploadHandler = require("itsa-fileuploadhandler"),
     maxFileSize = 5*1024*1024, // 5mb
     accessControlAllowOrigin = true,
-    fileUploadHandlerFns = fileUploadHandler.getHapiFns("/var/www/vhosts/server.itsa.io/server/imageuploader/uploadDir", maxFileSize, accessControlAllowOrigin);
+    tempDir = "/tmp",
+    fileUploadHandlerFns = fileUploadHandler.getHapiFns(tempDir, maxFileSize, accessControlAllowOrigin);
 
 // setting up the server:
 var server = new Hapi.Server();
