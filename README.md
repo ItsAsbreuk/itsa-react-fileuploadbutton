@@ -2,10 +2,32 @@
 
 File upload-button for react, without input-element.
 
-With progress-status, abortable and CORS enabled.
-Support for IE8+
+It has the following features:
 
-The itsa-react-fileuploadbutton will send the files in simultaneous chuncks to the server. This results into very high-speed uploads.
+* Abortable
+* CORS support
+* IE8+ support
+* Progress-status (IE10+)
+* Ultrafast upload by splitting the file(s) in chunks
+* Focussable
+* Aria-support (automaticly)
+
+
+## Different modes
+
+The uploadbutton uses XHR2 by default and falls back into using a form-submit mode (`multipart/form-data`).
+You can force the `form-submit` mode, by setting the prop `formSubmitMode` `true`. This is NOT recomended:
+
+#### Advantages `formSubmitMode`:
+* Easy setup serverside (no file-chunks)
+
+#### Disadvantages `formSubmitMode`:
+* No file-chunks, therefore no highspeed upload
+* No onProgress
+* When CORS, the uploader is unable to detect reponse-errors, leading into the callback of onSuccess in case of a network-error.
+
+Best usage is `same-origin` with `formSubmitMode`=true (which is the default). In this case the fileupload-button will act the same on every environment, with the exeption that there is no visual progress on IE<10.
+
 
 ## How to use:
 
@@ -17,29 +39,20 @@ const React = require("react"),
     FileUploadButton = require("./lib/component-styled.jsx");
 
 const props = {
-    url: "http://somedomain.com/procesimage",
-    buttonText: "Select File",
-    multipleFiles: false,
+    url: "http://yourdomain.com/procesimage",
+    buttonText: "Upload File",
     errorMsg: "you can only select a png-file",
     helpText: "png-files only",
-    markRequired: true,
-    maxFileSize: 5*1024*1024, // 5mb
+    maxFileSize: 15*1024*1024, // 5mb
     onFileChange: function(e) {
-        props1.validated = (e.target.getFiles()[0].type==="image/png");
-        renderUploadBtn();
+        props.validated = (e.target.getFiles()[0].type==="image/png");
+        render();
+        // reset the error-message next to the fileupload-button:
         propsMsg.msg = "";
         renderMsg();
     },
-    onProgress: function(data) {
-        propsMsg.msg = Math.round(100*data.loaded/data.total)+"%";
-        renderMsg();
-    },
-    onSuccess: function() {
-        propsMsg.msg = "ready!";
-        renderMsg();
-    },
-    onError: function(msg) {
-        propsMsg.msg = "Error "+msg;
+    onError: function(err) {
+        propsMsg.msg = "Error: "+err.message;
         renderMsg();
     }
 };
@@ -56,10 +69,10 @@ const Msg = React.createClass({
     }
 });
 
-var renderUploadBtn = function() {
+var render = function() {
     ReactDOM.render(
-        <FileUploadButton {...props1} />,
-        document.getElementById("component-container")
+        <FileUploadButton {...props} />,
+        document.getElementById("component-container1")
     );
 };
 
@@ -70,7 +83,7 @@ var renderMsg = function() {
     );
 };
 
-renderUploadBtn();
+render();
 renderMsg();
 ```
 
@@ -88,9 +101,9 @@ You need the right css in order to make use of `itsa-react-fileuploadbutton`. Th
 
 ## Setting up the server
 
-You need to set up the server right by using these modules. Therefor, you can use the module: `itsa-fileuploadhandler`
+You need to set up the server right by using these modules. Therefore, you can use the module: `itsa-fileuploadhandler`
 
-####Example server:
+####Example hapi-server:
 ```js
 'use strict';
 
@@ -119,12 +132,10 @@ var ROUTES = [
         path: '/procesimage',
         handler: function (request, reply) {
             fileUploadHandlerFns.recieveFile(request, reply, null, function(fullFilename, originalFilename) {
-                // console.log('fullFilename',fullFilename);
-                // console.log('originalFilename',originalFilename);
-                // return new Promise(function(resolve) {
-                //     ...
-                //     resolve();
-                // });
+                return new Promise(function(resolve) {
+                    // move the file(s) here, and when ready, then resolve the promise
+                    resolve();
+                });
             });
         }
     },
@@ -134,17 +145,16 @@ var ROUTES = [
         path: '/procesimage',
         config: {
               payload:{
-                    maxBytes:209715200,
-                    output:'stream',
+                    maxBytes: 209715200,
+                    output: 'stream',
                     parse: false
               },
               handler: function (request, reply) {
                 fileUploadHandlerFns.recieveFormFiles(request, reply, null, function(files) {
-                    // console.log('files',files);
-                    // return new Promise(function(resolve) {
-                    //     ...
-                    //     resolve();
-                    // });
+                    return new Promise(function(resolve) {
+                        // move the file(s) here, and when ready, then resolve the promise
+                        resolve();
+                    });
                 });
             }
         }

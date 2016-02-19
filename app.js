@@ -4,36 +4,22 @@ const React = require("react"),
     ReactDOM = require("react-dom"),
     FileUploadButton = require("./lib/component-styled.jsx");
 
-const props1 = {
+const props = {
     url: "http://imageuploader.itsa.io/procesimage",
-    buttonText: "Select File",
-    multipleFiles: true,
+    buttonText: "Upload File",
     errorMsg: "you can only select a png-file",
     helpText: "png-files only",
-    markRequired: true,
-    maxFileSize: 5*1024*1024, // 5mb
-    // onClick: function(e) {
-    //     console.info("component onClick", e);
-    // },
-    // onSend: function(e) {
-    //     console.info("component onSend", e);
-    // },
+    maxFileSize: 15*1024*1024, // 5mb
+    autoFocus: true,
     onFileChange: function(e) {
-        props1.validated = (e.target.getFiles()[0].type==="image/png");
-        render1();
+        props.validated = (e.target.getFiles()[0].type==="image/png");
+        render();
+        // reset the error-message next to the fileupload-button:
         propsMsg.msg = "";
         renderMsg();
     },
-    onProgress: function(data) {
-        propsMsg.msg = Math.round(100*data.loaded/data.total)+"%";
-        renderMsg();
-    },
-    onSuccess: function() {
-        propsMsg.msg = "ready!";
-        renderMsg();
-    },
-    onError: function(msg) {
-        propsMsg.msg = "Error "+msg;
+    onError: function(err) {
+        propsMsg.msg = "Error: "+err.message;
         renderMsg();
     }
 };
@@ -50,37 +36,9 @@ const Msg = React.createClass({
     }
 });
 
-// const props2 = {
-//     url: "http://imageuploader.itsa.io/procesimage",
-//     buttonText: "Select File - form upload",
-//     multipleFiles: true,
-//     iframeMode: true,
-//     autoSend: true,
-//     onClick: function(e) {
-//         console.info("component onClick", e);
-//         e.target.send();
-//         // e.preventDefault();
-//     },
-//     onFileChange: function(e) {
-//         console.info("component onFileChange", e);
-//     },
-//     onSend: function(e) {
-//         console.info("component onSend", e);
-//     },
-//     onProgress: function(data) {
-//         console.info("component onProgress", Math.round(100*data.loaded/data.total));
-//     },
-//     onSuccess: function(data) {
-//         console.info("component onSuccess", data);
-//     },
-//     onError: function(data) {
-//         console.info("component onError", data);
-//     }
-// };
-
-var render1 = function() {
+var render = function() {
     ReactDOM.render(
-        <FileUploadButton {...props1} />,
+        <FileUploadButton {...props} />,
         document.getElementById("component-container1")
     );
 };
@@ -92,10 +50,5 @@ var renderMsg = function() {
     );
 };
 
-render1();
+render();
 renderMsg();
-
-// ReactDOM.render(
-//     <FileUploadButton {...props2} />,
-//     document.getElementById("component-container2")
-// );

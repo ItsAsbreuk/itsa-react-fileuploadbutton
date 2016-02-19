@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Description here
+ * React-component: File upload-button.
  *
  *
  *
@@ -9,16 +9,17 @@
  * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
  *
  *
- * @module component.jsx
- * @class Component
- * @since 2.0.0
+ * @module itsa-react-fileuploadbutton
+ * @class FileUploadButton
+ * @since 0.0.1
 */
 
+import "itsa-jsext";
 import React, {PropTypes} from "react";
 import ReactDOM from "react-dom";
 import Button from "itsa-react-button";
 import {io} from "itsa-fetch";
-import {idGenerator, async} from "itsa-utils";
+import {idGenerator, async, later} from "itsa-utils";
 
 const isNode = (typeof global!=="undefined") && ({}.toString.call(global)==="[object global]") && (!global.document || ({}.toString.call(global.document)!=="[object HTMLDocument]")),
       MAIN_CLASS = "itsa-fileuploadbutton",
@@ -34,28 +35,6 @@ const Component = React.createClass({
 
     propTypes: {
         /**
-         * The Component its children
-         *
-         * @property children
-         * @type Object
-         * @since 2.0.0
-        */
-        onSuccess: PropTypes.func,
-        onError: PropTypes.func,
-        onFileChange: PropTypes.func,
-        autoSend: PropTypes.bool,
-        iframeMode: PropTypes.bool,
-        emptyAfterSent: PropTypes.bool,
-        maxFileSize: PropTypes.number,
-        multipleFiles: PropTypes.bool,
-        onClick: PropTypes.func,
-        onSend: PropTypes.func,
-        onProgress: PropTypes.func,
-        options: PropTypes.object,
-        params: PropTypes.object,
-        requestOptions: PropTypes.object,
-        totalFileSize: PropTypes.number,
-        /**
          * Whether to autofocus the Component.
          *
          * @property autoFocus
@@ -63,6 +42,63 @@ const Component = React.createClass({
          * @since 0.0.1
         */
         autoFocus: PropTypes.bool,
+
+        /**
+         * Whether to automaticly send the file(s) after being selected. When set `false`, you need to manually send the files
+         * with the `send`-method.
+         *
+         * @property autoSend
+         * @type Boolean
+         * @since 0.0.1
+        */
+        autoSend: PropTypes.bool,
+
+        /**
+         * The aria-label. When not set, it will equal the buttonText
+         *
+         * @property aria-label
+         * @type String
+         * @since 0.0.1
+        */
+        "aria-label": PropTypes.string,
+
+        /**
+         * The Button-text. Will be escaped. If you need HTML, then use `buttonHTML` instead.
+         *
+         * @property buttonText
+         * @type String
+         * @since 0.0.1
+        */
+        buttonText: PropTypes.string,
+
+        /**
+         * The Button-text, retaining html-code. If you don't need HTML,
+         * then `buttonText` is preferred.
+         *
+         * @property buttonHTML
+         * @type String
+         * @since 0.0.1
+        */
+        buttonHTML: PropTypes.string,
+
+        /**
+         * Whether the button is disabled
+         *
+         * @property disabled
+         * @type Boolean
+         * @since 0.0.1
+        */
+        disabled: PropTypes.bool,
+
+        /**
+         * Whether to empty the file(s) after sent to the server.
+         * Default: true
+         *
+         * @property emptyAfterSent
+         * @type Boolean
+         * @since 0.0.1
+        */
+        emptyAfterSent: PropTypes.bool,
 
         /**
          * The error-message that appears when the element is wrong validated.
@@ -74,7 +110,18 @@ const Component = React.createClass({
         errorMsg: PropTypes.string,
 
         /**
-         * The text that should appear when the element is wrong validated.
+         * To force the component to use form-submit instead of XHR2. This is NOT recomended.
+         * In case the browser does not support XHR2, it will automaticly fall back to form-submit.
+         * Default: false
+         *
+         * @property formSubmitMode
+         * @type Boolean
+         * @since 0.0.1
+        */
+        formSubmitMode: PropTypes.bool,
+
+        /**
+         * Help text to assist. Appears just below the button.
          *
          * @property helpText
          * @type String
@@ -83,22 +130,40 @@ const Component = React.createClass({
         helpText: PropTypes.string,
 
         /**
-         * Whether to mark the Component when successfully validated.
+         * Whether to mark the Component when the file(s) are successfully sent.
          *
-         * @property markValidated
+         * @property markSuccess
          * @type Boolean
          * @since 0.0.1
         */
-        markValidated: PropTypes.bool,
+        markSuccess: PropTypes.bool,
 
         /**
          * Whether the Component should show an validate-reclamation (star)
          *
-         * @property markValidated
+         * @property markRequired
          * @type Boolean
          * @since 0.0.1
         */
         markRequired: PropTypes.bool,
+
+        /**
+         * The maximum allowed file-size of each separate file.
+         *
+         * @property maxFileSize
+         * @type Number
+         * @since 0.0.1
+        */
+        maxFileSize: PropTypes.number,
+
+        /**
+         * Whether to support the selection of multiple files.
+         *
+         * @property multipleFiles
+         * @type Boolean
+         * @since 0.0.1
+        */
+        multipleFiles: PropTypes.bool,
 
         /**
          * The `name` for the element.
@@ -112,30 +177,133 @@ const Component = React.createClass({
         /**
          * The `onBlur` function, when happening on the DOM-Element.
          *
-         * @property onChange
+         * @property onBlur
          * @type Function
          * @since 0.1.0
         */
         onBlur: PropTypes.func,
+
         /**
-         * The `onFocus` function, when happening on the DOM-Element.
+         * The `onClick` function, when happening on the DOM-Element.
          *
-         * @property onChange
+         * @property onClick
+         * @type Function
+         * @since 0.0.1
+        */
+        onClick: PropTypes.func,
+
+        /**
+         * The `onError` function, when filetransfer errors.
+         *
+         * @property onError
+         * @type Function
+         * @since 0.0.1
+        */
+        onError: PropTypes.func,
+
+        /**
+         * The `onFileChange` function, when the users has selected files.
+         *
+         * @property onFileChange
+         * @type Function
+         * @since 0.0.1
+        */
+        onFileChange: PropTypes.func,
+
+        /**
+         * The `onFocus` function, when the Component gets focussed.
+         *
+         * @property onFocus
          * @type Function
          * @since 0.1.0
         */
         onFocus: PropTypes.func,
+
+        /**
+         * The `onProgress` function: callback during tranfer.
+         *
+         * @property onProgress
+         * @type Function
+         * @since 0.0.1
+        */
+        onProgress: PropTypes.func,
+
+        /**
+         * The `onSend` function, when the transfer starts.
+         *
+         * @property onSend
+         * @type Function
+         * @since 0.0.1
+        */
+        onSend: PropTypes.func,
+
+        /**
+         * The `onSuccess` function, transfer succeeded.
+         *
+         * @property onSuccess
+         * @type Function
+         * @since 0.0.1
+        */
+        onSuccess: PropTypes.func,
+
+        /**
+         * Additional params that can be send with the request.
+         *
+         * @property params
+         * @type Object
+         * @since 0.0.1
+        */
+        params: PropTypes.object,
+
+        /**
+         * Options to be passed through to the request.
+         *
+         * @property requestOptions
+         * @type Object
+         * @since 0.0.1
+        */
+        requestOptions: PropTypes.object,
+
+        /**
+         * Whether to show the progress inside the button.
+         * Default: true
+         *
+         * @property showProgress
+         * @type Boolean
+         * @since 0.0.1
+        */
+        showProgress: PropTypes.bool,
+
         /**
          * The tabindex of the Component.
          *
-         * @property type
+         * @property tabIndex
          * @type Number
          * @since 0.0.1
         */
         tabIndex: PropTypes.number,
-        url: PropTypes.string.isRequired,
+
         /**
-         * Whether the property is validated right.
+         * The total maximum allowed file-size of all files altogether.
+         *
+         * @property totalFileSize
+         * @type Number
+         * @since 0.0.1
+        */
+        totalFileSize: PropTypes.number,
+
+        /**
+         * The url to send to files to.
+         *
+         * @required
+         * @property url
+         * @type Boolean
+         * @since 0.0.1
+        */
+        url: PropTypes.string.isRequired,
+
+        /**
+         * Whether the selected files are is validated right. This value can be set inside the `onFileChange` callback.
          *
          * @property validated
          * @type Boolean
@@ -144,14 +312,24 @@ const Component = React.createClass({
         validated: PropTypes.bool
     },
 
+    /**
+     * Returns the default properties of the Component
+     *
+     * @method getDefaultProps
+     * @return {Object} the default properties
+     * @since 0.0.1
+    */
     getDefaultProps() {
         return {
+            autoFocus: false,
             autoSend: true,
-            iframeMode: false,
+            formSubmitMode: false,
             emptyAfterSent: true,
+            markSuccess: true,
+            markRequired: false,
             maxFileSize: DEF_MAX_SIZE,
             multipleFiles: false,
-            options: {},
+            showProgress: true,
             params: {},
             requestOptions: {},
             totalFileSize: DEF_MAX_SIZE
@@ -170,10 +348,22 @@ const Component = React.createClass({
         return this._inputNode ? this._inputNode.files.length : 0;
     },
 
+    /**
+     * componentWillMount does some initialization.
+     *
+     * @method componentWillMount
+     * @since 0.0.1
+     */
     componentWillMount() {
         this._iframeName = idGenerator("itsa-iframe");
     },
 
+    /**
+     * componentDidMount does some initialization.
+     *
+     * @method componentDidMount
+     * @since 0.0.1
+     */
     componentDidMount() {
         const instance = this;
         instance._inputNode = ReactDOM.findDOMNode(instance.refs.fileinput);
@@ -185,10 +375,18 @@ const Component = React.createClass({
         else {
             instance._buttonNode.addEventListener(CLICK, instance._handleClick, true);
         }
+        instance.props.autoFocus && instance.focus();
     },
 
+    /**
+     * componentWilUnmount does some cleanup.
+     *
+     * @method componentWillUnmount
+     * @since 0.0.1
+     */
     componentWillUnmount() {
         const instance = this;
+        instance._clearRemoveTimer();
         if (instance.IE8_Events) {
             instance._buttonNode.detachEvent("on"+CLICK, instance._handleClick);
         }
@@ -199,10 +397,22 @@ const Component = React.createClass({
     },
 
     /**
+     * Sets the focus on the Component.
+     *
+     * @method focus
+     * @chainable
+     * @since 0.0.1
+     */
+    focus() {
+        this._buttonNode.focus();
+        return this;
+    },
+
+    /**
      * Returns the currently selected files. This is an `Array-like` object, not a true Array.
      *
      * @method getFiles
-     * @return {Array-like} protected `input`-domNode
+     * @return {Array-like} protected list of files (of the `input`-domNode)
      * @since 0.0.1
     */
     getFiles() {
@@ -220,6 +430,21 @@ const Component = React.createClass({
     */
     getLastSent() {
         return this._lastfiles;
+    },
+
+    /**
+     * Returns the initial state.
+     *
+     * @method getInitialState
+     * @return object
+     * @since 0.0.1
+     */
+    getInitialState() {
+        return {
+            serverError: "",
+            serverSuccess: false,
+            percent: null
+        };
     },
 
     /**
@@ -253,12 +478,124 @@ const Component = React.createClass({
         return (this.count()>0);
     },
 
+    /**
+     * Aborts the transfer (if files are being sent).
+     *
+     * @method abort
+     * @params reset {Boolean} Whether to clean the file-list
+     * @since 0.0.1
+    */
     abort(reset) {
         // because, inside `onSend`, this._io might not be set yet, we need to go async:
         async(() => {
             this._io && this._io.abort();
             reset && this.reset();
         });
+    },
+
+    /**
+     * React render-method --> renderes the Component.
+     *
+     * @method render
+     * @return ReactComponent
+     * @since 0.0.1
+     */
+    render() {
+        let errorMsg, help, iframe, element, sizeValidationMsg, shiftLeft,
+            progressBar, classNameProgressBar, classNameProgressBarInner, progressBarInnerStyles;
+        const instance = this,
+              state = instance.state,
+              serverError = state.serverError,
+              props = instance.props.itsa_deepClone(),
+              serverSuccess = state.serverSuccess,
+              markServerSuccess = props.markSuccess && serverSuccess,
+              XHR2 = (XHR2support && !props.formSubmitMode),
+              showProgress = props.showProgress,
+              onProgress = props.onProgress;
+
+        delete props.onClick; // we needed to create a native click-event and don't want to invoke onClick twice
+
+        props.className || (props.className="");
+        props.className += (props.className ? " " : "") + MAIN_CLASS;
+
+        if (markServerSuccess) {
+            props.className += " "+MAIN_CLASS_PREFIX+"feedback-success";
+        }
+        else if (!instance.hasFiles() && !serverSuccess) {
+            props.markRequired && (props.className+=" "+MAIN_CLASS_PREFIX+"required");
+        }
+        if (props.markRequired || props.markSuccess) {
+            props.className += " "+MAIN_CLASS_PREFIX+"wide";
+        }
+
+        if (typeof state.percent==="number") {
+            classNameProgressBar = MAIN_CLASS_PREFIX+"progress";
+            classNameProgressBarInner = classNameProgressBar + "-inner";
+            serverSuccess && (classNameProgressBar+=" "+classNameProgressBar+"-completed");
+            shiftLeft = state.percent-100;
+            progressBarInnerStyles = {
+                marginLeft: shiftLeft+"%"
+            };
+            progressBar = (
+                <div className={classNameProgressBar}>
+                    <div className={classNameProgressBarInner} style={progressBarInnerStyles} />
+                </div>
+            );
+        }
+
+        sizeValidationMsg = instance._getSizeValidationMsg();
+        if (serverError || (props.validated===false) || sizeValidationMsg) {
+            errorMsg = (<div className={MAIN_CLASS_PREFIX+"error-text"}>{serverError || ((props.validated===false) ? props.errorMsg : sizeValidationMsg)}</div>);
+            props.className += SPACED_MAIN_CLASS_PREFIX+"error";
+        }
+
+        if (props.helpText && !errorMsg) {
+            help = (<div className={MAIN_CLASS_PREFIX+"help-text"}>{props.helpText}</div>);
+        }
+
+        if (XHR2) {
+            if (onProgress || showProgress) {
+                instance.progressfn = function(data) {
+                    let payload, percent;
+                    const total = data.total,
+                          loaded = data.loaded;
+                    if (showProgress) {
+                        percent = Math.round(100*(loaded/total));
+                        instance.setState({
+                            percent: percent
+                        });
+                    }
+                    if (onProgress) {
+                        payload = {
+                            ioPromise: data.target,
+                            target: instance,
+                            total,
+                            loaded
+                        };
+                        onProgress(payload);
+                    }
+                };
+            }
+            else {
+                instance.progressfn = null;
+            }
+            element = instance._renderInputElement();
+        }
+        else {
+            iframe = instance._renderIframe();
+            element = instance._renderFormElement();
+        }
+
+        return (
+            <div className={MAIN_CLASS} >
+                {iframe}
+                {element}
+                <Button {...props} ref="uploadbutton" showActivated={false} type="button" />
+                {progressBar}
+                {errorMsg}
+                {help}
+            </div>
+        );
     },
 
     reset() {
@@ -270,40 +607,13 @@ const Component = React.createClass({
         inputNode.setAttribute("type", "file");
     },
 
-    _getSizeValidationMsg() {
-        let msg, fileMsg, filesizeMsg;
-        const instance = this,
-              props = instance.props,
-              maxFileSize = props.maxFileSize,
-              totalFileSize = props.totalFileSize;
-        if (instance.hasFiles()) {
-            if (maxFileSize && (instance._getLargestFileSize()>maxFileSize)) {
-                fileMsg = props.multipleFiles ? "one of the files" : "selected file";
-                filesizeMsg = Math.round(maxFileSize/1024);
-                msg = fileMsg + " exceeds the maximum filesize of "+filesizeMsg+" KB";
-            }
-            else if (totalFileSize && (instance.getTotalFileSize()>totalFileSize)) {
-                fileMsg = props.multipleFiles ? "the size of all files exceed" : "selected file exceeds";
-                filesizeMsg = Math.round(totalFileSize/1024);
-                msg = fileMsg + " the maximum of "+filesizeMsg+" KB";
-            }
-        }
-        return msg;
-    },
     /**
-     * Send the selected files, by emitting the "uploader:send"-event.
-     * If `payload.url`, `payload.url` or `payload.url` is set, then these will overrule the default
-     * values (the way they were set at initiation, or by using `setDefaults`).
-     * You also can set other properties at the payload --> these will be available at the listeners.
+     * Send the selected files. Will also invoke the onSend callback, from within `e.preventDefault()` can be used.
      *
      * @method send
-     * @params [payload] {Object}
-     *     @params [payload.url] {String}
-     *     @params [payload.params] {Object}
-     *     @params [payload.options] {Object}
-     * @chainable
      * @since 0.0.1
     */
+
     send() {
         let hash = [],
             promisesById = {},
@@ -342,7 +652,7 @@ const Component = React.createClass({
             return "default-prevented";
         }
 
-        if (!XHR2support || props.iframeMode) {
+        if (!XHR2support || props.formSubmitMode) {
             instance._io = Promise.itsa_manage();
             instance._io.abort = () => {
                 // first abort the request:
@@ -359,9 +669,9 @@ const Component = React.createClass({
             instance.refs.fileform.submit();
         }
         else {
-            options = props.options.itsa_deepClone();
+            options = props.requestOptions.itsa_deepClone();
             options.progressfn = instance.progressfn; // is set during `render`
-            options.chunks = !props.iframeMode;
+            options.chunks = !props.formSubmitMode;
             params = props.params.itsa_deepClone();
             url = props.url;
 
@@ -377,7 +687,7 @@ const Component = React.createClass({
                         var promiseInstance = data.target,
                             totalLoaded = 0;
                         promisesById[promiseInstance._id] = data.loaded;
-                        promisesById.each(function(value) {
+                        promisesById.itsa_each(function(value) {
                             totalLoaded += value;
                         });
                         originalProgressFn({
@@ -398,7 +708,7 @@ const Component = React.createClass({
                     }
                     hash.push(ioPromise);
                 }
-                promise = window.Promise.finishAll(hash).then(function(response) {
+                promise = window.Promise.itsa_finishAll(hash).then(function(response) {
                     var rejected = response.rejected;
                     rejected.forEach(function(ioError) {
                         if (ioError) {
@@ -421,6 +731,7 @@ const Component = React.createClass({
                 promise.abort = NOOP;
             }
             instance._io = promise;
+            props.showProgress && this.setState({percent: 0});
         }
         if (props.emptyAfterSent && (len>0)) {
             // empty ON THE NEXT stack (not microstack), to ensure all previous methods are processing
@@ -434,85 +745,26 @@ const Component = React.createClass({
         return instance._io;
     },
 
-    /**
-     * React render-method --> renderes the Component.
-     *
-     * @method render
-     * @return ReactComponent
-     * @since 2.0.0
-     */
-    render() {
-        let errorMsg, help, iframe, element, sizeValidationMsg;
-        const instance = this,
-              props = instance.props.itsa_deepClone();
-
-        delete props.onClick; // we needed to create a native click-event and don't want to invoke onClick twice
-
-        props.className || (props.className="");
-        props.className += (props.className ? " " : "") + "itsa-fileuploadbutton";
-
-        if (!instance.hasFiles()) {
-            props.markRequired && (props.className+=" itsa-fileuploadbutton-required");
-        }
-        else if (props.markValidated && props.validated) {
-            props.className += " itsa-fileuploadbutton-feedback-success";
-        }
-
-        if (props.markRequired || props.markValidated) {
-            props.className += " itsa-fileuploadbutton-wide";
-        }
-
-        sizeValidationMsg = instance._getSizeValidationMsg();
-        if ((props.validated===false) || sizeValidationMsg) {
-            errorMsg = (<div className={MAIN_CLASS_PREFIX+"error-text"}>{(props.validated===false) ? props.errorMsg : sizeValidationMsg}</div>);
-            props.className += SPACED_MAIN_CLASS_PREFIX+"error";
-        }
-
-        if (props.helpText && !errorMsg) {
-            help = (<div className={MAIN_CLASS_PREFIX+"help-text"}>{props.helpText}</div>);
-        }
-
-        if (XHR2support && !props.iframeMode) {
-            if (props.onProgress) {
-                instance.progressfn = function(data) {
-                    const payload = {
-                        ioPromise: data.target,
-                        target: instance,
-                        total: data.total,
-                        loaded: data.loaded
-                    };
-                    props.onProgress(payload);
-                };
-            }
-            else {
-                instance.progressfn = null;
-            }
-            element = instance._renderInputElement();
-        }
-        else {
-            iframe = instance._renderIframe();
-            element = instance._renderFormElement();
-        }
-
-        return (
-            <div className={MAIN_CLASS} >
-                {iframe}
-                {element}
-                <Button ref="uploadbutton" {...props} />
-                {errorMsg}
-                {help}
-            </div>
-        );
-    },
-
     //==============================================================================
     //== private methods ===========================================================
     //==============================================================================
 
     /**
+     * Clears the internal timer set by `_setRemoveTimer`
+     *
+     * @method _clearRemoveTimer
+     * @private
+     * @since 0.0.1
+    */
+    _clearRemoveTimer() {
+        this._removeTimer && this._removeTimer.cancel();
+    },
+
+    /**
      * Returns the size of the largest file that is currently selected.
      *
      * @method _getLargestFileSize
+     * @private
      * @return {Number} The size of the largest file in bytes
      * @since 0.0.1
     */
@@ -530,16 +782,42 @@ const Component = React.createClass({
     },
 
     /**
-     * Default function for the `uploader:_handleClick`-event
+     * Returns the validation-message when file-size is exceeded.
      *
-     * @method _defFnSelectFiles
-     * @param e {Object} eventobject
-     *     @param [e.multiple] {Boolean} whether to support multiple selected files
+     * @method _getSizeValidationMsg
+     * @private
+     * @return {String} Message in case limits are exceeded
+     * @since 0.0.1
+    */
+    _getSizeValidationMsg() {
+        let msg, fileMsg, filesizeMsg;
+        const instance = this,
+              props = instance.props,
+              maxFileSize = props.maxFileSize,
+              totalFileSize = props.totalFileSize;
+        if (instance.hasFiles()) {
+            if (maxFileSize && (instance._getLargestFileSize()>maxFileSize)) {
+                fileMsg = props.multipleFiles ? "one of the files" : "selected file";
+                filesizeMsg = Math.round(maxFileSize/1024);
+                msg = fileMsg + " exceeds the maximum filesize of "+filesizeMsg+" KB";
+            }
+            else if (totalFileSize && (instance.getTotalFileSize()>totalFileSize)) {
+                fileMsg = props.multipleFiles ? "the size of all files exceed" : "selected file exceeds";
+                filesizeMsg = Math.round(totalFileSize/1024);
+                msg = fileMsg + " the maximum of "+filesizeMsg+" KB";
+            }
+        }
+        return msg;
+    },
+
+    /**
+     * Callback whenever the button gets clicked.
+     *
+     * @method _handleClick
      * @private
      * @since 0.0.1
     */
     _handleClick() {
-// http://stackoverflow.com/questions/32746279/not-triggering-event-when-clicking-an-input-type-file-element-in-firefox
         let prevented = false;
         const instance = this,
               onClick = instance.props.onClick;
@@ -548,21 +826,53 @@ const Component = React.createClass({
                                     preventDefault: () => {prevented = true},
                                     target: instance
                                });
+            instance._clearRemoveTimer();
+            instance.setState({
+                serverError: "",
+                serverSuccess: false,
+                percent: null
+            });
             prevented || instance._inputNode.click();
         }
     },
 
-    _handleError(data) {
+    /**
+     * Error-Callback for the promised-request
+     *
+     * @method _handleError
+     * @private
+     * @params err {Object}
+     * @since 0.0.1
+    */
+    _handleError(err) {
         const props = this.props,
-              onError = props.onError;
+              onError = props.onError,
+              statusMsg = (Object.itsa_isObject(err) && err.status) ? err.status : ((typeof err==="string") ? err : "Error");
+        statusMsg;
         if (onError) {
             onError({
-                status: (Object.itsa_isObject(data) && data.status) ? data.status : ((typeof data==="string") ? data : "Error"),
+                message: statusMsg,
                 target: this
             });
         }
+        this.setState({
+            serverError: "server-error: " + statusMsg.toLowerCase(),
+            serverSuccess: false,
+            percent: null
+        });
+        // remove progressBar after 1 second: when laid above the button hte button can't be pressed
+        this._setRemoveTimer();
     },
 
+    /**
+     * Callback whenever the `input`-element's files are changed. Will invoke `onFileChange` when present.
+     * If the property `autoSend` is true (and `onFileChange` did no `preventDefault()`), then the `send()`-method gets invoked.
+     *
+     * @method _handleFileChange
+     * @private
+     * @return {Number} The size of the largest file in bytes
+     * @since 0.0.1
+    */
     _handleFileChange() {
         let prevented = false;
         const instance = this,
@@ -578,6 +888,14 @@ const Component = React.createClass({
         }
     },
 
+    /**
+     * Error-Callback for the promised-request
+     *
+     * @method _handleSuccess
+     * @private
+     * @params err {data}
+     * @since 0.0.1
+    */
     _handleSuccess(data) {
         const props = this.props,
               onSuccess = props.onSuccess;
@@ -587,12 +905,36 @@ const Component = React.createClass({
                 target: this
             });
         }
+        this.setState({
+            serverError: "",
+            serverSuccess: true,
+            percent: 100
+        });
+        // remove progressBar after 1 second: when laid above the button hte button can't be pressed
+        this._setRemoveTimer();
     },
 
+    /**
+     * Callback whenever the iframe recieves an error (most likely by an invalid server-response).
+     * Will abort the request-promise.
+     *
+     * @method _iframeError
+     * @private
+     * @since 0.0.1
+    */
     _iframeError() {
         instance._io.abort();
     },
 
+    /**
+     * Callback whenever the iframe recieves a response from the server. Depending on the response, it will
+     * either fulfill or reject the request-promise.
+     *
+     * @method _iframeLoad
+     * @private
+     * @return {Number} The size of the largest file in bytes
+     * @since 0.0.1
+    */
     _iframeLoad() {
         let content;
         const instance = this,
@@ -604,7 +946,7 @@ const Component = React.createClass({
                     instance._io.fulfill(okStatus);
                 }
                 else {
-                    instance._io.reject();
+                    instance._io.reject("server did not accept the files");
                 }
             }
             catch(err) {
@@ -614,6 +956,14 @@ const Component = React.createClass({
         }
     },
 
+    /**
+     * Renderes the HTMLInputElement
+     *
+     * @method _renderInputElement
+     * @private
+     * @return {Component} The Input-element (jsx)
+     * @since 0.0.1
+    */
     _renderInputElement() {
         const inputStyles = {display: "none !important"};
         return (
@@ -626,11 +976,31 @@ const Component = React.createClass({
         );
     },
 
+    /**
+     * Renderes a HTMLFormElement (in case no XHR2 is used)
+     *
+     * @method _renderFormElement
+     * @private
+     * @return {Component} The Form-element (jsx)
+     * @since 0.0.1
+    */
     _renderFormElement() {
         const instance = this,
               props = instance.props,
               formStyles = {display: "none !important"},
-              inputStyles = {};
+              hiddenFields = [];
+
+        props.params.itsa_each((value, key) => {
+            let keyValue;
+            try {
+                keyValue = (typeof value==="object") ? JSON.stringify(value) : String(value);
+            }
+            catch(err) {
+                keyValue = null;
+            }
+            hiddenFields.push(<input key={key} type="hidden" name={key} value={keyValue} />);
+        })
+
         return (
             <form
                 action={props.url}
@@ -639,18 +1009,26 @@ const Component = React.createClass({
                 noValidate={true}
                 ref="fileform"
                 style={formStyles}
-                target={instance._iframeName}>
+                target={instance._iframeName} >
+                {hiddenFields}
                 <input
                     multiple={props.multipleFiles}
                     name="uploadfiles"
                     onChange={instance._handleFileChange}
                     ref="fileinput"
-                    style={inputStyles}
                     type="file" />
             </form>
         );
     },
 
+    /**
+     * Renderes an iFrame-element (in case no XHR2 is used), which is needed for the response-target of the form-submission.
+     *
+     * @method _renderIframe
+     * @private
+     * @return {Component} The iframe-element (jsx)
+     * @since 0.0.1
+    */
     _renderIframe() {
         const instance = this,
               iframeStyles = {display: "none !important"};
@@ -666,11 +1044,21 @@ const Component = React.createClass({
     },
 
     /**
+     * Sets a timer that will remove the progress-bar.
+     *
+     * @method _setRemoveTimer
+     * @private
+     * @since 0.0.1
+    */
+    _setRemoveTimer() {
+        this._removeTimer = later(() => this.setState({percent: null}), 1050);
+    },
+
+    /**
      * Stores the files that are sent into an internal hash, which can be read by `getLastSent()`.
      *
      * @method _storeLastSent
      * @private
-     * @chainable
      * @since 0.0.1
     */
     _storeLastSent() {

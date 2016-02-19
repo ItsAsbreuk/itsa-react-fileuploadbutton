@@ -1,0 +1,2337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>FileUploadButton - itsa-fileuploadbutton</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="https://avatars0.githubusercontent.com/u/8314644?v=3&amp;s=84" title="itsa-fileuploadbutton"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/FileUploadButton.html">FileUploadButton</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/itsa-react-fileuploadbutton.html">itsa-react-fileuploadbutton</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1>FileUploadButton Class</h1>
+<div class="box meta">
+
+
+        <div class="foundat">
+            Defined in: <a href="../files/lib_component.jsx.html#l3"><code>lib&#x2F;component.jsx:3</code></a>
+        </div>
+
+            Module: <a href="../modules/itsa-react-fileuploadbutton.html">itsa-react-fileuploadbutton</a>
+
+</div>
+
+
+<div class="box intro">
+    <p>React-component: File upload-button.</p>
+<p><i>Copyright (c) 2016 ItsAsbreuk - <a href="http://itsasbreuk.nl">http://itsasbreuk.nl</a></i><br>
+New BSD License - <a href="http://choosealicense.com/licenses/bsd-3-clause/">http://choosealicense.com/licenses/bsd-3-clause/</a></p>
+
+</div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method private">
+                                <a href="#method__clearRemoveTimer">_clearRemoveTimer</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__getLargestFileSize">_getLargestFileSize</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__getSizeValidationMsg">_getSizeValidationMsg</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__handleClick">_handleClick</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__handleError">_handleError</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__handleFileChange">_handleFileChange</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__handleSuccess">_handleSuccess</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__iframeError">_iframeError</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__iframeLoad">_iframeLoad</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__renderFormElement">_renderFormElement</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__renderIframe">_renderIframe</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__renderInputElement">_renderInputElement</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__setRemoveTimer">_setRemoveTimer</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__storeLastSent">_storeLastSent</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_abort">abort</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_componentDidMount">componentDidMount</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_componentWillMount">componentWillMount</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_componentWillUnmount">componentWillUnmount</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_count">count</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_focus">focus</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getDefaultProps">getDefaultProps</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getFiles">getFiles</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getInitialState">getInitialState</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getLastSent">getLastSent</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getTotalFileSize">getTotalFileSize</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_hasFiles">hasFiles</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_render">render</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_send">send</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                            <li class="index-item property">
+                                <a href="#property_aria-label">aria-label</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_autoFocus">autoFocus</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_autoSend">autoSend</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_buttonHTML">buttonHTML</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_buttonText">buttonText</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_disabled">disabled</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_emptyAfterSent">emptyAfterSent</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_errorMsg">errorMsg</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_formSubmitMode">formSubmitMode</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_helpText">helpText</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_markRequired">markRequired</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_markSuccess">markSuccess</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_maxFileSize">maxFileSize</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_multipleFiles">multipleFiles</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_name">name</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_onBlur">onBlur</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_onClick">onClick</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_onError">onError</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_onFileChange">onFileChange</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_onFocus">onFocus</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_onProgress">onProgress</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_onSend">onSend</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_onSuccess">onSuccess</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_params">params</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_requestOptions">requestOptions</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_showProgress">showProgress</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_tabIndex">tabIndex</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_totalFileSize">totalFileSize</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_url">url</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_validated">validated</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method__clearRemoveTimer" class="method item private">
+    <h3 class="name"><code>_clearRemoveTimer</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l752"><code>lib&#x2F;component.jsx:752</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Clears the internal timer set by <code>_setRemoveTimer</code></p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method__getLargestFileSize" class="method item private">
+    <h3 class="name"><code>_getLargestFileSize</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l763"><code>lib&#x2F;component.jsx:763</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Returns the size of the largest file that is currently selected.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                    <p>The size of the largest file in bytes</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method__getSizeValidationMsg" class="method item private">
+    <h3 class="name"><code>_getSizeValidationMsg</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l784"><code>lib&#x2F;component.jsx:784</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Returns the validation-message when file-size is exceeded.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>:
+                    <p>Message in case limits are exceeded</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method__handleClick" class="method item private">
+    <h3 class="name"><code>_handleClick</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l813"><code>lib&#x2F;component.jsx:813</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Callback whenever the button gets clicked.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method__handleError" class="method item private">
+    <h3 class="name"><code>_handleError</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>err</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l839"><code>lib&#x2F;component.jsx:839</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Error-Callback for the promised-request</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">err</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method__handleFileChange" class="method item private">
+    <h3 class="name"><code>_handleFileChange</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l867"><code>lib&#x2F;component.jsx:867</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Callback whenever the <code>input</code>-element's files are changed. Will invoke <code>onFileChange</code> when present.
+If the property <code>autoSend</code> is true (and <code>onFileChange</code> did no <code>preventDefault()</code>), then the <code>send()</code>-method gets invoked.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                    <p>The size of the largest file in bytes</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method__handleSuccess" class="method item private">
+    <h3 class="name"><code>_handleSuccess</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>err</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l891"><code>lib&#x2F;component.jsx:891</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Error-Callback for the promised-request</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">err</code>
+                        <span class="type">Data</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method__iframeError" class="method item private">
+    <h3 class="name"><code>_iframeError</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l917"><code>lib&#x2F;component.jsx:917</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Callback whenever the iframe recieves an error (most likely by an invalid server-response).
+Will abort the request-promise.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method__iframeLoad" class="method item private">
+    <h3 class="name"><code>_iframeLoad</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l929"><code>lib&#x2F;component.jsx:929</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Callback whenever the iframe recieves a response from the server. Depending on the response, it will
+either fulfill or reject the request-promise.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                    <p>The size of the largest file in bytes</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method__renderFormElement" class="method item private">
+    <h3 class="name"><code>_renderFormElement</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Component</span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l979"><code>lib&#x2F;component.jsx:979</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Renderes a HTMLFormElement (in case no XHR2 is used)</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Component</span>:
+                    <p>The Form-element (jsx)</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method__renderIframe" class="method item private">
+    <h3 class="name"><code>_renderIframe</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Component</span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l1024"><code>lib&#x2F;component.jsx:1024</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Renderes an iFrame-element (in case no XHR2 is used), which is needed for the response-target of the form-submission.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Component</span>:
+                    <p>The iframe-element (jsx)</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method__renderInputElement" class="method item private">
+    <h3 class="name"><code>_renderInputElement</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Component</span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l959"><code>lib&#x2F;component.jsx:959</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Renderes the HTMLInputElement</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Component</span>:
+                    <p>The Input-element (jsx)</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method__setRemoveTimer" class="method item private">
+    <h3 class="name"><code>_setRemoveTimer</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l1046"><code>lib&#x2F;component.jsx:1046</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Sets a timer that will remove the progress-bar.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method__storeLastSent" class="method item private">
+    <h3 class="name"><code>_storeLastSent</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l1057"><code>lib&#x2F;component.jsx:1057</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Stores the files that are sent into an internal hash, which can be read by <code>getLastSent()</code>.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_abort" class="method item">
+    <h3 class="name"><code>abort</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>reset</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l481"><code>lib&#x2F;component.jsx:481</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Aborts the transfer (if files are being sent).</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">reset</code>
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+                    <div class="param-description">
+                        <p>Whether to clean the file-list</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_componentDidMount" class="method item">
+    <h3 class="name"><code>componentDidMount</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l361"><code>lib&#x2F;component.jsx:361</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>componentDidMount does some initialization.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_componentWillMount" class="method item">
+    <h3 class="name"><code>componentWillMount</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l351"><code>lib&#x2F;component.jsx:351</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>componentWillMount does some initialization.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_componentWillUnmount" class="method item">
+    <h3 class="name"><code>componentWillUnmount</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l381"><code>lib&#x2F;component.jsx:381</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>componentWilUnmount does some cleanup.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_count" class="method item">
+    <h3 class="name"><code>count</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l339"><code>lib&#x2F;component.jsx:339</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Returns the number of files that are currently selected.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                    <p>Number of files currently selected</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_focus" class="method item">
+    <h3 class="name"><code>focus</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+        <span class="flag chainable">chainable</span>
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l399"><code>lib&#x2F;component.jsx:399</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Sets the focus on the Component.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_getDefaultProps" class="method item">
+    <h3 class="name"><code>getDefaultProps</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l315"><code>lib&#x2F;component.jsx:315</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Returns the default properties of the Component</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>:
+                    <p>the default properties</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getFiles" class="method item">
+    <h3 class="name"><code>getFiles</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Array-like</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l411"><code>lib&#x2F;component.jsx:411</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Returns the currently selected files. This is an <code>Array-like</code> object, not a true Array.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Array-like</span>:
+                    <p>protected list of files (of the <code>input</code>-domNode)</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getInitialState" class="method item">
+    <h3 class="name"><code>getInitialState</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l435"><code>lib&#x2F;component.jsx:435</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Returns the initial state.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>object</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getLastSent" class="method item">
+    <h3 class="name"><code>getLastSent</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l422"><code>lib&#x2F;component.jsx:422</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Returns the last send-files.
+This is handy to know, because after transmission, getFiles() will return empty.
+This is an true Array with objects of this structure: {name: xxx, size: xxx}</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
+                    <p>The last sent files</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getTotalFileSize" class="method item">
+    <h3 class="name"><code>getTotalFileSize</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l450"><code>lib&#x2F;component.jsx:450</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Returns the total size of all files that are currently selected.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                    <p>The size of all files in bytes</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_hasFiles" class="method item">
+    <h3 class="name"><code>hasFiles</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l470"><code>lib&#x2F;component.jsx:470</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Whether there are currently files selected.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>:
+                    <p>Number of selected files</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_render" class="method item">
+    <h3 class="name"><code>render</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type"></span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l496"><code>lib&#x2F;component.jsx:496</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>React render-method --&gt; renderes the Component.</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                    <p>ReactComponent</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_send" class="method item">
+    <h3 class="name"><code>send</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l610"><code>lib&#x2F;component.jsx:610</code></a>
+        </p>
+
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Send the selected files. Will also invoke the onSend callback, from within <code>e.preventDefault()</code> can be used.</p>
+
+    </div>
+
+
+
+
+</div>
+            </div>
+
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+<div id="property_aria-label" class="property item">
+    <h3 class="name"><code>aria-label</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l56"><code>lib&#x2F;component.jsx:56</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The aria-label. When not set, it will equal the buttonText</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_autoFocus" class="property item">
+    <h3 class="name"><code>autoFocus</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l37"><code>lib&#x2F;component.jsx:37</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Whether to autofocus the Component.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_autoSend" class="property item">
+    <h3 class="name"><code>autoSend</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l46"><code>lib&#x2F;component.jsx:46</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Whether to automaticly send the file(s) after being selected. When set <code>false</code>, you need to manually send the files
+with the <code>send</code>-method.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_buttonHTML" class="property item">
+    <h3 class="name"><code>buttonHTML</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l74"><code>lib&#x2F;component.jsx:74</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The Button-text, retaining html-code. If you don't need HTML,
+then <code>buttonText</code> is preferred.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_buttonText" class="property item">
+    <h3 class="name"><code>buttonText</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l65"><code>lib&#x2F;component.jsx:65</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The Button-text. Will be escaped. If you need HTML, then use <code>buttonHTML</code> instead.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_disabled" class="property item">
+    <h3 class="name"><code>disabled</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l84"><code>lib&#x2F;component.jsx:84</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Whether the button is disabled</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_emptyAfterSent" class="property item">
+    <h3 class="name"><code>emptyAfterSent</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l93"><code>lib&#x2F;component.jsx:93</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Whether to empty the file(s) after sent to the server.
+Default: true</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_errorMsg" class="property item">
+    <h3 class="name"><code>errorMsg</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l103"><code>lib&#x2F;component.jsx:103</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The error-message that appears when the element is wrong validated.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_formSubmitMode" class="property item">
+    <h3 class="name"><code>formSubmitMode</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l112"><code>lib&#x2F;component.jsx:112</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>To force the component to use form-submit instead of XHR2. This is NOT recomended.
+In case the browser does not support XHR2, it will automaticly fall back to form-submit.
+Default: false</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_helpText" class="property item">
+    <h3 class="name"><code>helpText</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l123"><code>lib&#x2F;component.jsx:123</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Help text to assist. Appears just below the button.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_markRequired" class="property item">
+    <h3 class="name"><code>markRequired</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l141"><code>lib&#x2F;component.jsx:141</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Whether the Component should show an validate-reclamation (star)</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_markSuccess" class="property item">
+    <h3 class="name"><code>markSuccess</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l132"><code>lib&#x2F;component.jsx:132</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Whether to mark the Component when the file(s) are successfully sent.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_maxFileSize" class="property item">
+    <h3 class="name"><code>maxFileSize</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l150"><code>lib&#x2F;component.jsx:150</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The maximum allowed file-size of each separate file.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_multipleFiles" class="property item">
+    <h3 class="name"><code>multipleFiles</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l159"><code>lib&#x2F;component.jsx:159</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Whether to support the selection of multiple files.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_name" class="property item">
+    <h3 class="name"><code>name</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l168"><code>lib&#x2F;component.jsx:168</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The <code>name</code> for the element.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_onBlur" class="property item">
+    <h3 class="name"><code>onBlur</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l177"><code>lib&#x2F;component.jsx:177</code></a>
+        </p>
+
+
+            <p>Available since 0.1.0</p>
+    </div>
+
+    <div class="description">
+        <p>The <code>onBlur</code> function, when happening on the DOM-Element.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_onClick" class="property item">
+    <h3 class="name"><code>onClick</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l186"><code>lib&#x2F;component.jsx:186</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The <code>onClick</code> function, when happening on the DOM-Element.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_onError" class="property item">
+    <h3 class="name"><code>onError</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l195"><code>lib&#x2F;component.jsx:195</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The <code>onError</code> function, when filetransfer errors.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_onFileChange" class="property item">
+    <h3 class="name"><code>onFileChange</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l204"><code>lib&#x2F;component.jsx:204</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The <code>onFileChange</code> function, when the users has selected files.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_onFocus" class="property item">
+    <h3 class="name"><code>onFocus</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l213"><code>lib&#x2F;component.jsx:213</code></a>
+        </p>
+
+
+            <p>Available since 0.1.0</p>
+    </div>
+
+    <div class="description">
+        <p>The <code>onFocus</code> function, when the Component gets focussed.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_onProgress" class="property item">
+    <h3 class="name"><code>onProgress</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l222"><code>lib&#x2F;component.jsx:222</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The <code>onProgress</code> function: callback during tranfer.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_onSend" class="property item">
+    <h3 class="name"><code>onSend</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l231"><code>lib&#x2F;component.jsx:231</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The <code>onSend</code> function, when the transfer starts.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_onSuccess" class="property item">
+    <h3 class="name"><code>onSuccess</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l240"><code>lib&#x2F;component.jsx:240</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The <code>onSuccess</code> function, transfer succeeded.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_params" class="property item">
+    <h3 class="name"><code>params</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l249"><code>lib&#x2F;component.jsx:249</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Additional params that can be send with the request.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_requestOptions" class="property item">
+    <h3 class="name"><code>requestOptions</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l258"><code>lib&#x2F;component.jsx:258</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Options to be passed through to the request.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_showProgress" class="property item">
+    <h3 class="name"><code>showProgress</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l267"><code>lib&#x2F;component.jsx:267</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Whether to show the progress inside the button.
+Default: true</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_tabIndex" class="property item">
+    <h3 class="name"><code>tabIndex</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l277"><code>lib&#x2F;component.jsx:277</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The tabindex of the Component.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_totalFileSize" class="property item">
+    <h3 class="name"><code>totalFileSize</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l286"><code>lib&#x2F;component.jsx:286</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The total maximum allowed file-size of all files altogether.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_url" class="property item">
+    <h3 class="name"><code>url</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l295"><code>lib&#x2F;component.jsx:295</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>The url to send to files to.</p>
+
+    </div>
+
+
+
+</div>
+<div id="property_validated" class="property item">
+    <h3 class="name"><code>validated</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/lib_component.jsx.html#l305"><code>lib&#x2F;component.jsx:305</code></a>
+        </p>
+
+
+            <p>Available since 0.0.1</p>
+    </div>
+
+    <div class="description">
+        <p>Whether the selected files are is validated right. This value can be set inside the <code>onFileChange</code> callback.</p>
+
+    </div>
+
+
+
+</div>
+            </div>
+
+
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

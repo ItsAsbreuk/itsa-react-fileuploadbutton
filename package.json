@@ -1,6 +1,6 @@
 {
   "name": "itsa-react-fileuploadbutton",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "File upload-button for react, without input-element",
   "author": [
     {
@@ -31,8 +31,9 @@
     "lib": "./lib"
   },
   "dependencies": {
-    "itsa-fetch": "^1.0.5",
-    "itsa-react-button": "0.0.2",
+    "itsa-fetch": "^1.0.6",
+    "itsa-jsext": "0.0.1",
+    "itsa-react-button": "0.0.7",
     "itsa-utils": "0.0.2",
     "react": "^0.14.0",
     "react-dom": "^0.14.7"

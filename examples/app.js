@@ -50,36 +50,22 @@
 	    ReactDOM = __webpack_require__(158),
 	    FileUploadButton = __webpack_require__(159);
 
-	var props1 = {
+	var props = {
 	    url: "http://imageuploader.itsa.io/procesimage",
-	    buttonText: "Select File",
-	    multipleFiles: true,
+	    buttonText: "Upload File",
 	    errorMsg: "you can only select a png-file",
 	    helpText: "png-files only",
-	    markRequired: true,
-	    maxFileSize: 5 * 1024 * 1024, // 5mb
-	    // onClick: function(e) {
-	    //     console.info("component onClick", e);
-	    // },
-	    // onSend: function(e) {
-	    //     console.info("component onSend", e);
-	    // },
+	    maxFileSize: 15 * 1024 * 1024, // 5mb
+	    autoFocus: true,
 	    onFileChange: function onFileChange(e) {
-	        props1.validated = e.target.getFiles()[0].type === "image/png";
-	        render1();
+	        props.validated = e.target.getFiles()[0].type === "image/png";
+	        render();
+	        // reset the error-message next to the fileupload-button:
 	        propsMsg.msg = "";
 	        renderMsg();
 	    },
-	    onProgress: function onProgress(data) {
-	        propsMsg.msg = Math.round(100 * data.loaded / data.total) + "%";
-	        renderMsg();
-	    },
-	    onSuccess: function onSuccess() {
-	        propsMsg.msg = "ready!";
-	        renderMsg();
-	    },
-	    onError: function onError(msg) {
-	        propsMsg.msg = "Error " + msg;
+	    onError: function onError(err) {
+	        propsMsg.msg = "Error: " + err.message;
 	        renderMsg();
 	    }
 	};
@@ -99,49 +85,16 @@
 	    }
 	});
 
-	// const props2 = {
-	//     url: "http://imageuploader.itsa.io/procesimage",
-	//     buttonText: "Select File - form upload",
-	//     multipleFiles: true,
-	//     iframeMode: true,
-	//     autoSend: true,
-	//     onClick: function(e) {
-	//         console.info("component onClick", e);
-	//         e.target.send();
-	//         // e.preventDefault();
-	//     },
-	//     onFileChange: function(e) {
-	//         console.info("component onFileChange", e);
-	//     },
-	//     onSend: function(e) {
-	//         console.info("component onSend", e);
-	//     },
-	//     onProgress: function(data) {
-	//         console.info("component onProgress", Math.round(100*data.loaded/data.total));
-	//     },
-	//     onSuccess: function(data) {
-	//         console.info("component onSuccess", data);
-	//     },
-	//     onError: function(data) {
-	//         console.info("component onError", data);
-	//     }
-	// };
-
-	var render1 = function render1() {
-	    ReactDOM.render(React.createElement(FileUploadButton, props1), document.getElementById("component-container1"));
+	var render = function render() {
+	    ReactDOM.render(React.createElement(FileUploadButton, props), document.getElementById("component-container1"));
 	};
 
 	var renderMsg = function renderMsg() {
 	    ReactDOM.render(React.createElement(Msg, propsMsg), document.getElementById("message-container"));
 	};
 
-	render1();
+	render();
 	renderMsg();
-
-	// ReactDOM.render(
-	//     <FileUploadButton {...props2} />,
-	//     document.getElementById("component-container2")
-	// );
 
 /***/ },
 /* 1 */
@@ -19842,7 +19795,7 @@
 
 
 	// module
-	exports.push([module.id, "button.itsa-button {\n  margin: 0;\n  padding: 0.5em 1em;\n  font: inherit;\n  /* 2 */\n  font-family: inherit;\n  font-size: 100%;\n  color: #444;\n  /* rgba not supported (IE 8) */\n  color: rgba(0, 0, 0, 0.8);\n  /* rgba supported */\n  border: 1px solid #999;\n  /*IE 6/7/8*/\n  border: none transparent;\n  /*IE9 + everything else*/\n  background-color: #E6E6E6;\n  text-decoration: none;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;\n  display: inline-block;\n  position: relative;\n  vertical-align: middle;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  overflow: visible;\n  text-transform: none;\n  -webkit-appearance: button;\n  /* 2 */\n  line-height: normal;\n  white-space: nowrap;\n  vertical-align: baseline;\n  text-align: center;\n  cursor: pointer; }\n\nbutton.itsa-button-primary {\n  background-color: #0078E7;\n  color: #FFF; }\n\nbutton.itsa-button-toggled {\n  background-color: #0078E7;\n  color: #FFF; }\n\nbutton.itsa-button:hover, button.itsa-button:hover:focus {\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000',GradientType=0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0, 0, 0, 0.05)), to(rgba(0, 0, 0, 0.15)));\n  background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  background-image: -o-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset; }\n\nbutton.itsa-button:focus {\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000',GradientType=0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0, 0, 0, 0.05)), to(rgba(0, 0, 0, 0.1)));\n  background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  background-image: -o-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6) inset;\n  outline: 0; }\n\nbutton.itsa-button::-moz-focus-inner {\n  /* firefox focusring */\n  border: 0; }\n\nbutton.itsa-button-active {\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset, 0 0 10px rgba(0, 0, 0, 0.4) inset; }\n\nbutton.itsa-button:not(.itsa-button-togglebtn):active:hover, button.itsa-button:not(.itsa-button-togglebtn):active:focus, button.itsa-button:not(.itsa-button-togglebtn):active:hover:focus, button.itsa-button-active:not(.itsa-button-togglebtn):hover, button.itsa-button-active:not(.itsa-button-togglebtn):focus, button.itsa-button-active:not(.itsa-button-togglebtn):hover:focus {\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset, 0 0 10px black inset; }\n\nbutton.itsa-button[disabled], button.itsa-button[disabled]:focus, button.itsa-button[disabled]:hover, button.itsa-button[disabled]:active, button.itsa-button[disabled].itsa-button-active {\n  border: none;\n  background-image: none;\n  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);\n  filter: alpha(opacity=60);\n  -khtml-opacity: 0.6;\n  -moz-opacity: 0.6;\n  opacity: 0.6;\n  cursor: not-allowed;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;\n  cursor: default; }\n\nbutton.itsa-button-smoothrounded {\n  border-radius: 2px; }\n\nbutton.itsa-button-rounded {\n  border-radius: 0.3em; }\n\nbutton.itsa-button-heavyrounded {\n  border-radius: 0.5em; }\n\nbutton.itsa-button-oval {\n  border-radius: 50%; }\n\nbutton.itsa-button-halfoval {\n  border-radius: 25%; }\n", ""]);
+	exports.push([module.id, "button.itsa-button {\n  margin: 0;\n  padding: 0.5em 1em;\n  font: inherit;\n  /* 2 */\n  font-family: inherit;\n  font-size: 100%;\n  color: #444;\n  /* rgba not supported (IE 8) */\n  color: rgba(0, 0, 0, 0.8);\n  /* rgba supported */\n  border: 1px solid #999;\n  /*IE 6/7/8*/\n  border: none transparent;\n  /*IE9 + everything else*/\n  background-color: #E6E6E6;\n  text-decoration: none;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;\n  display: inline-block;\n  position: relative;\n  vertical-align: middle;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  overflow: visible;\n  text-transform: none;\n  -webkit-appearance: button;\n  /* 2 */\n  line-height: normal;\n  white-space: nowrap;\n  vertical-align: baseline;\n  text-align: center;\n  cursor: pointer; }\n\nbutton.itsa-button-primary {\n  background-color: #0078E7;\n  color: #FFF; }\n\nbutton.itsa-button-toggled {\n  background-color: #0078E7;\n  color: #FFF; }\n\nbutton.itsa-button:hover, button.itsa-button:hover:focus {\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000',GradientType=0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0, 0, 0, 0.05)), to(rgba(0, 0, 0, 0.15)));\n  background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  background-image: -o-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset; }\n\nbutton.itsa-button:focus {\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000',GradientType=0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0, 0, 0, 0.05)), to(rgba(0, 0, 0, 0.1)));\n  background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  background-image: -o-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6) inset;\n  outline: 0; }\n\nbutton.itsa-button::-moz-focus-inner {\n  /* firefox focusring */\n  border: 0; }\n\nbutton.itsa-button-active {\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset, 0 0 10px rgba(0, 0, 0, 0.4) inset; }\n\nbutton.itsa-button:not(.itsa-button-togglebtn):active:hover, button.itsa-button:not(.itsa-button-togglebtn):active:focus, button.itsa-button:not(.itsa-button-togglebtn):active:hover:focus, button.itsa-button-active:not(.itsa-button-togglebtn):hover, button.itsa-button-active:not(.itsa-button-togglebtn):focus, button.itsa-button-active:not(.itsa-button-togglebtn):hover:focus {\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset, 0 0 10px black inset; }\n\nbutton.itsa-button[disabled], button.itsa-button[disabled]:focus, button.itsa-button[disabled]:hover, button.itsa-button[disabled]:active, button.itsa-button[disabled].itsa-button-active, button.itsa-button[disabled]:active:hover, button.itsa-button[disabled].itsa-button-active:hover, button.itsa-button[disabled]:active:focus, button.itsa-button[disabled].itsa-button-active:focus, button.itsa-button[disabled]:active:focus:hover, button.itsa-button[disabled].itsa-button-active:focus:hover {\n  border: none;\n  background-image: none;\n  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);\n  filter: alpha(opacity=60);\n  -khtml-opacity: 0.6;\n  -moz-opacity: 0.6;\n  opacity: 0.6;\n  cursor: not-allowed;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;\n  cursor: default; }\n\nbutton.itsa-button-smoothrounded {\n  border-radius: 2px; }\n\nbutton.itsa-button-rounded {\n  border-radius: 0.3em; }\n\nbutton.itsa-button-heavyrounded {\n  border-radius: 0.5em; }\n\nbutton.itsa-button-oval {\n  border-radius: 50%; }\n\nbutton.itsa-button-halfoval {\n  border-radius: 25%; }\n", ""]);
 
 	// exports
 
@@ -20191,7 +20144,7 @@
 
 
 	// module
-	exports.push([module.id, ".itsa-fileuploadbutton {\n  position: relative;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  margin-bottom: 1.5em;\n  /* keep space for help- and error-messages */ }\n\nbutton.itsa-button.itsa-fileuploadbutton-wide {\n  padding-right: 1.7em; }\n\nbutton.itsa-button.itsa-fileuploadbutton-error {\n  box-shadow: 0 0 0 1px #FF6A6A inset; }\n\n.itsa-fileuploadbutton-required::after {\n  content: \"*\";\n  position: absolute;\n  font-size: 2em;\n  top: 0.11em;\n  right: 0.2em;\n  color: #FF6A6A; }\n\n.itsa-fileuploadbutton-feedback-success::after {\n  content: url(" + __webpack_require__(166) + ");\n  position: absolute;\n  top: 0.1em;\n  right: 0; }\n\n.itsa-fileuploadbutton-error input {\n  border-color: #FF6A6A !important;\n  -webkit-transition: all 0.2s ease-out 0s;\n  -moz-transition: all 0.2s ease-out 0s;\n  -ms-transition: all 0.2s ease-out 0s;\n  -o-transition: all 0.2s ease-out 0s;\n  transition: all 0.2s ease-out 0s; }\n\n.itsa-fileuploadbutton-error-text {\n  white-space: nowrap;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  color: #F34F4F;\n  font-size: 0.8em;\n  line-height: 1em;\n  opacity: 1;\n  position: absolute;\n  z-index: 1;\n  background-color: #F9F9F9;\n  border: 1px solid #FF6A6A;\n  bottom: -1.3em;\n  left: 0;\n  padding: 0.15em 0.4em 0.1em;\n  -webkit-transition: all 0.2s ease-out 0s;\n  -moz-transition: all 0.2s ease-out 0s;\n  -ms-transition: all 0.2s ease-out 0s;\n  -o-transition: all 0.2s ease-out 0s;\n  transition: all 0.2s ease-out 0s; }\n\n.itsa-fileuploadbutton-help-text {\n  white-space: nowrap;\n  color: #999;\n  font-size: 0.8em;\n  bottom: -1.3em;\n  left: 1px;\n  position: absolute;\n  z-index: 1;\n  padding: 0.15em 0.4em 0.1em;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n", ""]);
+	exports.push([module.id, ".itsa-fileuploadbutton {\n  position: relative;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  margin-bottom: 1.5em;\n  /* keep space for help- and error-messages */\n  vertical-align: baseline; }\n\nbutton.itsa-button.itsa-fileuploadbutton-wide {\n  padding-right: 2em; }\n\nbutton.itsa-button.itsa-fileuploadbutton-error {\n  box-shadow: 0 0 0 1px #FF6A6A inset; }\n\n.itsa-fileuploadbutton-required::after {\n  content: \"*\";\n  position: absolute;\n  font-size: 2em;\n  top: 0.1em;\n  right: 0.2em;\n  color: #FF6A6A; }\n\n.itsa-fileuploadbutton-feedback-success::after {\n  content: url(" + __webpack_require__(166) + ");\n  position: absolute;\n  top: 0.5em;\n  right: 0.3em; }\n\n.itsa-fileuploadbutton-error input {\n  border-color: #FF6A6A !important;\n  -webkit-transition: all 0.2s ease-out 0s;\n  -moz-transition: all 0.2s ease-out 0s;\n  -ms-transition: all 0.2s ease-out 0s;\n  -o-transition: all 0.2s ease-out 0s;\n  transition: all 0.2s ease-out 0s; }\n\n.itsa-fileuploadbutton-error-text {\n  white-space: nowrap;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  color: #F34F4F;\n  font-size: 0.8em;\n  line-height: 1em;\n  opacity: 1;\n  position: absolute;\n  z-index: 1;\n  background-color: #F9F9F9;\n  border: 1px solid #FF6A6A;\n  bottom: -1.3em;\n  left: 0;\n  padding: 0.15em 0.4em 0.1em;\n  -webkit-transition: all 0.2s ease-out 0s;\n  -moz-transition: all 0.2s ease-out 0s;\n  -ms-transition: all 0.2s ease-out 0s;\n  -o-transition: all 0.2s ease-out 0s;\n  transition: all 0.2s ease-out 0s; }\n\n.itsa-fileuploadbutton-help-text {\n  white-space: nowrap;\n  color: #999;\n  font-size: 0.8em;\n  bottom: -1.3em;\n  left: 1px;\n  position: absolute;\n  z-index: 1;\n  padding: 0.15em 0.4em 0.1em;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n.itsa-fileuploadbutton-progress {\n  display: block;\n  position: absolute;\n  width: 96%;\n  /* IE8 */\n  width: calc(100% - 0.4em);\n  margin-left: -48%;\n  /* IE8 */\n  margin-left: calc(-50% + 0.2em);\n  left: 50%;\n  overflow: hidden;\n  opacity: 1;\n  border: solid 2px #444;\n  background-color: rgba(255, 255, 255, 0.1);\n  border-radius: 1em;\n  height: 0.4em;\n  bottom: 1px;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n/*$progress-smooth-delay: \"50ms\";*/\n.itsa-fileuploadbutton-progress-inner {\n  position: relative;\n  background-color: #444;\n  opacity: 0.8;\n  width: 100%;\n  height: 100%;\n  -webkit-transition: margin-left 50ms linear;\n  -moz-transition: margin-left 50ms linear;\n  -ms-transition: margin-left 50ms linear;\n  -o-transition: margin-left 50ms linear;\n  transition: margin-left 50ms linear; }\n\n.itsa-fileuploadbutton-progress.itsa-fileuploadbutton-progress-completed {\n  -webkit-transition: opacity 0.5s ease-out 0.5s;\n  -moz-transition: opacity 0.5s ease-out 0.5s;\n  -ms-transition: opacity 0.5s ease-out 0.5s;\n  -o-transition: opacity 0.5s ease-out 0.5s;\n  transition: opacity 0.5s ease-out 0.5s;\n  opacity: 0; }\n", ""]);
 
 	// exports
 
@@ -20200,7 +20153,7 @@
 /* 166 */
 /***/ function(module, exports) {
 
-	module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjIycHgiIGhlaWdodD0iMjJweCIgdmlld0JveD0iMCAwIDIyIDIyIiB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHhtbG5zOnNrZXRjaD0iaHR0cDovL3d3dy5ib2hlbWlhbmNvZGluZy5jb20vc2tldGNoL25zIj4KICAgIDwhLS0gR2VuZXJhdG9yOiBTa2V0Y2ggMy4zICgxMTk3MCkgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+aWNvbi1zdWNjZXNzIGNvcHkgNDwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSJtb2JpbGUiIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIHNrZXRjaDp0eXBlPSJNU1BhZ2UiPgogICAgICAgIDxnIGlkPSJTaWduLXVwLWlQaG9uZS02LXN1Y2Nlc3MiIHNrZXRjaDp0eXBlPSJNU0FydGJvYXJkR3JvdXAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMTUuMDAwMDAwLCAtMjQ1LjAwMDAwMCkiPgogICAgICAgICAgICA8ZyBpZD0iaWNvbi1zdWNjZXNzLWNvcHktNCIgc2tldGNoOnR5cGU9Ik1TTGF5ZXJHcm91cCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMzE1LjAwMDAwMCwgMjQ1LjAwMDAwMCkiPgogICAgICAgICAgICAgICAgPGVsbGlwc2UgaWQ9Ik92YWwtMSIgZmlsbD0iIzhDQkM0NSIgc2tldGNoOnR5cGU9Ik1TU2hhcGVHcm91cCIgY3g9IjEwLjcwNzY5MjMiIGN5PSIxMC43MTQyODU3IiByeD0iMTAuNzA3NjkyMyIgcnk9IjEwLjcxNDI4NTciPjwvZWxsaXBzZT4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik01LjYxMDI2MjY4LDEyLjkyMzU3OCBMNi42MjcyMjQzOCwxMS43NzU3OTUgTDkuMjUwOTk4NjMsMTMuNTY3MDgxOCBMMTUuMzg2ODAwNSw2LjcyNTA2NjM4IEwxNi42OTc0Mjk2LDcuNjExNzgzNzEgTDkuNTM2OTk2ODEsMTUuNTk2MzYyMiBMNS42MTAyNjI2OCwxMi45MjM1NzggTDUuNjEwMjYyNjgsMTIuOTIzNTc4IFoiIGlkPSLinJMtY29weSIgZmlsbD0iI0ZGRkZGRiIgc2tldGNoOnR5cGU9Ik1TU2hhcGVHcm91cCI+PC9wYXRoPgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4="
+	module.exports = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+Cjxzdmcgd2lkdGg9IjEuMmVtIiBoZWlnaHQ9IjEuMmVtIiB2aWV3Qm94PSIwIDAgMjIgMjIiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeG1sbnM6c2tldGNoPSJodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2gvbnMiPgogICAgPCEtLSBHZW5lcmF0b3I6IFNrZXRjaCAzLjMgKDExOTcwKSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5pY29uLXN1Y2Nlc3MgY29weSA0PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGRlZnM+PC9kZWZzPgogICAgPGcgaWQ9Im1vYmlsZSIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCIgc2tldGNoOnR5cGU9Ik1TUGFnZSI+CiAgICAgICAgPGcgaWQ9IlNpZ24tdXAtaVBob25lLTYtc3VjY2VzcyIgc2tldGNoOnR5cGU9Ik1TQXJ0Ym9hcmRHcm91cCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMxNS4wMDAwMDAsIC0yNDUuMDAwMDAwKSI+CiAgICAgICAgICAgIDxnIGlkPSJpY29uLXN1Y2Nlc3MtY29weS00IiBza2V0Y2g6dHlwZT0iTVNMYXllckdyb3VwIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgzMTUuMDAwMDAwLCAyNDUuMDAwMDAwKSI+CiAgICAgICAgICAgICAgICA8ZWxsaXBzZSBpZD0iT3ZhbC0xIiBmaWxsPSIjOENCQzQ1IiBza2V0Y2g6dHlwZT0iTVNTaGFwZUdyb3VwIiBjeD0iMTAuNzA3NjkyMyIgY3k9IjEwLjcxNDI4NTciIHJ4PSIxMC43MDc2OTIzIiByeT0iMTAuNzE0Mjg1NyI+PC9lbGxpcHNlPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTUuNjEwMjYyNjgsMTIuOTIzNTc4IEw2LjYyNzIyNDM4LDExLjc3NTc5NSBMOS4yNTA5OTg2MywxMy41NjcwODE4IEwxNS4zODY4MDA1LDYuNzI1MDY2MzggTDE2LjY5NzQyOTYsNy42MTE3ODM3MSBMOS41MzY5OTY4MSwxNS41OTYzNjIyIEw1LjYxMDI2MjY4LDEyLjkyMzU3OCBMNS42MTAyNjI2OCwxMi45MjM1NzggWiIgaWQ9IuKcky1jb3B5IiBmaWxsPSIjRkZGRkZGIiBza2V0Y2g6dHlwZT0iTVNTaGFwZUdyb3VwIj48L3BhdGg+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg=="
 
 /***/ },
 /* 167 */
@@ -20209,7 +20162,7 @@
 	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
 
 	/**
-	 * Description here
+	 * React-component: File upload-button.
 	 *
 	 *
 	 *
@@ -20217,12 +20170,16 @@
 	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
 	 *
 	 *
-	 * @module component.jsx
-	 * @class Component
-	 * @since 2.0.0
+	 * @module itsa-react-fileuploadbutton
+	 * @class FileUploadButton
+	 * @since 0.0.1
 	*/
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	__webpack_require__(168);
 
 	var _react = __webpack_require__(1);
 
@@ -20232,13 +20189,13 @@
 
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 
-	var _itsaReactButton = __webpack_require__(168);
+	var _itsaReactButton = __webpack_require__(176);
 
 	var _itsaReactButton2 = _interopRequireDefault(_itsaReactButton);
 
-	var _itsaFetch = __webpack_require__(176);
+	var _itsaFetch = __webpack_require__(184);
 
-	var _itsaUtils = __webpack_require__(190);
+	var _itsaUtils = __webpack_require__(198);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20259,28 +20216,6 @@
 
 	    propTypes: {
 	        /**
-	         * The Component its children
-	         *
-	         * @property children
-	         * @type Object
-	         * @since 2.0.0
-	        */
-	        onSuccess: _react.PropTypes.func,
-	        onError: _react.PropTypes.func,
-	        onFileChange: _react.PropTypes.func,
-	        autoSend: _react.PropTypes.bool,
-	        iframeMode: _react.PropTypes.bool,
-	        emptyAfterSent: _react.PropTypes.bool,
-	        maxFileSize: _react.PropTypes.number,
-	        multipleFiles: _react.PropTypes.bool,
-	        onClick: _react.PropTypes.func,
-	        onSend: _react.PropTypes.func,
-	        onProgress: _react.PropTypes.func,
-	        options: _react.PropTypes.object,
-	        params: _react.PropTypes.object,
-	        requestOptions: _react.PropTypes.object,
-	        totalFileSize: _react.PropTypes.number,
-	        /**
 	         * Whether to autofocus the Component.
 	         *
 	         * @property autoFocus
@@ -20288,6 +20223,63 @@
 	         * @since 0.0.1
 	        */
 	        autoFocus: _react.PropTypes.bool,
+
+	        /**
+	         * Whether to automaticly send the file(s) after being selected. When set `false`, you need to manually send the files
+	         * with the `send`-method.
+	         *
+	         * @property autoSend
+	         * @type Boolean
+	         * @since 0.0.1
+	        */
+	        autoSend: _react.PropTypes.bool,
+
+	        /**
+	         * The aria-label. When not set, it will equal the buttonText
+	         *
+	         * @property aria-label
+	         * @type String
+	         * @since 0.0.1
+	        */
+	        "aria-label": _react.PropTypes.string,
+
+	        /**
+	         * The Button-text. Will be escaped. If you need HTML, then use `buttonHTML` instead.
+	         *
+	         * @property buttonText
+	         * @type String
+	         * @since 0.0.1
+	        */
+	        buttonText: _react.PropTypes.string,
+
+	        /**
+	         * The Button-text, retaining html-code. If you don't need HTML,
+	         * then `buttonText` is preferred.
+	         *
+	         * @property buttonHTML
+	         * @type String
+	         * @since 0.0.1
+	        */
+	        buttonHTML: _react.PropTypes.string,
+
+	        /**
+	         * Whether the button is disabled
+	         *
+	         * @property disabled
+	         * @type Boolean
+	         * @since 0.0.1
+	        */
+	        disabled: _react.PropTypes.bool,
+
+	        /**
+	         * Whether to empty the file(s) after sent to the server.
+	         * Default: true
+	         *
+	         * @property emptyAfterSent
+	         * @type Boolean
+	         * @since 0.0.1
+	        */
+	        emptyAfterSent: _react.PropTypes.bool,
 
 	        /**
 	         * The error-message that appears when the element is wrong validated.
@@ -20299,7 +20291,18 @@
 	        errorMsg: _react.PropTypes.string,
 
 	        /**
-	         * The text that should appear when the element is wrong validated.
+	         * To force the component to use form-submit instead of XHR2. This is NOT recomended.
+	         * In case the browser does not support XHR2, it will automaticly fall back to form-submit.
+	         * Default: false
+	         *
+	         * @property formSubmitMode
+	         * @type Boolean
+	         * @since 0.0.1
+	        */
+	        formSubmitMode: _react.PropTypes.bool,
+
+	        /**
+	         * Help text to assist. Appears just below the button.
 	         *
 	         * @property helpText
 	         * @type String
@@ -20308,22 +20311,40 @@
 	        helpText: _react.PropTypes.string,
 
 	        /**
-	         * Whether to mark the Component when successfully validated.
+	         * Whether to mark the Component when the file(s) are successfully sent.
 	         *
-	         * @property markValidated
+	         * @property markSuccess
 	         * @type Boolean
 	         * @since 0.0.1
 	        */
-	        markValidated: _react.PropTypes.bool,
+	        markSuccess: _react.PropTypes.bool,
 
 	        /**
 	         * Whether the Component should show an validate-reclamation (star)
 	         *
-	         * @property markValidated
+	         * @property markRequired
 	         * @type Boolean
 	         * @since 0.0.1
 	        */
 	        markRequired: _react.PropTypes.bool,
+
+	        /**
+	         * The maximum allowed file-size of each separate file.
+	         *
+	         * @property maxFileSize
+	         * @type Number
+	         * @since 0.0.1
+	        */
+	        maxFileSize: _react.PropTypes.number,
+
+	        /**
+	         * Whether to support the selection of multiple files.
+	         *
+	         * @property multipleFiles
+	         * @type Boolean
+	         * @since 0.0.1
+	        */
+	        multipleFiles: _react.PropTypes.bool,
 
 	        /**
 	         * The `name` for the element.
@@ -20337,30 +20358,133 @@
 	        /**
 	         * The `onBlur` function, when happening on the DOM-Element.
 	         *
-	         * @property onChange
+	         * @property onBlur
 	         * @type Function
 	         * @since 0.1.0
 	        */
 	        onBlur: _react.PropTypes.func,
+
 	        /**
-	         * The `onFocus` function, when happening on the DOM-Element.
+	         * The `onClick` function, when happening on the DOM-Element.
 	         *
-	         * @property onChange
+	         * @property onClick
+	         * @type Function
+	         * @since 0.0.1
+	        */
+	        onClick: _react.PropTypes.func,
+
+	        /**
+	         * The `onError` function, when filetransfer errors.
+	         *
+	         * @property onError
+	         * @type Function
+	         * @since 0.0.1
+	        */
+	        onError: _react.PropTypes.func,
+
+	        /**
+	         * The `onFileChange` function, when the users has selected files.
+	         *
+	         * @property onFileChange
+	         * @type Function
+	         * @since 0.0.1
+	        */
+	        onFileChange: _react.PropTypes.func,
+
+	        /**
+	         * The `onFocus` function, when the Component gets focussed.
+	         *
+	         * @property onFocus
 	         * @type Function
 	         * @since 0.1.0
 	        */
 	        onFocus: _react.PropTypes.func,
+
+	        /**
+	         * The `onProgress` function: callback during tranfer.
+	         *
+	         * @property onProgress
+	         * @type Function
+	         * @since 0.0.1
+	        */
+	        onProgress: _react.PropTypes.func,
+
+	        /**
+	         * The `onSend` function, when the transfer starts.
+	         *
+	         * @property onSend
+	         * @type Function
+	         * @since 0.0.1
+	        */
+	        onSend: _react.PropTypes.func,
+
+	        /**
+	         * The `onSuccess` function, transfer succeeded.
+	         *
+	         * @property onSuccess
+	         * @type Function
+	         * @since 0.0.1
+	        */
+	        onSuccess: _react.PropTypes.func,
+
+	        /**
+	         * Additional params that can be send with the request.
+	         *
+	         * @property params
+	         * @type Object
+	         * @since 0.0.1
+	        */
+	        params: _react.PropTypes.object,
+
+	        /**
+	         * Options to be passed through to the request.
+	         *
+	         * @property requestOptions
+	         * @type Object
+	         * @since 0.0.1
+	        */
+	        requestOptions: _react.PropTypes.object,
+
+	        /**
+	         * Whether to show the progress inside the button.
+	         * Default: true
+	         *
+	         * @property showProgress
+	         * @type Boolean
+	         * @since 0.0.1
+	        */
+	        showProgress: _react.PropTypes.bool,
+
 	        /**
 	         * The tabindex of the Component.
 	         *
-	         * @property type
+	         * @property tabIndex
 	         * @type Number
 	         * @since 0.0.1
 	        */
 	        tabIndex: _react.PropTypes.number,
-	        url: _react.PropTypes.string.isRequired,
+
 	        /**
-	         * Whether the property is validated right.
+	         * The total maximum allowed file-size of all files altogether.
+	         *
+	         * @property totalFileSize
+	         * @type Number
+	         * @since 0.0.1
+	        */
+	        totalFileSize: _react.PropTypes.number,
+
+	        /**
+	         * The url to send to files to.
+	         *
+	         * @required
+	         * @property url
+	         * @type Boolean
+	         * @since 0.0.1
+	        */
+	        url: _react.PropTypes.string.isRequired,
+
+	        /**
+	         * Whether the selected files are is validated right. This value can be set inside the `onFileChange` callback.
 	         *
 	         * @property validated
 	         * @type Boolean
@@ -20369,14 +20493,24 @@
 	        validated: _react.PropTypes.bool
 	    },
 
+	    /**
+	     * Returns the default properties of the Component
+	     *
+	     * @method getDefaultProps
+	     * @return {Object} the default properties
+	     * @since 0.0.1
+	    */
 	    getDefaultProps: function getDefaultProps() {
 	        return {
+	            autoFocus: false,
 	            autoSend: true,
-	            iframeMode: false,
+	            formSubmitMode: false,
 	            emptyAfterSent: true,
+	            markSuccess: true,
+	            markRequired: false,
 	            maxFileSize: DEF_MAX_SIZE,
 	            multipleFiles: false,
-	            options: {},
+	            showProgress: true,
 	            params: {},
 	            requestOptions: {},
 	            totalFileSize: DEF_MAX_SIZE
@@ -20395,9 +20529,25 @@
 	        // need to inspect `this._inputNode` --> at first rendering it will be undefined
 	        return this._inputNode ? this._inputNode.files.length : 0;
 	    },
+
+
+	    /**
+	     * componentWillMount does some initialization.
+	     *
+	     * @method componentWillMount
+	     * @since 0.0.1
+	     */
 	    componentWillMount: function componentWillMount() {
 	        this._iframeName = (0, _itsaUtils.idGenerator)("itsa-iframe");
 	    },
+
+
+	    /**
+	     * componentDidMount does some initialization.
+	     *
+	     * @method componentDidMount
+	     * @since 0.0.1
+	     */
 	    componentDidMount: function componentDidMount() {
 	        var instance = this;
 	        instance._inputNode = _reactDom2.default.findDOMNode(instance.refs.fileinput);
@@ -20408,9 +20558,19 @@
 	        } else {
 	            instance._buttonNode.addEventListener(CLICK, instance._handleClick, true);
 	        }
+	        instance.props.autoFocus && instance.focus();
 	    },
+
+
+	    /**
+	     * componentWilUnmount does some cleanup.
+	     *
+	     * @method componentWillUnmount
+	     * @since 0.0.1
+	     */
 	    componentWillUnmount: function componentWillUnmount() {
 	        var instance = this;
+	        instance._clearRemoveTimer();
 	        if (instance.IE8_Events) {
 	            instance._buttonNode.detachEvent("on" + CLICK, instance._handleClick);
 	        } else {
@@ -20421,10 +20581,23 @@
 
 
 	    /**
+	     * Sets the focus on the Component.
+	     *
+	     * @method focus
+	     * @chainable
+	     * @since 0.0.1
+	     */
+	    focus: function focus() {
+	        this._buttonNode.focus();
+	        return this;
+	    },
+
+
+	    /**
 	     * Returns the currently selected files. This is an `Array-like` object, not a true Array.
 	     *
 	     * @method getFiles
-	     * @return {Array-like} protected `input`-domNode
+	     * @return {Array-like} protected list of files (of the `input`-domNode)
 	     * @since 0.0.1
 	    */
 	    getFiles: function getFiles() {
@@ -20443,6 +20616,22 @@
 	    */
 	    getLastSent: function getLastSent() {
 	        return this._lastfiles;
+	    },
+
+
+	    /**
+	     * Returns the initial state.
+	     *
+	     * @method getInitialState
+	     * @return object
+	     * @since 0.0.1
+	     */
+	    getInitialState: function getInitialState() {
+	        return {
+	            serverError: "",
+	            serverSuccess: false,
+	            percent: null
+	        };
 	    },
 
 
@@ -20478,6 +20667,15 @@
 	    hasFiles: function hasFiles() {
 	        return this.count() > 0;
 	    },
+
+
+	    /**
+	     * Aborts the transfer (if files are being sent).
+	     *
+	     * @method abort
+	     * @params reset {Boolean} Whether to clean the file-list
+	     * @since 0.0.1
+	    */
 	    abort: function abort(reset) {
 	        var _this = this;
 
@@ -20487,6 +20685,126 @@
 	            reset && _this.reset();
 	        });
 	    },
+
+
+	    /**
+	     * React render-method --> renderes the Component.
+	     *
+	     * @method render
+	     * @return ReactComponent
+	     * @since 0.0.1
+	     */
+	    render: function render() {
+	        var errorMsg = undefined,
+	            help = undefined,
+	            iframe = undefined,
+	            element = undefined,
+	            sizeValidationMsg = undefined,
+	            shiftLeft = undefined,
+	            progressBar = undefined,
+	            classNameProgressBar = undefined,
+	            classNameProgressBarInner = undefined,
+	            progressBarInnerStyles = undefined;
+	        var instance = this,
+	            state = instance.state,
+	            serverError = state.serverError,
+	            props = instance.props.itsa_deepClone(),
+	            serverSuccess = state.serverSuccess,
+	            markServerSuccess = props.markSuccess && serverSuccess,
+	            XHR2 = XHR2support && !props.formSubmitMode,
+	            showProgress = props.showProgress,
+	            onProgress = props.onProgress;
+
+	        delete props.onClick; // we needed to create a native click-event and don't want to invoke onClick twice
+
+	        props.className || (props.className = "");
+	        props.className += (props.className ? " " : "") + MAIN_CLASS;
+
+	        if (markServerSuccess) {
+	            props.className += " " + MAIN_CLASS_PREFIX + "feedback-success";
+	        } else if (!instance.hasFiles() && !serverSuccess) {
+	            props.markRequired && (props.className += " " + MAIN_CLASS_PREFIX + "required");
+	        }
+	        if (props.markRequired || props.markSuccess) {
+	            props.className += " " + MAIN_CLASS_PREFIX + "wide";
+	        }
+
+	        if (typeof state.percent === "number") {
+	            classNameProgressBar = MAIN_CLASS_PREFIX + "progress";
+	            classNameProgressBarInner = classNameProgressBar + "-inner";
+	            serverSuccess && (classNameProgressBar += " " + classNameProgressBar + "-completed");
+	            shiftLeft = state.percent - 100;
+	            progressBarInnerStyles = {
+	                marginLeft: shiftLeft + "%"
+	            };
+	            progressBar = _react2.default.createElement(
+	                "div",
+	                { className: classNameProgressBar },
+	                _react2.default.createElement("div", { className: classNameProgressBarInner, style: progressBarInnerStyles })
+	            );
+	        }
+
+	        sizeValidationMsg = instance._getSizeValidationMsg();
+	        if (serverError || props.validated === false || sizeValidationMsg) {
+	            errorMsg = _react2.default.createElement(
+	                "div",
+	                { className: MAIN_CLASS_PREFIX + "error-text" },
+	                serverError || (props.validated === false ? props.errorMsg : sizeValidationMsg)
+	            );
+	            props.className += SPACED_MAIN_CLASS_PREFIX + "error";
+	        }
+
+	        if (props.helpText && !errorMsg) {
+	            help = _react2.default.createElement(
+	                "div",
+	                { className: MAIN_CLASS_PREFIX + "help-text" },
+	                props.helpText
+	            );
+	        }
+
+	        if (XHR2) {
+	            if (onProgress || showProgress) {
+	                instance.progressfn = function (data) {
+	                    var payload = undefined,
+	                        percent = undefined;
+	                    var total = data.total,
+	                        loaded = data.loaded;
+	                    if (showProgress) {
+	                        percent = Math.round(100 * (loaded / total));
+	                        instance.setState({
+	                            percent: percent
+	                        });
+	                    }
+	                    if (onProgress) {
+	                        payload = {
+	                            ioPromise: data.target,
+	                            target: instance,
+	                            total: total,
+	                            loaded: loaded
+	                        };
+	                        onProgress(payload);
+	                    }
+	                };
+	            } else {
+	                instance.progressfn = null;
+	            }
+	            element = instance._renderInputElement();
+	        } else {
+	            iframe = instance._renderIframe();
+	            element = instance._renderFormElement();
+	        }
+
+	        return _react2.default.createElement(
+	            "div",
+	            { className: MAIN_CLASS },
+	            iframe,
+	            element,
+	            _react2.default.createElement(_itsaReactButton2.default, _extends({}, props, { ref: "uploadbutton", showActivated: false, type: "button" })),
+	            progressBar,
+	            errorMsg,
+	            help
+	        );
+	    },
 	    reset: function reset() {
 	        var inputNode = this._inputNode;
 	        // force the fileselector-popup up to disappear and become empty
@@ -20495,42 +20813,15 @@
 	        inputNode.value = "";
 	        inputNode.setAttribute("type", "file");
 	    },
-	    _getSizeValidationMsg: function _getSizeValidationMsg() {
-	        var msg = undefined,
-	            fileMsg = undefined,
-	            filesizeMsg = undefined;
-	        var instance = this,
-	            props = instance.props,
-	            maxFileSize = props.maxFileSize,
-	            totalFileSize = props.totalFileSize;
-	        if (instance.hasFiles()) {
-	            if (maxFileSize && instance._getLargestFileSize() > maxFileSize) {
-	                fileMsg = props.multipleFiles ? "one of the files" : "selected file";
-	                filesizeMsg = Math.round(maxFileSize / 1024);
-	                msg = fileMsg + " exceeds the maximum filesize of " + filesizeMsg + " KB";
-	            } else if (totalFileSize && instance.getTotalFileSize() > totalFileSize) {
-	                fileMsg = props.multipleFiles ? "the size of all files exceed" : "selected file exceeds";
-	                filesizeMsg = Math.round(totalFileSize / 1024);
-	                msg = fileMsg + " the maximum of " + filesizeMsg + " KB";
-	            }
-	        }
-	        return msg;
-	    },
+
 
 	    /**
-	     * Send the selected files, by emitting the "uploader:send"-event.
-	     * If `payload.url`, `payload.url` or `payload.url` is set, then these will overrule the default
-	     * values (the way they were set at initiation, or by using `setDefaults`).
-	     * You also can set other properties at the payload --> these will be available at the listeners.
+	     * Send the selected files. Will also invoke the onSend callback, from within `e.preventDefault()` can be used.
 	     *
 	     * @method send
-	     * @params [payload] {Object}
-	     *     @params [payload.url] {String}
-	     *     @params [payload.params] {Object}
-	     *     @params [payload.options] {Object}
-	     * @chainable
 	     * @since 0.0.1
 	    */
+
 	    send: function send() {
 	        var hash = [],
 	            promisesById = {},
@@ -20579,7 +20870,7 @@
 	            return "default-prevented";
 	        }
 
-	        if (!XHR2support || props.iframeMode) {
+	        if (!XHR2support || props.formSubmitMode) {
 	            instance._io = Promise.itsa_manage();
 	            instance._io.abort = function () {
 	                // first abort the request:
@@ -20594,9 +20885,9 @@
 	            instance._formsubmit = true;
 	            instance.refs.fileform.submit();
 	        } else {
-	            options = props.options.itsa_deepClone();
+	            options = props.requestOptions.itsa_deepClone();
 	            options.progressfn = instance.progressfn; // is set during `render`
-	            options.chunks = !props.iframeMode;
+	            options.chunks = !props.formSubmitMode;
 	            params = props.params.itsa_deepClone();
 	            url = props.url;
 
@@ -20611,7 +20902,7 @@
 	                        var promiseInstance = data.target,
 	                            totalLoaded = 0;
 	                        promisesById[promiseInstance._id] = data.loaded;
-	                        promisesById.each(function (value) {
+	                        promisesById.itsa_each(function (value) {
 	                            totalLoaded += value;
 	                        });
 	                        originalProgressFn({
@@ -20632,7 +20923,7 @@
 	                    }
 	                    hash.push(ioPromise);
 	                }
-	                promise = window.Promise.finishAll(hash).then(function (response) {
+	                promise = window.Promise.itsa_finishAll(hash).then(function (response) {
 	                    var rejected = response.rejected;
 	                    rejected.forEach(function (ioError) {
 	                        if (ioError) {
@@ -20654,6 +20945,7 @@
 	                promise.abort = NOOP;
 	            }
 	            instance._io = promise;
+	            props.showProgress && this.setState({ percent: 0 });
 	        }
 	        if (props.emptyAfterSent && len > 0) {
 	            // empty ON THE NEXT stack (not microstack), to ensure all previous methods are processing
@@ -20669,95 +20961,27 @@
 	    },
 
 
-	    /**
-	     * React render-method --> renderes the Component.
-	     *
-	     * @method render
-	     * @return ReactComponent
-	     * @since 2.0.0
-	     */
-	    render: function render() {
-	        var errorMsg = undefined,
-	            help = undefined,
-	            iframe = undefined,
-	            element = undefined,
-	            sizeValidationMsg = undefined;
-	        var instance = this,
-	            props = instance.props.itsa_deepClone();
-
-	        delete props.onClick; // we needed to create a native click-event and don't want to invoke onClick twice
-
-	        props.className || (props.className = "");
-	        props.className += (props.className ? " " : "") + "itsa-fileuploadbutton";
-
-	        if (!instance.hasFiles()) {
-	            props.markRequired && (props.className += " itsa-fileuploadbutton-required");
-	        } else if (props.markValidated && props.validated) {
-	            props.className += " itsa-fileuploadbutton-feedback-success";
-	        }
-
-	        if (props.markRequired || props.markValidated) {
-	            props.className += " itsa-fileuploadbutton-wide";
-	        }
-
-	        sizeValidationMsg = instance._getSizeValidationMsg();
-	        if (props.validated === false || sizeValidationMsg) {
-	            errorMsg = _react2.default.createElement(
-	                "div",
-	                { className: MAIN_CLASS_PREFIX + "error-text" },
-	                props.validated === false ? props.errorMsg : sizeValidationMsg
-	            );
-	            props.className += SPACED_MAIN_CLASS_PREFIX + "error";
-	        }
-
-	        if (props.helpText && !errorMsg) {
-	            help = _react2.default.createElement(
-	                "div",
-	                { className: MAIN_CLASS_PREFIX + "help-text" },
-	                props.helpText
-	            );
-	        }
-
-	        if (XHR2support && !props.iframeMode) {
-	            if (props.onProgress) {
-	                instance.progressfn = function (data) {
-	                    var payload = {
-	                        ioPromise: data.target,
-	                        target: instance,
-	                        total: data.total,
-	                        loaded: data.loaded
-	                    };
-	                    props.onProgress(payload);
-	                };
-	            } else {
-	                instance.progressfn = null;
-	            }
-	            element = instance._renderInputElement();
-	        } else {
-	            iframe = instance._renderIframe();
-	            element = instance._renderFormElement();
-	        }
-
-	        return _react2.default.createElement(
-	            "div",
-	            { className: MAIN_CLASS },
-	            iframe,
-	            element,
-	            _react2.default.createElement(_itsaReactButton2.default, _extends({ ref: "uploadbutton" }, props)),
-	            errorMsg,
-	            help
-	        );
-	    },
-
-
 	    //==============================================================================
 	    //== private methods ===========================================================
 	    //==============================================================================
 
 	    /**
+	     * Clears the internal timer set by `_setRemoveTimer`
+	     *
+	     * @method _clearRemoveTimer
+	     * @private
+	     * @since 0.0.1
+	    */
+	    _clearRemoveTimer: function _clearRemoveTimer() {
+	        this._removeTimer && this._removeTimer.cancel();
+	    },
+
+
+	    /**
 	     * Returns the size of the largest file that is currently selected.
 	     *
 	     * @method _getLargestFileSize
+	     * @private
 	     * @return {Number} The size of the largest file in bytes
 	     * @since 0.0.1
 	    */
@@ -20777,16 +21001,44 @@
 
 
 	    /**
-	     * Default function for the `uploader:_handleClick`-event
+	     * Returns the validation-message when file-size is exceeded.
 	     *
-	     * @method _defFnSelectFiles
-	     * @param e {Object} eventobject
-	     *     @param [e.multiple] {Boolean} whether to support multiple selected files
+	     * @method _getSizeValidationMsg
+	     * @private
+	     * @return {String} Message in case limits are exceeded
+	     * @since 0.0.1
+	    */
+	    _getSizeValidationMsg: function _getSizeValidationMsg() {
+	        var msg = undefined,
+	            fileMsg = undefined,
+	            filesizeMsg = undefined;
+	        var instance = this,
+	            props = instance.props,
+	            maxFileSize = props.maxFileSize,
+	            totalFileSize = props.totalFileSize;
+	        if (instance.hasFiles()) {
+	            if (maxFileSize && instance._getLargestFileSize() > maxFileSize) {
+	                fileMsg = props.multipleFiles ? "one of the files" : "selected file";
+	                filesizeMsg = Math.round(maxFileSize / 1024);
+	                msg = fileMsg + " exceeds the maximum filesize of " + filesizeMsg + " KB";
+	            } else if (totalFileSize && instance.getTotalFileSize() > totalFileSize) {
+	                fileMsg = props.multipleFiles ? "the size of all files exceed" : "selected file exceeds";
+	                filesizeMsg = Math.round(totalFileSize / 1024);
+	                msg = fileMsg + " the maximum of " + filesizeMsg + " KB";
+	            }
+	        }
+	        return msg;
+	    },
+
+
+	    /**
+	     * Callback whenever the button gets clicked.
+	     *
+	     * @method _handleClick
 	     * @private
 	     * @since 0.0.1
 	    */
 	    _handleClick: function _handleClick() {
-	        // http://stackoverflow.com/questions/32746279/not-triggering-event-when-clicking-an-input-type-file-element-in-firefox
 	        var prevented = false;
 	        var instance = this,
 	            onClick = instance.props.onClick;
@@ -20797,19 +21049,55 @@
 	                },
 	                target: instance
 	            });
+	            instance._clearRemoveTimer();
+	            instance.setState({
+	                serverError: "",
+	                serverSuccess: false,
+	                percent: null
+	            });
 	            prevented || instance._inputNode.click();
 	        }
 	    },
-	    _handleError: function _handleError(data) {
+
+
+	    /**
+	     * Error-Callback for the promised-request
+	     *
+	     * @method _handleError
+	     * @private
+	     * @params err {Object}
+	     * @since 0.0.1
+	    */
+	    _handleError: function _handleError(err) {
 	        var props = this.props,
-	            onError = props.onError;
+	            onError = props.onError,
+	            statusMsg = Object.itsa_isObject(err) && err.status ? err.status : typeof err === "string" ? err : "Error";
+	        statusMsg;
 	        if (onError) {
 	            onError({
-	                status: Object.itsa_isObject(data) && data.status ? data.status : typeof data === "string" ? data : "Error",
+	                message: statusMsg,
 	                target: this
 	            });
 	        }
+	        this.setState({
+	            serverError: "server-error: " + statusMsg.toLowerCase(),
+	            serverSuccess: false,
+	            percent: null
+	        });
+	        // remove progressBar after 1 second: when laid above the button hte button can't be pressed
+	        this._setRemoveTimer();
 	    },
+
+
+	    /**
+	     * Callback whenever the `input`-element's files are changed. Will invoke `onFileChange` when present.
+	     * If the property `autoSend` is true (and `onFileChange` did no `preventDefault()`), then the `send()`-method gets invoked.
+	     *
+	     * @method _handleFileChange
+	     * @private
+	     * @return {Number} The size of the largest file in bytes
+	     * @since 0.0.1
+	    */
 	    _handleFileChange: function _handleFileChange() {
 	        var prevented = false;
 	        var instance = this,
@@ -20828,6 +21116,16 @@
 	            });
 	        }
 	    },
+
+
+	    /**
+	     * Error-Callback for the promised-request
+	     *
+	     * @method _handleSuccess
+	     * @private
+	     * @params err {data}
+	     * @since 0.0.1
+	    */
 	    _handleSuccess: function _handleSuccess(data) {
 	        var props = this.props,
 	            onSuccess = props.onSuccess;
@@ -20837,10 +21135,38 @@
 	                target: this
 	            });
 	        }
+	        this.setState({
+	            serverError: "",
+	            serverSuccess: true,
+	            percent: 100
+	        });
+	        // remove progressBar after 1 second: when laid above the button hte button can't be pressed
+	        this._setRemoveTimer();
 	    },
+
+
+	    /**
+	     * Callback whenever the iframe recieves an error (most likely by an invalid server-response).
+	     * Will abort the request-promise.
+	     *
+	     * @method _iframeError
+	     * @private
+	     * @since 0.0.1
+	    */
 	    _iframeError: function _iframeError() {
 	        instance._io.abort();
 	    },
+
+
+	    /**
+	     * Callback whenever the iframe recieves a response from the server. Depending on the response, it will
+	     * either fulfill or reject the request-promise.
+	     *
+	     * @method _iframeLoad
+	     * @private
+	     * @return {Number} The size of the largest file in bytes
+	     * @since 0.0.1
+	    */
 	    _iframeLoad: function _iframeLoad() {
 	        var content = undefined;
 	        var instance = this,
@@ -20851,7 +21177,7 @@
 	                if (content === "OK") {
 	                    instance._io.fulfill(okStatus);
 	                } else {
-	                    instance._io.reject();
+	                    instance._io.reject("server did not accept the files");
 	                }
 	            } catch (err) {
 	                // CORS is active --> we are unable to determine the response, so we need to fulfill the request:
@@ -20859,6 +21185,16 @@
 	            }
 	        }
 	    },
+
+
+	    /**
+	     * Renderes the HTMLInputElement
+	     *
+	     * @method _renderInputElement
+	     * @private
+	     * @return {Component} The Input-element (jsx)
+	     * @since 0.0.1
+	    */
 	    _renderInputElement: function _renderInputElement() {
 	        var inputStyles = { display: "none !important" };
 	        return _react2.default.createElement("input", {
@@ -20868,11 +21204,32 @@
 	            style: inputStyles,
 	            type: "file" });
 	    },
+
+
+	    /**
+	     * Renderes a HTMLFormElement (in case no XHR2 is used)
+	     *
+	     * @method _renderFormElement
+	     * @private
+	     * @return {Component} The Form-element (jsx)
+	     * @since 0.0.1
+	    */
 	    _renderFormElement: function _renderFormElement() {
 	        var instance = this,
 	            props = instance.props,
 	            formStyles = { display: "none !important" },
-	            inputStyles = {};
+	            hiddenFields = [];
+
+	        props.params.itsa_each(function (value, key) {
+	            var keyValue = undefined;
+	            try {
+	                keyValue = (typeof value === "undefined" ? "undefined" : _typeof(value)) === "object" ? JSON.stringify(value) : String(value);
+	            } catch (err) {
+	                keyValue = null;
+	            }
+	            hiddenFields.push(_react2.default.createElement("input", { key: key, type: "hidden", name: key, value: keyValue }));
+	        });
+
 	        return _react2.default.createElement(
 	            "form",
 	            {
@@ -20883,15 +21240,25 @@
 	                ref: "fileform",
 	                style: formStyles,
 	                target: instance._iframeName },
+	            hiddenFields,
 	            _react2.default.createElement("input", {
 	                multiple: props.multipleFiles,
 	                name: "uploadfiles",
 	                onChange: instance._handleFileChange,
 	                ref: "fileinput",
-	                style: inputStyles,
 	                type: "file" })
 	        );
 	    },
+
+
+	    /**
+	     * Renderes an iFrame-element (in case no XHR2 is used), which is needed for the response-target of the form-submission.
+	     *
+	     * @method _renderIframe
+	     * @private
+	     * @return {Component} The iframe-element (jsx)
+	     * @since 0.0.1
+	    */
 	    _renderIframe: function _renderIframe() {
 	        var instance = this,
 	            iframeStyles = { display: "none !important" };
@@ -20906,11 +21273,26 @@
 
 
 	    /**
+	     * Sets a timer that will remove the progress-bar.
+	     *
+	     * @method _setRemoveTimer
+	     * @private
+	     * @since 0.0.1
+	    */
+	    _setRemoveTimer: function _setRemoveTimer() {
+	        var _this2 = this;
+
+	        this._removeTimer = (0, _itsaUtils.later)(function () {
+	            return _this2.setState({ percent: null });
+	        }, 1050);
+	    },
+
+
+	    /**
 	     * Stores the files that are sent into an internal hash, which can be read by `getLastSent()`.
 	     *
 	     * @method _storeLastSent
 	     * @private
-	     * @chainable
 	     * @since 0.0.1
 	    */
 	    _storeLastSent: function _storeLastSent() {
@@ -20941,1212 +21323,16 @@
 
 	"use strict";
 
-	/**
-	 * React-Component: refined Button.
-	 *
-	 *
-	 *
-	 * <i>Copyright (c) 2016 ItsAsbreuk - http://itsasbreuk.nl</i><br>
-	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
-	 *
-	 *
-	 * @module itsa-react-button
-	 * @class Button
-	 * @since 0.0.1
-	*/
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-	var _react = __webpack_require__(1);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactDom = __webpack_require__(158);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _utils = __webpack_require__(169);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var MAIN_CLASS = "itsa-button",
-	    MAIN_CLASS_PREFIX = MAIN_CLASS + "-",
-	    WHITE_SPACE = "&#160;",
-	    // white-space
-	BOOLEAN = "boolean",
-	    DEF_BUTTON_PRESS_TIME = 300;
-
-	var Button = _react2.default.createClass({
-	    displayName: "Button",
-
-
-	    propTypes: {
-	        /**
-	         * Array with the keys that can press the button when focussed.
-	         * Default: [13, 32]
-	         *
-	         * @property activatedBy
-	         * @type Array
-	         * @since 0.0.1
-	        */
-	        activatedBy: _react.PropTypes.array,
-
-	        /**
-	         * The aria-label. When not set, it will equal the buttonText
-	         *
-	         * @property aria-label
-	         * @type String
-	         * @since 0.0.1
-	        */
-	        "aria-label": _react.PropTypes.string,
-
-	        /**
-	         * The Button-text. Will be escaped. If you need HTML, then use `buttonHTML` instead.
-	         *
-	         * @property buttonText
-	         * @type String
-	         * @since 0.0.1
-	        */
-	        buttonText: _react.PropTypes.string,
-
-	        /**
-	         * The Button-text, retaining html-code. If you don't need HTML,
-	         * then `buttonText` is preferred.
-	         *
-	         * @property buttonHTML
-	         * @type String
-	         * @since 0.0.1
-	        */
-	        buttonHTML: _react.PropTypes.string,
-
-	        /**
-	         * The time that the button retains in its `pressed-state` when activated by a key-press.
-	         *
-	         * Default: 300ms
-	         *
-	         * @property buttonPressTime
-	         * @type Number
-	         * @since 0.0.1
-	        */
-	        buttonPressTime: _react.PropTypes.number,
-
-	        /**
-	         * Whether the button resonses rapidly (keydown and mousedown).
-	         * Note: native HTMLButtonElements don't resonse rapidly --> the onClick event happens on mouseUp.
-	         *
-	         * Default: true
-	         *
-	         * @property directResponse
-	         * @type Boolean
-	         * @since 0.0.1
-	        */
-	        directResponse: _react.PropTypes.bool,
-
-	        /**
-	         * Whether the button is disabled
-	         *
-	         * @property disabled
-	         * @type Boolean
-	         * @since 0.0.1
-	        */
-	        disabled: _react.PropTypes.bool,
-
-	        /**
-	         * The name-attribute of the button
-	         *
-	         * @property name
-	         * @type String
-	         * @since 0.0.1
-	        */
-	        name: _react.PropTypes.string,
-
-	        /**
-	         * Callback wheneveer the button gets clicked.
-	         *
-	         * @property onClick
-	         * @type Function
-	         * @since 0.0.1
-	        */
-	        onClick: _react.PropTypes.func,
-
-	        /**
-	         * The tabIndex
-	         * Default: 1
-	         *
-	         * @property tabIndex
-	         * @type Number
-	         * @since 0.0.1
-	        */
-	        tabIndex: _react.PropTypes.number,
-
-	        /**
-	         * Whether the button is in a toggle-state.
-	         * You don;t need to use this directly: use the module ToggleButton instead.
-	         *
-	         * @property toggled
-	         * @type Boolean
-	         * @since 0.0.1
-	        */
-	        toggled: _react.PropTypes.bool,
-
-	        /**
-	         * The type of the button
-	         * Default: "button"
-	         *
-	         * @property children
-	         * @type String
-	         * @since 0.0.1
-	        */
-	        type: _react.PropTypes.string
-	    },
-
-	    /**
-	     * componentDidMount does some initialization.
-	     *
-	     * @method componentDidMount
-	     * @since 0.0.1
-	     */
-	    componentDidMount: function componentDidMount() {
-	        var instance = this;
-	        instance._buttonNode = _reactDom2.default.findDOMNode(instance);
-	        instance._mounted = true;
-	    },
-
-
-	    /**
-	     * componentWilUnmount does some cleanup.
-	     *
-	     * @method componentWillUnmount
-	     * @since 0.0.1
-	     */
-	    componentWillUnmount: function componentWillUnmount() {
-	        this._mounted = false;
-	    },
-
-
-	    /**
-	     * Sets the focus on the Component.
-	     *
-	     * @method focus
-	     * @chainable
-	     * @since 0.0.1
-	     */
-	    focus: function focus() {
-	        this._buttonNode.focus();
-	        return this;
-	    },
-
-
-	    /**
-	     * Returns the default props.
-	     *
-	     * @method getDefaultProps
-	     * @return object
-	     * @since 0.0.1
-	     */
-	    getDefaultProps: function getDefaultProps() {
-	        return {
-	            activatedBy: [13, 32],
-	            buttonPressTime: DEF_BUTTON_PRESS_TIME,
-	            directResponse: true,
-	            disabled: false,
-	            tabIndex: 1,
-	            type: 'button'
-	        };
-	    },
-
-
-	    /**
-	     * Returns the initial state.
-	     *
-	     * @method getInitialState
-	     * @return object
-	     * @since 0.0.1
-	     */
-	    getInitialState: function getInitialState() {
-	        return {
-	            active: false
-	        };
-	    },
-
-
-	    /**
-	     * Callback-fn for the onClick-event.
-	     * Will invoke `this.props.onChange`
-	     *
-	     * @method handleClick
-	     * @since 0.0.1
-	     */
-	    handleClick: function handleClick(e) {
-	        var instance = this,
-	            props = instance.props,
-	            onClick = props.onClick;
-	        if (!instance._keyDown && !this._mouseDown) {
-	            // don't double execute
-	            instance.focus();
-	            if (onClick) {
-	                e.preventDefault();
-	                onClick();
-	            }
-	        }
-	    },
-
-
-	    /**
-	     * Callback-fn for the onKeyDown-event.
-	     *
-	     * @method handleKeyDown
-	     * @since 0.0.1
-	     */
-	    handleKeyDown: function handleKeyDown(e, directResponse, force) {
-	        var instance = this,
-	            props = instance.props,
-	            onClick = props.onClick,
-	            activatedBy = props.activatedBy,
-	            forced = force === true,
-	            // IMPORTANT --> on a keyEvent this is an object in which we are not interested
-	        pressTimer = instance.pressTimer,
-	            keyCode = e.keyCode,
-	            isDirectResponse = (typeof directResponse === "undefined" ? "undefined" : _typeof(directResponse)) === BOOLEAN ? directResponse : props.directResponse;
-
-	        if (keyCode === 27) {
-	            // escape keyDown in case it was set
-	            instance._keyDown = false;
-	            pressTimer && pressTimer.cancel();
-	            if (instance.state.active) {
-	                instance.setState({
-	                    active: false
-	                });
-	            }
-	        } else {
-	            if (forced || activatedBy.indexOf(keyCode) !== -1) {
-	                instance._keyDown = true;
-	                if (_typeof(props.toggled) === BOOLEAN) {
-	                    onClick && onClick();
-	                } else {
-	                    if (!instance.state.active) {
-	                        instance.setState({
-	                            active: true
-	                        });
-	                        pressTimer && pressTimer.cancel();
-	                        instance.pressTimer = (0, _utils.later)(instance._processKeyUp.bind(instance, null, isDirectResponse, forced), props.buttonPressTime);
-	                        if (isDirectResponse) {
-	                            onClick && onClick();
-	                        }
-	                    }
-	                }
-	            }
-	        }
-	    },
-
-
-	    /**
-	     * Callback-fn for the onKeyUp-event.
-	     *
-	     * @method handleKeyUp
-	     * @since 0.0.1
-	     */
-	    handleKeyUp: function handleKeyUp(e) {
-	        var _this = this;
-
-	        // we must go async --> instance._keyDown cannot be set 'false' right away,
-	        // because the handleClick method needs to be processed first
-	        // if we don;t do this, props.onClick() would be executed twice when the spacebutton is pressed
-	        (0, _utils.async)(function () {
-	            var instance = _this;
-	            instance._keyDown = false;
-	            if (_typeof(instance.props.toggled) !== BOOLEAN && instance.state.active) {
-	                instance._processKeyUp(true);
-	            }
-	        });
-	    },
-
-
-	    /**
-	     * Callback-fn for the onMouseDown-event.
-	     *
-	     * @method handleMouseDown
-	     * @since 0.0.1
-	     */
-	    handleMouseDown: function handleMouseDown(e) {
-	        this.handleClick(e);
-	        this._mouseDown = true;
-	    },
-
-
-	    /**
-	     * Callback-fn for the onMouseUp-event.
-	     *
-	     * @method handleMouseUp
-	     * @since 0.0.1
-	     */
-	    handleMouseUp: function handleMouseUp() {
-	        var _this2 = this;
-
-	        // we must go async --> instance._mouseDown cannot be set 'false' right away,
-	        // because the handleClick method needs to be processed first
-	        // if we don;t do this, props.onClick() would be executed twice when the spacebutton is pressed
-	        (0, _utils.async)(function () {
-	            return _this2._mouseDown = false;
-	        });
-	    },
-
-
-	    /**
-	     * Callback-fn for the onClick-event.
-	     * Will invoke `this.props.onChange`
-	     *
-	     * @method press
-	     * @param boolean [directResponse] whether directly call onClick, or wait until the button raises up.
-	     * @since 0.0.1
-	     */
-	    press: function press(directResponse) {
-	        this.handleKeyDown({}, directResponse, true);
-	    },
-
-
-	    /**
-	     * React render-method --> renderes the Component.
-	     *
-	     * @method render
-	     * @return ReactComponent
-	     * @since 0.0.1
-	     */
-	    render: function render() {
-	        var classname = MAIN_CLASS,
-	            buttonHTML = this.props.buttonHTML,
-	            dangerouslySetInnerHTML = undefined,
-	            buttonText = undefined,
-	            handleClick = undefined,
-	            handleKeyDown = undefined,
-	            handleKeyUp = undefined,
-	            handleMouseDown = undefined,
-	            handleMouseUp = undefined;
-
-	        var instance = this,
-	            props = instance.props,
-	            state = instance.state,
-	            disabled = props.disabled,
-	            directResponse = props.directResponse,
-	            saveButtonText = instance._saveHTML(props.buttonText),
-	            isToggleButton = _typeof(props.toggled) === BOOLEAN,
-	            ariaLabel = props["aria-label"] || saveButtonText || instance._saveHTML(buttonHTML);
-
-	        if (state.active || props.toggled) {
-	            classname += " " + MAIN_CLASS_PREFIX + "active";
-	            props.toggled && (classname += " " + MAIN_CLASS_PREFIX + "toggled");
-	        }
-	        isToggleButton && (classname += " " + MAIN_CLASS_PREFIX + "togglebtn");
-	        props.className && (classname += " " + props.className);
-
-	        if (!buttonHTML && !props.buttonText) {
-	            buttonHTML = WHITE_SPACE;
-	        }
-	        if (buttonHTML) {
-	            dangerouslySetInnerHTML = { __html: buttonHTML };
-	        } else {
-	            buttonText = saveButtonText;
-	        }
-
-	        if (!disabled) {
-	            if (directResponse || isToggleButton) {
-	                handleMouseDown = instance.handleMouseDown;
-	                handleMouseUp = instance.handleMouseUp;
-	            }
-	            handleClick = instance.handleClick;
-	            handleKeyDown = instance.handleKeyDown;
-	            handleKeyUp = instance.handleKeyUp;
-	        }
-
-	        return _react2.default.createElement(
-	            "button",
-	            { accessKey: props.accessKey,
-	                "aria-label": ariaLabel,
-	                "aria-pressed": props.toggled,
-	                className: classname,
-	                dangerouslySetInnerHTML: dangerouslySetInnerHTML,
-	                disabled: disabled,
-	                name: props.name,
-	                onClick: handleClick,
-	                onKeyDown: handleKeyDown,
-	                onKeyUp: handleKeyUp,
-	                onMouseDown: handleMouseDown,
-	                onMouseUp: handleMouseUp,
-	                role: "button",
-	                tabIndex: props.tabIndex,
-	                type: props.type },
-	            buttonText
-	        );
-	    },
-
-
-	    /**
-	     * React render-method --> renderes the Component.
-	     *
-	     * @method _processKeyUp
-	     * @param Boolean manual whether this routine gets called manually (keypress), or from a click-event
-	     * @param Boolean directResponse Whether to direct response or wait for the button to raise up
-	     * @param Boolean force whether to force (initiated by the method `press`)
-	     * @private
-	     * @since 0.0.1
-	     */
-	    _processKeyUp: function _processKeyUp(manual, directResponse, force) {
-	        var instance = this,
-	            props = instance.props,
-	            onClick = props.onClick,
-	            pressTimer = instance.pressTimer,
-	            manualDeactivation = manual && !pressTimer,
-	            timerDeactivation = !manual && pressTimer;
-	        if (this._mounted) {
-	            // we don't want unMounted Buttons to trigger the state and onClick-prop
-	            if (timerDeactivation) {
-	                pressTimer.cancel();
-	                delete instance.pressTimer;
-	            }
-	            force && (instance._keyDown = false); // because we didn;t came from `handleKeyUp`
-	            if ((!instance._keyDown || force) && (manualDeactivation || timerDeactivation)) {
-	                if (instance.state.active) {
-	                    instance.setState({
-	                        active: false
-	                    });
-	                    if ((typeof directResponse === "undefined" ? "undefined" : _typeof(directResponse)) === BOOLEAN ? !directResponse : !props.directResponse) {
-	                        onClick && onClick();
-	                    }
-	                }
-	            }
-	        }
-	    },
-
-
-	    /**
-	     * Returns a save string
-	     *
-	     * @method _saveHTML
-	     * @private
-	     * @param String html the text that should be removed from any html-entities
-	     * @return String
-	     * @since 0.0.1
-	     */
-	    _saveHTML: function _saveHTML(html) {
-	        return html && html.replace(/<[^>]*>/g, '');
-	    }
-	});
-
-	module.exports = Button;
+	__webpack_require__(169);
+	__webpack_require__(170);
+	__webpack_require__(171);
+	__webpack_require__(172);
+	__webpack_require__(173);
+	__webpack_require__(174);
+	__webpack_require__(175);
 
 /***/ },
 /* 169 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	module.exports = {
-	   idGenerator: __webpack_require__(170).idGenerator,
-	   later: __webpack_require__(174).later,
-	   async: __webpack_require__(174).async
-	};
-
-/***/ },
-/* 170 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	__webpack_require__(171);
-
-	var UNDEFINED_NS = '__undefined__',
-	    namespaces = {};
-
-	/**
-	 * Collection of various utility functions.
-	 *
-	 *
-	 * <i>Copyright (c) 2014 ITSA - https://github.com/itsa</i>
-	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
-	 *
-	 * @module utils
-	 * @class Utils
-	 * @static
-	*/
-
-	/**
-	 * Generates an unique id with the signature: "namespace-follownr"
-	 *
-	 * @example
-	 *
-	 *     var generator = require('core-utils-idgenerator');
-	 *
-	 *     console.log(generator()); // --> 1
-	 *     console.log(generator()); // --> 2
-	 *     console.log(generator(1000)); // --> 1000
-	 *     console.log(generator()); // --> 1001
-	 *     console.log(generator('Parcel, 500')); // -->"Parcel-500"
-	 *     console.log(generator('Parcel')); // -->"Parcel-501"
-	 *
-	 *
-	 * @method idGenerator
-	 * @param [namespace] {String} namespace to prepend the generated id.
-	 *        When ignored, the generator just returns a number.
-	 * @param [start] {Number} startvalue for the next generated id. Any further generated id's will preceed this id.
-	 *        If `start` is lower or equal than the last generated id, it will be ignored.
-	 * @return {Number|String} an unique id. Either a number, or a String (digit prepended with "namespace-")
-	 */
-	module.exports.idGenerator = function (namespace, start) {
-	  // in case `start` is set at first argument, transform into (null, start)
-	  typeof namespace === 'number' && (start = namespace) && (namespace = null);
-	  namespace || (namespace = UNDEFINED_NS);
-
-	  if (!namespaces[namespace]) {
-	    namespaces[namespace] = start || 1;
-	  } else if (start && namespaces[namespace] < start) {
-	    namespaces[namespace] = start;
-	  }
-	  return namespace === UNDEFINED_NS ? namespaces[namespace]++ : namespace + '-' + namespaces[namespace]++;
-	};
-
-/***/ },
-/* 171 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	__webpack_require__(172);
-	__webpack_require__(173);
-
-/***/ },
-/* 172 */
-/***/ function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
-
-	(function (global) {
-	    "use strict";
-
-	    var CONSOLE = {
-	        log: function log() {/* NOOP */},
-	        info: function info() {/* NOOP */},
-	        warn: function warn() {/* NOOP */},
-	        error: function error() {/* NOOP */}
-	    };
-
-	    global.console || function (GlobalPrototype) {
-	        GlobalPrototype.console = CONSOLE;
-	    }(global.prototype);
-
-	    module.exports = CONSOLE;
-	})(typeof global !== 'undefined' ? global : /* istanbul ignore next */undefined);
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 173 */
-/***/ function(module, exports) {
-
-	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
-
-	// based upon https://gist.github.com/jonathantneal/3062955
-	(function (global) {
-	    "use strict";
-
-	    global.Element && function (ElementPrototype) {
-	        ElementPrototype.matchesSelector || (ElementPrototype.matchesSelector = ElementPrototype.mozMatchesSelector || ElementPrototype.msMatchesSelector || ElementPrototype.oMatchesSelector || ElementPrototype.webkitMatchesSelector || function (selector) {
-	            var node = this,
-	                nodes = (node.parentNode || global.document).querySelectorAll(selector),
-	                i = -1;
-	            while (nodes[++i] && nodes[i] !== node) {}
-	            return !!nodes[i];
-	        });
-	    }(global.Element.prototype);
-	})(typeof global !== 'undefined' ? global : /* istanbul ignore next */undefined);
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
-
-/***/ },
-/* 174 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(setImmediate, process) {/**
-	 * Collection of various utility functions.
-	 *
-	 *
-	 * <i>Copyright (c) 2014 ITSA - https://github.com/itsa</i>
-	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
-	 *
-	 * @module utils
-	 * @class Utils
-	 * @static
-	*/
-
-	"use strict";
-
-	__webpack_require__(171);
-
-	var NAME = '[utils-timers]: ',
-	    _asynchronizer,
-	    _async;
-
-	/**
-	 * Forces a function to be run asynchronously, but as fast as possible. In Node.js
-	 * this is achieved using `setImmediate` or `process.nextTick`.
-	 *
-	 * @method _asynchronizer
-	 * @param callbackFn {Function} The function to call asynchronously
-	 * @static
-	 * @private
-	**/
-	_asynchronizer = typeof setImmediate !== 'undefined' ? function (fn) {
-	  setImmediate(fn);
-	} : typeof process !== 'undefined' && process.nextTick ? process.nextTick : function (fn) {
-	  setTimeout(fn, 0);
-	};
-
-	/**
-	 * Invokes the callbackFn once in the next turn of the JavaScript event loop. If the function
-	 * requires a specific execution context or arguments, wrap it with Function.bind.
-	 *
-	 * I.async returns an object with a cancel method.  If the cancel method is
-	 * called before the callback function, the callback function won't be called.
-	 *
-	 * @method async
-	 * @param {Function} callbackFn
-	 * @param [invokeAfterFn=true] {boolean} set to false to prevent the _afterSyncFn to be invoked
-	 * @return {Object} An object with a cancel method.  If the cancel method is
-	 * called before the callback function, the callback function won't be called.
-	**/
-	_async = function _async(callbackFn, invokeAfterFn) {
-	  console.log(NAME, 'async');
-	  var canceled;
-
-	  invokeAfterFn = typeof invokeAfterFn === 'boolean' ? invokeAfterFn : true;
-	  typeof callbackFn === 'function' && _asynchronizer(function () {
-	    if (!canceled) {
-	      callbackFn();
-	    }
-	  });
-
-	  return {
-	    cancel: function cancel() {
-	      canceled = true;
-	    }
-	  };
-	};
-
-	/**
-	 * Invokes the callbackFn once in the next turn of the JavaScript event loop. If the function
-	 * requires a specific execution context or arguments, wrap it with Function.bind.
-	 *
-	 * I.async returns an object with a cancel method.  If the cancel method is
-	 * called before the callback function, the callback function won't be called.
-	 *
-	 * @method async
-	 * @param {Function} callbackFn
-	 * @param [invokeAfterFn=true] {boolean} set to false to prevent the _afterSyncFn to be invoked
-	 * @return {Object} An object with a cancel method.  If the cancel method is
-	 * called before the callback function, the callback function won't be called.
-	**/
-	module.exports.async = _async;
-
-	/**
-	 * Invokes the callbackFn after a timeout (asynchronous). If the function
-	 * requires a specific execution context or arguments, wrap it with Function.bind.
-	 *
-	 * To invoke the callback function periodic, set 'periodic' either 'true', or specify a second timeout.
-	 * If number, then periodic is considered 'true' but with a perdiod defined by 'periodic',
-	 * which means: the first timer executes after 'timeout' and next timers after 'period'.
-	 *
-	 * I.later returns an object with a cancel method.  If the cancel() method is
-	 * called before the callback function, the callback function won't be called.
-	 *
-	 * @method later
-	 * @param callbackFn {Function} the function to execute.
-	 * @param [timeout] {Number} the number of milliseconds to wait until the callbackFn is executed.
-	 * when not set, the callback function is invoked once in the next turn of the JavaScript event loop.
-	 * @param [periodic] {boolean|Number} if true, executes continuously at supplied, if number, then periodic is considered 'true' but with a perdiod
-	 * defined by 'periodic', which means: the first timer executes after 'timeout' and next timers after 'period'.
-	 * The interval executes until canceled.
-	 * @return {object} a timer object. Call the cancel() method on this object to stop the timer.
-	*/
-	module.exports.later = function (callbackFn, timeout, periodic) {
-	  console.log(NAME, 'later --> timeout: ' + timeout + 'ms | periodic: ' + periodic);
-	  var canceled = false;
-	  if (typeof timeout !== 'number') {
-	    return _async(callbackFn);
-	  }
-	  var wrapper = function wrapper() {
-	    // nodejs may execute a callback, so in order to preserve
-	    // the cancel() === no more runny-run, we have to build in an extra conditional
-	    if (!canceled) {
-	      callbackFn();
-	      // we are NOT using setInterval, because that leads to problems when the callback
-	      // lasts longer than the interval. Instead, we use the interval as inbetween-phase
-	      // between the separate callbacks.
-	      id = periodic ? setTimeout(wrapper, typeof periodic === 'number' ? periodic : timeout) : null;
-	    }
-	  },
-	      id;
-	  typeof callbackFn === 'function' && (id = setTimeout(wrapper, timeout));
-
-	  return {
-	    cancel: function cancel() {
-	      canceled = true;
-	      id && clearTimeout(id);
-	      // break closure:
-	      id = null;
-	    }
-	  };
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(175).setImmediate, __webpack_require__(4)))
-
-/***/ },
-/* 175 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {"use strict";
-
-	var nextTick = __webpack_require__(4).nextTick;
-	var apply = Function.prototype.apply;
-	var slice = Array.prototype.slice;
-	var immediateIds = {};
-	var nextImmediateId = 0;
-
-	// DOM APIs, for completeness
-
-	exports.setTimeout = function () {
-	  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
-	};
-	exports.setInterval = function () {
-	  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
-	};
-	exports.clearTimeout = exports.clearInterval = function (timeout) {
-	  timeout.close();
-	};
-
-	function Timeout(id, clearFn) {
-	  this._id = id;
-	  this._clearFn = clearFn;
-	}
-	Timeout.prototype.unref = Timeout.prototype.ref = function () {};
-	Timeout.prototype.close = function () {
-	  this._clearFn.call(window, this._id);
-	};
-
-	// Does not start the time, just sets up the members needed.
-	exports.enroll = function (item, msecs) {
-	  clearTimeout(item._idleTimeoutId);
-	  item._idleTimeout = msecs;
-	};
-
-	exports.unenroll = function (item) {
-	  clearTimeout(item._idleTimeoutId);
-	  item._idleTimeout = -1;
-	};
-
-	exports._unrefActive = exports.active = function (item) {
-	  clearTimeout(item._idleTimeoutId);
-
-	  var msecs = item._idleTimeout;
-	  if (msecs >= 0) {
-	    item._idleTimeoutId = setTimeout(function onTimeout() {
-	      if (item._onTimeout) item._onTimeout();
-	    }, msecs);
-	  }
-	};
-
-	// That's not how node.js implements it but the exposed api is the same.
-	exports.setImmediate = typeof setImmediate === "function" ? setImmediate : function (fn) {
-	  var id = nextImmediateId++;
-	  var args = arguments.length < 2 ? false : slice.call(arguments, 1);
-
-	  immediateIds[id] = true;
-
-	  nextTick(function onNextTick() {
-	    if (immediateIds[id]) {
-	      // fn.call() is faster so we optimize for the common use-case
-	      // @see http://jsperf.com/call-apply-segu
-	      if (args) {
-	        fn.apply(null, args);
-	      } else {
-	        fn.call(null);
-	      }
-	      // Prevent ids from leaking
-	      exports.clearImmediate(id);
-	    }
-	  });
-
-	  return id;
-	};
-
-	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function (id) {
-	  delete immediateIds[id];
-	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(175).setImmediate, __webpack_require__(175).clearImmediate))
-
-/***/ },
-/* 176 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var IO = __webpack_require__(177);
-
-	module.exports = __webpack_require__(202)(IO);
-
-/***/ },
-/* 177 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	var IO = __webpack_require__(178)(window.XMLHttpRequest);
-
-	__webpack_require__(187).extendIO(IO);
-	__webpack_require__(188).extendIO(IO);
-	__webpack_require__(189).extendIO(IO);
-	__webpack_require__(196).extendIO(IO);
-	__webpack_require__(197).extendIO(IO);
-	__webpack_require__(201).extendIO(IO, window.DOMParser);
-
-	module.exports = IO;
-
-/***/ },
-/* 178 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	/**
-	 * @module itsa-fetch
-	 * @class Fetch
-	 * @since 0.0.1
-	*/
-
-	__webpack_require__(179);
-
-	var NAME = "itsa-fetch",
-	    GET = "GET",
-	    DEF_REQ_TIMEOUT = 300000,
-	    // don"t create an ever-lasting request: always quit after 5 minutes
-	BODY_METHODS = {
-	    POST: 1,
-	    PUT: 1
-	},
-	    CONTENT_TYPE = "Content-Type",
-	    MIME_JSON = "application/json",
-	    MIME_BLOB = "application/octet-stream",
-	    DEF_CONTENT_TYPE_POST = "application/x-www-form-urlencoded; charset=UTF-8",
-	    ERROR_NO_XHR = "no valid xhr transport-mechanism available",
-	    REQUEST_TIMEOUT = "Request-timeout",
-	    UNKNOW_ERROR = "Network error",
-	    XHR_ERROR = "XHR Error",
-	    ABORTED = "Request aborted",
-	    NO_XHR = "No valid xhr found on this browser";
-
-	module.exports = function (XMLHttpRequest) {
-
-	    var ENCODE_URI_COMPONENT = encodeURIComponent,
-	        testxhr = new XMLHttpRequest(),
-	        xhr2support = "withCredentials" in testxhr,
-	        IO;
-
-	    // check for XMLHttpRequest2 support:
-
-	    // to prevent multiple IO instances
-	    // (which might happen: http://nodejs.org/docs/latest/api/modules.html#modules_module_caching_caveats)
-	    // we make sure IO is defined only once. Therefore we bind it to `window` and return it if created before
-	    // We need a singleton IO, because submodules might merge in. You can"t have them merging
-	    // into some other IO-instance than which is used.
-
-	    IO = {
-	        config: {},
-
-	        supportXHR2: xhr2support,
-
-	        //===============================================================================================
-	        // private methods:
-	        //===============================================================================================
-
-	        _xhrList: [],
-
-	        _runningRequests: [],
-
-	        /**
-	         * Initializes the xhr-instance, based on the config-params.
-	         * This method is the standard way of doing xhr-requests without processing streams.
-	         *
-	         * @method _initXHR
-	         * @param xhr {Object} xhr-instance
-	         * @param options {Object}
-	         *    @param [options.url] {String} The url to which the request is sent.
-	         *    @param [options.method="GET"] {String} The HTTP method to use.
-	         *    can be ignored, even if streams are used --> the returned Promise will always hold all data
-	         *    @param [options.sync=false] {boolean} By default, all requests are sent asynchronously. To send synchronous requests, set to true.
-	         *           This feature only works in the browser: nodejs will always perform asynchronous requests.
-	         *    @param [options.data] {Object} Data to be sent to the server, either to be used by `query-params` or `body`.
-	         *    @param [options.headers] {Object} HTTP request headers.
-	         *    @param [options.responseType] {String} Force the response type.
-	         *    @param [options.timeout=3000] {number} to timeout the request, leading into a rejected Promise.
-	         *    @param [options.withCredentials=false] {boolean} Whether or not to send credentials on the request.
-	         * @param fulfill {Function} reference to xhr-promise"s fulfill-function
-	         * @param reject {Function} reference to xhr-promise"s reject-function
-	         * @param promise {Promise} the xhr-promise which will be extended with the `abort()`-method
-	         * @private
-	        */
-	        _initXHR: function _initXHR(xhr, options, promise) {
-	            var instance = this,
-	                url = options.url,
-	                method = options.method || GET,
-	                headers = options.headers || {},
-	                // all request will get some headers
-	            async = !options.sync,
-	                data = options.data,
-	                reject = promise.reject,
-	                sendPayload;
-	            // xhr will be null in case of a CORS-request when no CORS is possible
-	            if (!xhr) {
-	                console.error(NAME, "_initXHR fails: " + ERROR_NO_XHR);
-	                reject(ERROR_NO_XHR);
-	                return;
-	            }
-
-	            // method-name should be in uppercase:
-	            method = method.toUpperCase();
-	            // in case of BODY-method: eliminate any data behind querystring:
-	            // else: append data-object behind querystring
-	            if (BODY_METHODS[method]) {
-	                url = url.split("?"); // now url is an array
-	                url = url[0]; // now url is a String again
-	            } else if (data && headers[CONTENT_TYPE] !== MIME_BLOB) {
-	                    url += (url.itsa_contains("?") ? "&" : "?") + instance._toQueryString(data);
-	                }
-
-	            xhr.open(method, url, async);
-	            // xhr.responseType = options.responseType || "text";
-	            options.withCredentials && (xhr.withCredentials = true);
-
-	            // more initialisation might be needed by extended modules:
-	            instance._xhrInitList.forEach(function (fn) {
-	                fn(xhr, promise, headers, method);
-	            });
-
-	            if (BODY_METHODS[method] && data) {
-	                if (headers[CONTENT_TYPE] === MIME_BLOB) {
-	                    if (!xhr._isXDR) {
-	                        sendPayload = data;
-	                    }
-	                } else {
-	                    sendPayload = headers[CONTENT_TYPE] === MIME_JSON || xhr._isXDR ? JSON.stringify(data) : instance._toQueryString(data);
-	                }
-	            }
-	            // send the request:
-	            xhr.send(sendPayload);
-
-	            // now add xhr.abort() to the promise, so we can call from within the returned promise-instance
-	            promise.abort = function () {
-	                reject(ABORTED);
-	                xhr._aborted = true; // must be set: IE9 won"t allow to read anything on xhr after being aborted
-	                xhr.abort();
-	            };
-
-	            // in case synchronous transfer: force an xhr.onreadystatechange:
-	            async || xhr.onreadystatechange();
-	        },
-
-	        /**
-	         * Adds the `headers`-object to `xhr`-headers.
-	         *
-	         * @method _setHeaders
-	         * @param xhr {Object} containing the xhr-instance
-	         * @param headers {Object} containing all headers
-	         * @param method {String} the request-method used
-	         * @private
-	        */
-	        _setHeaders: function _setHeaders(xhr, promise, headers, method) {
-	            // XDR cannot set requestheaders, only XHR:
-	            if (!xhr._isXDR) {
-	                var name;
-	                if (method !== "POST" && method !== "PUT") {
-	                    // force GET-request to make a request instead of using cache (like IE does):
-	                    headers["If-Modified-Since"] = "Wed, 15 Nov 1995 01:00:00 GMT";
-	                    // header "Content-Type" should only be set with POST or PUT requests:
-	                    delete headers[CONTENT_TYPE];
-	                }
-	                // set all headers
-	                for (name in headers) {
-	                    xhr.setRequestHeader(name, headers[name]);
-	                }
-
-	                // in case of POST or PUT method: always make sure "Content-Type" is specified
-	                !BODY_METHODS[method] || headers && CONTENT_TYPE in headers || xhr.setRequestHeader(CONTENT_TYPE, DEF_CONTENT_TYPE_POST);
-	            }
-	        },
-
-	        /**
-	         * Adds 2 methods on the xhr-instance which are used by xhr when events occur:
-	         *
-	         * xhr.onreadystatechange()
-	         * xhr.ontimeout()  // only XMLHttpRequest2
-	         *
-	         * These events are responsible for making the Promise resolve.
-	         * @method _setReadyHandle
-	         * @param xhr {Object} containing the xhr-instance
-	         * @param fulfill {Function} reference to the Promise fulfill-function
-	         * @param reject {Function} reference to the Promise reject-function
-	         * @private
-	        */
-	        _setReadyHandle: function _setReadyHandle(xhr, promise) {
-	            // for XDomainRequest, we need "onload" instead of "onreadystatechange"
-	            xhr.onreadystatechange = function () {
-	                // CANNOT console xhr.responseText here! IE9 will throw an error:
-	                // you can only acces it after (xhr.readyState===4)
-	                // also check xhr._aborted --> IE9 comes here after aborted and will throw an error when reading xhr"s native properties
-	                if (!xhr._aborted && xhr.readyState === 4) {
-	                    clearTimeout(xhr._timer);
-	                    if (xhr.status >= 200 && xhr.status < 300) {
-	                        // In case streamback function is set, but when no intermediate stream-data was send
-	                        // (or in case of XDR: below 2kb it doesn"t call onprogress)
-	                        // --> we might need to call onprogress ourselve.
-	                        if (xhr._isStream && !xhr._gotstreamed) {
-	                            xhr.onprogress(xhr.responseText);
-	                        }
-	                        if (xhr._fileProgress && !xhr._gotstreamed) {
-	                            xhr.onprogress({
-	                                lengthComputable: true,
-	                                loaded: 1,
-	                                total: 1
-	                            });
-	                        }
-	                        promise.fulfill(xhr);
-	                    } else {
-	                        promise.reject(xhr.statusText || UNKNOW_ERROR);
-	                    }
-	                }
-	            };
-	            xhr.onerror = function () {
-	                clearTimeout(xhr._timer);
-	                promise.reject(XHR_ERROR);
-	            };
-	        },
-
-	        /**
-	         * Stringifies an object into one string with every pair separated by `&`
-	         *
-	         * @method _toQueryString
-	         * @param data {Object} containing key-value pairs
-	         * @return {String} stringified presentation of the object, with every pair separated by `&`
-	         * @private
-	        */
-	        _toQueryString: function _toQueryString(data) {
-	            var paramArray = [],
-	                key,
-	                value;
-	            for (key in data) {
-	                value = data[key];
-	                key = ENCODE_URI_COMPONENT(key);
-	                paramArray.push(value === null ? key : key + "=" + ENCODE_URI_COMPONENT(value));
-	            }
-	            return paramArray.join("&");
-	        },
-
-	        /**
-	         * Aborts all running io-requests
-	        */
-	        abortAll: function abortAll() {
-	            var instance = this;
-	            instance._runningRequests.forEach(function (promise) {
-	                promise.abort();
-	            });
-	            instance._runningRequests.length = 0;
-	        },
-
-	        /**
-	         * Sends a HTTP request to the server and returns a Promise with an additional .abort() method to cancel the request.
-	         * This method is the standard way of doing xhr-requests without processing streams.
-	         *
-	         * @method request
-	         * @param options {Object}
-	         *    @param [options.url] {String} The url to which the request is sent.
-	         *    @param [options.method="GET"] {String} The HTTP method to use.
-	         *    can be ignored, even if streams are used --> the returned Promise will always hold all data
-	         *    @param [options.sync=false] {boolean} By default, all requests are sent asynchronously. To send synchronous requests, set to true.
-	         *    @param [options.data] {Object} Data to be sent to the server, either to be used by `query-params` or `body`.
-	         *    @param [options.headers] {Object} HTTP request headers.
-	         *    @param [options.responseType] {String} Force the response type.
-	         *    @param [options.timeout=3000] {number} to timeout the request, leading into a rejected Promise.
-	         *    @param [options.withCredentials=false] {boolean} Whether or not to send credentials on the request.
-	         *    @param [options.streamback] {Function} callbackfunction in case you want to process streams (needs io-stream module).
-	         *    @param [options.stayActive] {Number} minimal time the request should be pending, even if IO has finished
-	         * @return {Promise} Promise holding the request. Has an additional .abort() method to cancel the request.
-	         * <ul>
-	         *     <li>on success: xhr {XMLHttpRequest1|XMLHttpRequest2} xhr-response</li>
-	         *     <li>on failure: reason {Error}</li>
-	         * </ul>
-	        */
-	        request: function request(options) {
-	            var instance = this,
-	                props = {},
-	                xhr,
-	                promise;
-	            options = Object.itsa_isObject(options) ? options.itsa_deepClone() : {};
-	            promise = Promise.itsa_manage(options.streamback, options.stayActive);
-
-	            xhr = new XMLHttpRequest();
-	            props._isXHR2 = xhr2support;
-	            // it could be other modules like io-cors or io-stream have subscribed
-	            // xhr might be changed, also private properties might be extended
-	            instance._xhrList.forEach(function (fn) {
-	                xhr = fn(xhr, props, options, promise);
-	            });
-	            if (!xhr) {
-	                return Promise.reject(NO_XHR);
-	            }
-	            xhr.itsa_merge(props);
-
-	            // Don"t use xhr.timeout --> IE<10 throws an error when set xhr.timeout
-	            // We use a timer that aborts the request
-	            Object.defineProperty(xhr, "_timer", {
-	                configurable: false,
-	                enumerable: false,
-	                writable: false,
-	                value: setTimeout(function () {
-	                    promise.reject(REQUEST_TIMEOUT);
-	                    xhr._aborted = true; // must be set: IE9 won"t allow to read anything on xhr after being aborted
-	                    xhr.abort();
-	                }, options.timeout || instance.config.timeout || DEF_REQ_TIMEOUT)
-	            });
-
-	            instance._initXHR(xhr, options, promise);
-
-	            // add to interbal hash:
-	            instance._runningRequests.push(promise);
-	            // remove it when ready:
-	            promise.itsa_finally(function () {
-	                instance._runningRequests.itsa_remove(promise);
-	            });
-
-	            return promise;
-	        }
-
-	    };
-
-	    IO._xhrInitList = [IO._setReadyHandle, IO._setHeaders];
-
-	    return IO;
-	};
-
-/***/ },
-/* 179 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	__webpack_require__(180);
-	__webpack_require__(181);
-	__webpack_require__(182);
-	__webpack_require__(183);
-	__webpack_require__(184);
-	__webpack_require__(185);
-	__webpack_require__(186);
-
-/***/ },
-/* 180 */
 /***/ function(module, exports) {
 
 	/**
@@ -22199,7 +21385,7 @@
 	})(Function.prototype);
 
 /***/ },
-/* 181 */
+/* 170 */
 /***/ function(module, exports) {
 
 	/**
@@ -22757,7 +21943,7 @@
 	};
 
 /***/ },
-/* 182 */
+/* 171 */
 /***/ function(module, exports) {
 
 	/**
@@ -23031,7 +22217,7 @@
 	})(String.prototype);
 
 /***/ },
-/* 183 */
+/* 172 */
 /***/ function(module, exports) {
 
 	/**
@@ -23366,7 +22552,7 @@
 	})(Array.prototype);
 
 /***/ },
-/* 184 */
+/* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -23386,9 +22572,9 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	__webpack_require__(181);
-	__webpack_require__(183);
-	__webpack_require__(182);
+	__webpack_require__(170);
+	__webpack_require__(172);
+	__webpack_require__(171);
 
 	var STRING = "string";
 
@@ -23459,7 +22645,7 @@
 	};
 
 /***/ },
-/* 185 */
+/* 174 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -23818,7 +23004,7 @@
 	};
 
 /***/ },
-/* 186 */
+/* 175 */
 /***/ function(module, exports) {
 
 	/**
@@ -23879,7 +23065,2985 @@
 	};
 
 /***/ },
+/* 176 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	/**
+	 * React-Component: refined Button.
+	 *
+	 *
+	 *
+	 * <i>Copyright (c) 2016 ItsAsbreuk - http://itsasbreuk.nl</i><br>
+	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
+	 *
+	 *
+	 * @module itsa-react-button
+	 * @class Button
+	 * @since 0.0.1
+	*/
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var _react = __webpack_require__(1);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(158);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _utils = __webpack_require__(177);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var MAIN_CLASS = "itsa-button",
+	    MAIN_CLASS_PREFIX = MAIN_CLASS + "-",
+	    WHITE_SPACE = "&#160;",
+	    // white-space
+	BOOLEAN = "boolean",
+	    DEF_BUTTON_PRESS_TIME = 300;
+
+	var Button = _react2.default.createClass({
+	    displayName: "Button",
+
+
+	    propTypes: {
+	        /**
+	         * Array with the keys that can press the button when focussed.
+	         * Default: [13, 32]
+	         *
+	         * @property activatedBy
+	         * @type Array
+	         * @since 0.0.1
+	        */
+	        activatedBy: _react.PropTypes.array,
+
+	        /**
+	         * The aria-label. When not set, it will equal the buttonText
+	         *
+	         * @property aria-label
+	         * @type String
+	         * @since 0.0.1
+	        */
+	        "aria-label": _react.PropTypes.string,
+
+	        /**
+	         * The Button-text. Will be escaped. If you need HTML, then use `buttonHTML` instead.
+	         *
+	         * @property buttonText
+	         * @type String
+	         * @since 0.0.1
+	        */
+	        buttonText: _react.PropTypes.string,
+
+	        /**
+	         * The Button-text, retaining html-code. If you don't need HTML,
+	         * then `buttonText` is preferred.
+	         *
+	         * @property buttonHTML
+	         * @type String
+	         * @since 0.0.1
+	        */
+	        buttonHTML: _react.PropTypes.string,
+
+	        /**
+	         * The time that the button retains in its `pressed-state` when activated by a key-press.
+	         *
+	         * Default: 300ms
+	         *
+	         * @property buttonPressTime
+	         * @type Number
+	         * @since 0.0.1
+	        */
+	        buttonPressTime: _react.PropTypes.number,
+
+	        /**
+	         * Whether the button resonses rapidly (keydown and mousedown).
+	         * Note: native HTMLButtonElements don't resonse rapidly --> the onClick event happens on mouseUp.
+	         *
+	         * Default: true
+	         *
+	         * @property directResponse
+	         * @type Boolean
+	         * @since 0.0.1
+	        */
+	        directResponse: _react.PropTypes.bool,
+
+	        /**
+	         * Whether the button is disabled
+	         *
+	         * @property disabled
+	         * @type Boolean
+	         * @since 0.0.1
+	        */
+	        disabled: _react.PropTypes.bool,
+
+	        /**
+	         * The name-attribute of the button
+	         *
+	         * @property name
+	         * @type String
+	         * @since 0.0.1
+	        */
+	        name: _react.PropTypes.string,
+
+	        /**
+	         * Callback wheneveer the button gets clicked.
+	         *
+	         * @property onClick
+	         * @type Function
+	         * @since 0.0.1
+	        */
+	        onClick: _react.PropTypes.func,
+
+	        /**
+	         * Whether keypress should show active status. (should be set `false` for file-uploadbuttons)
+	         * Default: true
+	         *
+	         * @property showActivated
+	         * @type Number
+	         * @since 0.0.5
+	        */
+	        showActivated: _react.PropTypes.bool,
+
+	        /**
+	         * The tabIndex
+	         * Default: 1
+	         *
+	         * @property tabIndex
+	         * @type Number
+	         * @since 0.0.1
+	        */
+	        tabIndex: _react.PropTypes.number,
+
+	        /**
+	         * Whether the button is in a toggle-state.
+	         * You don;t need to use this directly: use the module ToggleButton instead.
+	         *
+	         * @property toggled
+	         * @type Boolean
+	         * @since 0.0.1
+	        */
+	        toggled: _react.PropTypes.bool,
+
+	        /**
+	         * The type of the button
+	         * Default: "button"
+	         *
+	         * @property children
+	         * @type String
+	         * @since 0.0.1
+	        */
+	        type: _react.PropTypes.string
+	    },
+
+	    /**
+	     * componentDidMount does some initialization.
+	     *
+	     * @method componentDidMount
+	     * @since 0.0.1
+	     */
+	    componentDidMount: function componentDidMount() {
+	        var instance = this;
+	        instance._buttonNode = _reactDom2.default.findDOMNode(instance);
+	        instance._mounted = true;
+	    },
+
+
+	    /**
+	     * componentWilUnmount does some cleanup.
+	     *
+	     * @method componentWillUnmount
+	     * @since 0.0.1
+	     */
+	    componentWillUnmount: function componentWillUnmount() {
+	        this._mounted = false;
+	    },
+
+
+	    /**
+	     * Sets the focus on the Component.
+	     *
+	     * @method focus
+	     * @chainable
+	     * @since 0.0.1
+	     */
+	    focus: function focus() {
+	        this._buttonNode.focus();
+	        return this;
+	    },
+
+
+	    /**
+	     * Returns the default props.
+	     *
+	     * @method getDefaultProps
+	     * @return object
+	     * @since 0.0.1
+	     */
+	    getDefaultProps: function getDefaultProps() {
+	        return {
+	            activatedBy: [13, 32],
+	            buttonPressTime: DEF_BUTTON_PRESS_TIME,
+	            directResponse: true,
+	            disabled: false,
+	            showActivated: true,
+	            tabIndex: 1,
+	            type: 'button'
+	        };
+	    },
+
+
+	    /**
+	     * Returns the initial state.
+	     *
+	     * @method getInitialState
+	     * @return object
+	     * @since 0.0.1
+	     */
+	    getInitialState: function getInitialState() {
+	        return {
+	            active: false
+	        };
+	    },
+
+
+	    /**
+	     * Callback-fn for the onClick-event.
+	     * Will invoke `this.props.onChange`
+	     *
+	     * @method handleClick
+	     * @since 0.0.1
+	     */
+	    handleClick: function handleClick(e) {
+	        var instance = this,
+	            props = instance.props,
+	            onClick = props.onClick;
+	        if (!instance._keyDown && !this._mouseDown) {
+	            // don't double execute
+	            instance.focus();
+	            if (onClick) {
+	                e.preventDefault();
+	                onClick();
+	            }
+	        }
+	    },
+
+
+	    /**
+	     * Callback-fn for the onKeyDown-event.
+	     *
+	     * @method handleKeyDown
+	     * @since 0.0.1
+	     */
+	    handleKeyDown: function handleKeyDown(e, directResponse, force) {
+	        var instance = this,
+	            props = instance.props,
+	            onClick = props.onClick,
+	            activatedBy = props.activatedBy,
+	            forced = force === true,
+	            // IMPORTANT --> on a keyEvent this is an object in which we are not interested
+	        pressTimer = instance.pressTimer,
+	            keyCode = e.keyCode,
+	            isDirectResponse = (typeof directResponse === "undefined" ? "undefined" : _typeof(directResponse)) === BOOLEAN ? directResponse : props.directResponse;
+
+	        if (keyCode === 27) {
+	            // escape keyDown in case it was set
+	            instance._keyDown = false;
+	            pressTimer && pressTimer.cancel();
+	            if (instance.state.active) {
+	                instance.setState({
+	                    active: false
+	                });
+	            }
+	        } else {
+	            if (forced || activatedBy.indexOf(keyCode) !== -1) {
+	                instance._keyDown = true;
+	                if (_typeof(props.toggled) === BOOLEAN) {
+	                    onClick && onClick();
+	                } else {
+	                    if (!instance.state.active) {
+	                        instance.setState({
+	                            active: true
+	                        });
+	                        pressTimer && pressTimer.cancel();
+	                        instance.pressTimer = (0, _utils.later)(instance._processKeyUp.bind(instance, null, isDirectResponse, forced), props.buttonPressTime);
+	                        if (isDirectResponse) {
+	                            onClick && onClick();
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	    },
+
+
+	    /**
+	     * Callback-fn for the onKeyUp-event.
+	     *
+	     * @method handleKeyUp
+	     * @since 0.0.1
+	     */
+	    handleKeyUp: function handleKeyUp(e) {
+	        var _this = this;
+
+	        // we must go async --> instance._keyDown cannot be set 'false' right away,
+	        // because the handleClick method needs to be processed first
+	        // if we don;t do this, props.onClick() would be executed twice when the spacebutton is pressed
+	        (0, _utils.async)(function () {
+	            var instance = _this;
+	            instance._keyDown = false;
+	            if (_typeof(instance.props.toggled) !== BOOLEAN && instance.state.active) {
+	                instance._processKeyUp(true);
+	            }
+	        });
+	    },
+
+
+	    /**
+	     * Callback-fn for the onMouseDown-event.
+	     *
+	     * @method handleMouseDown
+	     * @since 0.0.1
+	     */
+	    handleMouseDown: function handleMouseDown(e) {
+	        this.handleClick(e);
+	        this._mouseDown = true;
+	    },
+
+
+	    /**
+	     * Callback-fn for the onMouseUp-event.
+	     *
+	     * @method handleMouseUp
+	     * @since 0.0.1
+	     */
+	    handleMouseUp: function handleMouseUp() {
+	        var _this2 = this;
+
+	        // we must go async --> instance._mouseDown cannot be set 'false' right away,
+	        // because the handleClick method needs to be processed first
+	        // if we don;t do this, props.onClick() would be executed twice when the spacebutton is pressed
+	        (0, _utils.async)(function () {
+	            return _this2._mouseDown = false;
+	        });
+	    },
+
+
+	    /**
+	     * Callback-fn for the onClick-event.
+	     * Will invoke `this.props.onChange`
+	     *
+	     * @method press
+	     * @param boolean [directResponse] whether directly call onClick, or wait until the button raises up.
+	     * @since 0.0.1
+	     */
+	    press: function press(directResponse) {
+	        this.handleKeyDown({}, directResponse, true);
+	    },
+
+
+	    /**
+	     * React render-method --> renderes the Component.
+	     *
+	     * @method render
+	     * @return ReactComponent
+	     * @since 0.0.1
+	     */
+	    render: function render() {
+	        var classname = MAIN_CLASS,
+	            buttonHTML = this.props.buttonHTML,
+	            dataAttrs = {},
+	            dangerouslySetInnerHTML = undefined,
+	            buttonText = undefined,
+	            handleClick = undefined,
+	            handleKeyDown = undefined,
+	            handleKeyUp = undefined,
+	            handleMouseDown = undefined,
+	            handleMouseUp = undefined;
+
+	        var instance = this,
+	            props = instance.props,
+	            state = instance.state,
+	            disabled = props.disabled,
+	            directResponse = props.directResponse,
+	            saveButtonText = instance._saveHTML(props.buttonText),
+	            isToggleButton = _typeof(props.toggled) === BOOLEAN,
+	            ariaLabel = props["aria-label"] || saveButtonText || instance._saveHTML(buttonHTML);
+
+	        if (state.active || props.toggled) {
+	            props.showActivated && (classname += " " + MAIN_CLASS_PREFIX + "active");
+	            props.toggled && (classname += " " + MAIN_CLASS_PREFIX + "toggled");
+	        }
+	        isToggleButton && (classname += " " + MAIN_CLASS_PREFIX + "togglebtn");
+	        props.className && (classname += " " + props.className);
+
+	        if (!buttonHTML && !props.buttonText) {
+	            buttonHTML = WHITE_SPACE;
+	        }
+	        if (buttonHTML) {
+	            dangerouslySetInnerHTML = { __html: buttonHTML };
+	        } else {
+	            buttonText = saveButtonText;
+	        }
+
+	        if (!disabled) {
+	            if (directResponse || isToggleButton) {
+	                handleMouseDown = instance.handleMouseDown;
+	                handleMouseUp = instance.handleMouseUp;
+	            }
+	            handleClick = instance.handleClick;
+	            handleKeyDown = instance.handleKeyDown;
+	            handleKeyUp = instance.handleKeyUp;
+	        }
+
+	        return _react2.default.createElement(
+	            "button",
+	            _extends({}, instance._getDataAttrs(), {
+	                accessKey: props.accessKey,
+	                "aria-label": ariaLabel,
+	                "aria-pressed": props.toggled,
+	                className: classname,
+	                dangerouslySetInnerHTML: dangerouslySetInnerHTML,
+	                disabled: disabled,
+	                name: props.name,
+	                onClick: handleClick,
+	                onKeyDown: handleKeyDown,
+	                onKeyUp: handleKeyUp,
+	                onMouseDown: handleMouseDown,
+	                onMouseUp: handleMouseUp,
+	                role: "button",
+	                tabIndex: props.tabIndex,
+	                type: props.type }),
+	            buttonText
+	        );
+	    },
+
+
+	    /**
+	     * Extracts the `data-*` attributes from props.
+	     *
+	     * @method _getDataAttrs
+	     * @private
+	     * @return object all the data-* attributes
+	     * @since 0.0.3
+	     */
+	    _getDataAttrs: function _getDataAttrs() {
+	        var dataAttrs = {};
+	        var props = this.props,
+	            keys = Object.keys(props);
+
+	        keys.forEach(function (key) {
+	            key.substr(0, 5).toLowerCase() === "data-" && (dataAttrs[key] = props[key]);
+	        });
+	        return dataAttrs;
+	    },
+
+
+	    /**
+	     * React render-method --> renderes the Component.
+	     *
+	     * @method _processKeyUp
+	     * @param Boolean manual whether this routine gets called manually (keypress), or from a click-event
+	     * @param Boolean directResponse Whether to direct response or wait for the button to raise up
+	     * @param Boolean force whether to force (initiated by the method `press`)
+	     * @private
+	     * @since 0.0.1
+	     */
+	    _processKeyUp: function _processKeyUp(manual, directResponse, force) {
+	        var instance = this,
+	            props = instance.props,
+	            onClick = props.onClick,
+	            pressTimer = instance.pressTimer,
+	            manualDeactivation = manual && !pressTimer,
+	            timerDeactivation = !manual && pressTimer;
+	        if (this._mounted) {
+	            // we don't want unMounted Buttons to trigger the state and onClick-prop
+	            if (timerDeactivation) {
+	                pressTimer.cancel();
+	                delete instance.pressTimer;
+	            }
+	            force && (instance._keyDown = false); // because we didn;t came from `handleKeyUp`
+	            if ((!instance._keyDown || force) && (manualDeactivation || timerDeactivation)) {
+	                if (instance.state.active) {
+	                    instance.setState({
+	                        active: false
+	                    });
+	                    if ((typeof directResponse === "undefined" ? "undefined" : _typeof(directResponse)) === BOOLEAN ? !directResponse : !props.directResponse) {
+	                        onClick && onClick();
+	                    }
+	                }
+	            }
+	        }
+	    },
+
+
+	    /**
+	     * Returns a save string
+	     *
+	     * @method _saveHTML
+	     * @private
+	     * @param String html the text that should be removed from any html-entities
+	     * @return String
+	     * @since 0.0.1
+	     */
+	    _saveHTML: function _saveHTML(html) {
+	        return html && html.replace(/<[^>]*>/g, '');
+	    }
+	});
+
+	module.exports = Button;
+
+/***/ },
+/* 177 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	module.exports = {
+	   idGenerator: __webpack_require__(178).idGenerator,
+	   later: __webpack_require__(182).later,
+	   async: __webpack_require__(182).async
+	};
+
+/***/ },
+/* 178 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	__webpack_require__(179);
+
+	var UNDEFINED_NS = '__undefined__',
+	    namespaces = {};
+
+	/**
+	 * Collection of various utility functions.
+	 *
+	 *
+	 * <i>Copyright (c) 2014 ITSA - https://github.com/itsa</i>
+	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
+	 *
+	 * @module utils
+	 * @class Utils
+	 * @static
+	*/
+
+	/**
+	 * Generates an unique id with the signature: "namespace-follownr"
+	 *
+	 * @example
+	 *
+	 *     var generator = require('core-utils-idgenerator');
+	 *
+	 *     console.log(generator()); // --> 1
+	 *     console.log(generator()); // --> 2
+	 *     console.log(generator(1000)); // --> 1000
+	 *     console.log(generator()); // --> 1001
+	 *     console.log(generator('Parcel, 500')); // -->"Parcel-500"
+	 *     console.log(generator('Parcel')); // -->"Parcel-501"
+	 *
+	 *
+	 * @method idGenerator
+	 * @param [namespace] {String} namespace to prepend the generated id.
+	 *        When ignored, the generator just returns a number.
+	 * @param [start] {Number} startvalue for the next generated id. Any further generated id's will preceed this id.
+	 *        If `start` is lower or equal than the last generated id, it will be ignored.
+	 * @return {Number|String} an unique id. Either a number, or a String (digit prepended with "namespace-")
+	 */
+	module.exports.idGenerator = function (namespace, start) {
+	  // in case `start` is set at first argument, transform into (null, start)
+	  typeof namespace === 'number' && (start = namespace) && (namespace = null);
+	  namespace || (namespace = UNDEFINED_NS);
+
+	  if (!namespaces[namespace]) {
+	    namespaces[namespace] = start || 1;
+	  } else if (start && namespaces[namespace] < start) {
+	    namespaces[namespace] = start;
+	  }
+	  return namespace === UNDEFINED_NS ? namespaces[namespace]++ : namespace + '-' + namespaces[namespace]++;
+	};
+
+/***/ },
+/* 179 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	__webpack_require__(180);
+	__webpack_require__(181);
+
+/***/ },
+/* 180 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
+
+	(function (global) {
+	    "use strict";
+
+	    var CONSOLE = {
+	        log: function log() {/* NOOP */},
+	        info: function info() {/* NOOP */},
+	        warn: function warn() {/* NOOP */},
+	        error: function error() {/* NOOP */}
+	    };
+
+	    global.console || function (GlobalPrototype) {
+	        GlobalPrototype.console = CONSOLE;
+	    }(global.prototype);
+
+	    module.exports = CONSOLE;
+	})(typeof global !== 'undefined' ? global : /* istanbul ignore next */undefined);
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 181 */
+/***/ function(module, exports) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
+
+	// based upon https://gist.github.com/jonathantneal/3062955
+	(function (global) {
+	    "use strict";
+
+	    global.Element && function (ElementPrototype) {
+	        ElementPrototype.matchesSelector || (ElementPrototype.matchesSelector = ElementPrototype.mozMatchesSelector || ElementPrototype.msMatchesSelector || ElementPrototype.oMatchesSelector || ElementPrototype.webkitMatchesSelector || function (selector) {
+	            var node = this,
+	                nodes = (node.parentNode || global.document).querySelectorAll(selector),
+	                i = -1;
+	            while (nodes[++i] && nodes[i] !== node) {}
+	            return !!nodes[i];
+	        });
+	    }(global.Element.prototype);
+	})(typeof global !== 'undefined' ? global : /* istanbul ignore next */undefined);
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(setImmediate, process) {/**
+	 * Collection of various utility functions.
+	 *
+	 *
+	 * <i>Copyright (c) 2014 ITSA - https://github.com/itsa</i>
+	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
+	 *
+	 * @module utils
+	 * @class Utils
+	 * @static
+	*/
+
+	"use strict";
+
+	__webpack_require__(179);
+
+	var NAME = '[utils-timers]: ',
+	    _asynchronizer,
+	    _async;
+
+	/**
+	 * Forces a function to be run asynchronously, but as fast as possible. In Node.js
+	 * this is achieved using `setImmediate` or `process.nextTick`.
+	 *
+	 * @method _asynchronizer
+	 * @param callbackFn {Function} The function to call asynchronously
+	 * @static
+	 * @private
+	**/
+	_asynchronizer = typeof setImmediate !== 'undefined' ? function (fn) {
+	  setImmediate(fn);
+	} : typeof process !== 'undefined' && process.nextTick ? process.nextTick : function (fn) {
+	  setTimeout(fn, 0);
+	};
+
+	/**
+	 * Invokes the callbackFn once in the next turn of the JavaScript event loop. If the function
+	 * requires a specific execution context or arguments, wrap it with Function.bind.
+	 *
+	 * I.async returns an object with a cancel method.  If the cancel method is
+	 * called before the callback function, the callback function won't be called.
+	 *
+	 * @method async
+	 * @param {Function} callbackFn
+	 * @param [invokeAfterFn=true] {boolean} set to false to prevent the _afterSyncFn to be invoked
+	 * @return {Object} An object with a cancel method.  If the cancel method is
+	 * called before the callback function, the callback function won't be called.
+	**/
+	_async = function _async(callbackFn, invokeAfterFn) {
+	  console.log(NAME, 'async');
+	  var canceled;
+
+	  invokeAfterFn = typeof invokeAfterFn === 'boolean' ? invokeAfterFn : true;
+	  typeof callbackFn === 'function' && _asynchronizer(function () {
+	    if (!canceled) {
+	      callbackFn();
+	    }
+	  });
+
+	  return {
+	    cancel: function cancel() {
+	      canceled = true;
+	    }
+	  };
+	};
+
+	/**
+	 * Invokes the callbackFn once in the next turn of the JavaScript event loop. If the function
+	 * requires a specific execution context or arguments, wrap it with Function.bind.
+	 *
+	 * I.async returns an object with a cancel method.  If the cancel method is
+	 * called before the callback function, the callback function won't be called.
+	 *
+	 * @method async
+	 * @param {Function} callbackFn
+	 * @param [invokeAfterFn=true] {boolean} set to false to prevent the _afterSyncFn to be invoked
+	 * @return {Object} An object with a cancel method.  If the cancel method is
+	 * called before the callback function, the callback function won't be called.
+	**/
+	module.exports.async = _async;
+
+	/**
+	 * Invokes the callbackFn after a timeout (asynchronous). If the function
+	 * requires a specific execution context or arguments, wrap it with Function.bind.
+	 *
+	 * To invoke the callback function periodic, set 'periodic' either 'true', or specify a second timeout.
+	 * If number, then periodic is considered 'true' but with a perdiod defined by 'periodic',
+	 * which means: the first timer executes after 'timeout' and next timers after 'period'.
+	 *
+	 * I.later returns an object with a cancel method.  If the cancel() method is
+	 * called before the callback function, the callback function won't be called.
+	 *
+	 * @method later
+	 * @param callbackFn {Function} the function to execute.
+	 * @param [timeout] {Number} the number of milliseconds to wait until the callbackFn is executed.
+	 * when not set, the callback function is invoked once in the next turn of the JavaScript event loop.
+	 * @param [periodic] {boolean|Number} if true, executes continuously at supplied, if number, then periodic is considered 'true' but with a perdiod
+	 * defined by 'periodic', which means: the first timer executes after 'timeout' and next timers after 'period'.
+	 * The interval executes until canceled.
+	 * @return {object} a timer object. Call the cancel() method on this object to stop the timer.
+	*/
+	module.exports.later = function (callbackFn, timeout, periodic) {
+	  console.log(NAME, 'later --> timeout: ' + timeout + 'ms | periodic: ' + periodic);
+	  var canceled = false;
+	  if (typeof timeout !== 'number') {
+	    return _async(callbackFn);
+	  }
+	  var wrapper = function wrapper() {
+	    // nodejs may execute a callback, so in order to preserve
+	    // the cancel() === no more runny-run, we have to build in an extra conditional
+	    if (!canceled) {
+	      callbackFn();
+	      // we are NOT using setInterval, because that leads to problems when the callback
+	      // lasts longer than the interval. Instead, we use the interval as inbetween-phase
+	      // between the separate callbacks.
+	      id = periodic ? setTimeout(wrapper, typeof periodic === 'number' ? periodic : timeout) : null;
+	    }
+	  },
+	      id;
+	  typeof callbackFn === 'function' && (id = setTimeout(wrapper, timeout));
+
+	  return {
+	    cancel: function cancel() {
+	      canceled = true;
+	      id && clearTimeout(id);
+	      // break closure:
+	      id = null;
+	    }
+	  };
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(183).setImmediate, __webpack_require__(4)))
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(setImmediate, clearImmediate) {"use strict";
+
+	var nextTick = __webpack_require__(4).nextTick;
+	var apply = Function.prototype.apply;
+	var slice = Array.prototype.slice;
+	var immediateIds = {};
+	var nextImmediateId = 0;
+
+	// DOM APIs, for completeness
+
+	exports.setTimeout = function () {
+	  return new Timeout(apply.call(setTimeout, window, arguments), clearTimeout);
+	};
+	exports.setInterval = function () {
+	  return new Timeout(apply.call(setInterval, window, arguments), clearInterval);
+	};
+	exports.clearTimeout = exports.clearInterval = function (timeout) {
+	  timeout.close();
+	};
+
+	function Timeout(id, clearFn) {
+	  this._id = id;
+	  this._clearFn = clearFn;
+	}
+	Timeout.prototype.unref = Timeout.prototype.ref = function () {};
+	Timeout.prototype.close = function () {
+	  this._clearFn.call(window, this._id);
+	};
+
+	// Does not start the time, just sets up the members needed.
+	exports.enroll = function (item, msecs) {
+	  clearTimeout(item._idleTimeoutId);
+	  item._idleTimeout = msecs;
+	};
+
+	exports.unenroll = function (item) {
+	  clearTimeout(item._idleTimeoutId);
+	  item._idleTimeout = -1;
+	};
+
+	exports._unrefActive = exports.active = function (item) {
+	  clearTimeout(item._idleTimeoutId);
+
+	  var msecs = item._idleTimeout;
+	  if (msecs >= 0) {
+	    item._idleTimeoutId = setTimeout(function onTimeout() {
+	      if (item._onTimeout) item._onTimeout();
+	    }, msecs);
+	  }
+	};
+
+	// That's not how node.js implements it but the exposed api is the same.
+	exports.setImmediate = typeof setImmediate === "function" ? setImmediate : function (fn) {
+	  var id = nextImmediateId++;
+	  var args = arguments.length < 2 ? false : slice.call(arguments, 1);
+
+	  immediateIds[id] = true;
+
+	  nextTick(function onNextTick() {
+	    if (immediateIds[id]) {
+	      // fn.call() is faster so we optimize for the common use-case
+	      // @see http://jsperf.com/call-apply-segu
+	      if (args) {
+	        fn.apply(null, args);
+	      } else {
+	        fn.call(null);
+	      }
+	      // Prevent ids from leaking
+	      exports.clearImmediate(id);
+	    }
+	  });
+
+	  return id;
+	};
+
+	exports.clearImmediate = typeof clearImmediate === "function" ? clearImmediate : function (id) {
+	  delete immediateIds[id];
+	};
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(183).setImmediate, __webpack_require__(183).clearImmediate))
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var IO = __webpack_require__(185);
+
+	module.exports = __webpack_require__(210)(IO);
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var IO = __webpack_require__(186)(window.XMLHttpRequest);
+
+	__webpack_require__(195).extendIO(IO);
+	__webpack_require__(196).extendIO(IO);
+	__webpack_require__(197).extendIO(IO);
+	__webpack_require__(204).extendIO(IO);
+	__webpack_require__(205).extendIO(IO);
+	__webpack_require__(209).extendIO(IO, window.DOMParser);
+
+	module.exports = IO;
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	/**
+	 * @module itsa-fetch
+	 * @class Fetch
+	 * @since 0.0.1
+	*/
+
+	__webpack_require__(187);
+
+	var NAME = "itsa-fetch",
+	    GET = "GET",
+	    DEF_REQ_TIMEOUT = 300000,
+	    // don"t create an ever-lasting request: always quit after 5 minutes
+	BODY_METHODS = {
+	    POST: 1,
+	    PUT: 1
+	},
+	    CONTENT_TYPE = "Content-Type",
+	    MIME_JSON = "application/json",
+	    MIME_BLOB = "application/octet-stream",
+	    DEF_CONTENT_TYPE_POST = "application/x-www-form-urlencoded; charset=UTF-8",
+	    ERROR_NO_XHR = "no valid xhr transport-mechanism available",
+	    REQUEST_TIMEOUT = "Request-timeout",
+	    UNKNOW_ERROR = "Network error",
+	    XHR_ERROR = "XHR Error",
+	    ABORTED = "Request aborted",
+	    NO_XHR = "No valid xhr found on this browser";
+
+	module.exports = function (XMLHttpRequest) {
+
+	    var ENCODE_URI_COMPONENT = encodeURIComponent,
+	        testxhr = new XMLHttpRequest(),
+	        xhr2support = "withCredentials" in testxhr,
+	        IO;
+
+	    // check for XMLHttpRequest2 support:
+
+	    // to prevent multiple IO instances
+	    // (which might happen: http://nodejs.org/docs/latest/api/modules.html#modules_module_caching_caveats)
+	    // we make sure IO is defined only once. Therefore we bind it to `window` and return it if created before
+	    // We need a singleton IO, because submodules might merge in. You can"t have them merging
+	    // into some other IO-instance than which is used.
+
+	    IO = {
+	        config: {},
+
+	        supportXHR2: xhr2support,
+
+	        //===============================================================================================
+	        // private methods:
+	        //===============================================================================================
+
+	        _xhrList: [],
+
+	        _runningRequests: [],
+
+	        /**
+	         * Initializes the xhr-instance, based on the config-params.
+	         * This method is the standard way of doing xhr-requests without processing streams.
+	         *
+	         * @method _initXHR
+	         * @param xhr {Object} xhr-instance
+	         * @param options {Object}
+	         *    @param [options.url] {String} The url to which the request is sent.
+	         *    @param [options.method="GET"] {String} The HTTP method to use.
+	         *    can be ignored, even if streams are used --> the returned Promise will always hold all data
+	         *    @param [options.sync=false] {boolean} By default, all requests are sent asynchronously. To send synchronous requests, set to true.
+	         *           This feature only works in the browser: nodejs will always perform asynchronous requests.
+	         *    @param [options.data] {Object} Data to be sent to the server, either to be used by `query-params` or `body`.
+	         *    @param [options.headers] {Object} HTTP request headers.
+	         *    @param [options.responseType] {String} Force the response type.
+	         *    @param [options.timeout=3000] {number} to timeout the request, leading into a rejected Promise.
+	         *    @param [options.withCredentials=false] {boolean} Whether or not to send credentials on the request.
+	         * @param fulfill {Function} reference to xhr-promise"s fulfill-function
+	         * @param reject {Function} reference to xhr-promise"s reject-function
+	         * @param promise {Promise} the xhr-promise which will be extended with the `abort()`-method
+	         * @private
+	        */
+	        _initXHR: function _initXHR(xhr, options, promise) {
+	            var instance = this,
+	                url = options.url,
+	                method = options.method || GET,
+	                headers = options.headers || {},
+	                // all request will get some headers
+	            async = !options.sync,
+	                data = options.data,
+	                reject = promise.reject,
+	                sendPayload;
+	            // xhr will be null in case of a CORS-request when no CORS is possible
+	            if (!xhr) {
+	                console.error(NAME, "_initXHR fails: " + ERROR_NO_XHR);
+	                reject(ERROR_NO_XHR);
+	                return;
+	            }
+
+	            // method-name should be in uppercase:
+	            method = method.toUpperCase();
+	            // in case of BODY-method: eliminate any data behind querystring:
+	            // else: append data-object behind querystring
+	            if (BODY_METHODS[method]) {
+	                url = url.split("?"); // now url is an array
+	                url = url[0]; // now url is a String again
+	            } else if (data && headers[CONTENT_TYPE] !== MIME_BLOB) {
+	                    url += (url.itsa_contains("?") ? "&" : "?") + instance._toQueryString(data);
+	                }
+
+	            xhr.open(method, url, async);
+	            // xhr.responseType = options.responseType || "text";
+	            options.withCredentials && (xhr.withCredentials = true);
+
+	            // more initialisation might be needed by extended modules:
+	            instance._xhrInitList.forEach(function (fn) {
+	                fn(xhr, promise, headers, method);
+	            });
+
+	            if (BODY_METHODS[method] && data) {
+	                if (headers[CONTENT_TYPE] === MIME_BLOB) {
+	                    if (!xhr._isXDR) {
+	                        sendPayload = data;
+	                    }
+	                } else {
+	                    sendPayload = headers[CONTENT_TYPE] === MIME_JSON || xhr._isXDR ? JSON.stringify(data) : instance._toQueryString(data);
+	                }
+	            }
+	            // send the request:
+	            xhr.send(sendPayload);
+
+	            // now add xhr.abort() to the promise, so we can call from within the returned promise-instance
+	            promise.abort = function () {
+	                reject(ABORTED);
+	                xhr._aborted = true; // must be set: IE9 won"t allow to read anything on xhr after being aborted
+	                xhr.abort();
+	            };
+
+	            // in case synchronous transfer: force an xhr.onreadystatechange:
+	            async || xhr.onreadystatechange();
+	        },
+
+	        /**
+	         * Adds the `headers`-object to `xhr`-headers.
+	         *
+	         * @method _setHeaders
+	         * @param xhr {Object} containing the xhr-instance
+	         * @param headers {Object} containing all headers
+	         * @param method {String} the request-method used
+	         * @private
+	        */
+	        _setHeaders: function _setHeaders(xhr, promise, headers, method) {
+	            // XDR cannot set requestheaders, only XHR:
+	            if (!xhr._isXDR) {
+	                var name;
+	                if (method !== "POST" && method !== "PUT") {
+	                    // force GET-request to make a request instead of using cache (like IE does):
+	                    headers["If-Modified-Since"] = "Wed, 15 Nov 1995 01:00:00 GMT";
+	                    // header "Content-Type" should only be set with POST or PUT requests:
+	                    delete headers[CONTENT_TYPE];
+	                }
+	                // set all headers
+	                for (name in headers) {
+	                    xhr.setRequestHeader(name, headers[name]);
+	                }
+
+	                // in case of POST or PUT method: always make sure "Content-Type" is specified
+	                !BODY_METHODS[method] || headers && CONTENT_TYPE in headers || xhr.setRequestHeader(CONTENT_TYPE, DEF_CONTENT_TYPE_POST);
+	            }
+	        },
+
+	        /**
+	         * Adds 2 methods on the xhr-instance which are used by xhr when events occur:
+	         *
+	         * xhr.onreadystatechange()
+	         * xhr.ontimeout()  // only XMLHttpRequest2
+	         *
+	         * These events are responsible for making the Promise resolve.
+	         * @method _setReadyHandle
+	         * @param xhr {Object} containing the xhr-instance
+	         * @param fulfill {Function} reference to the Promise fulfill-function
+	         * @param reject {Function} reference to the Promise reject-function
+	         * @private
+	        */
+	        _setReadyHandle: function _setReadyHandle(xhr, promise) {
+	            // for XDomainRequest, we need "onload" instead of "onreadystatechange"
+	            xhr.onreadystatechange = function () {
+	                // CANNOT console xhr.responseText here! IE9 will throw an error:
+	                // you can only acces it after (xhr.readyState===4)
+	                // also check xhr._aborted --> IE9 comes here after aborted and will throw an error when reading xhr"s native properties
+	                if (!xhr._aborted && xhr.readyState === 4) {
+	                    clearTimeout(xhr._timer);
+	                    if (xhr.status >= 200 && xhr.status < 300) {
+	                        // In case streamback function is set, but when no intermediate stream-data was send
+	                        // (or in case of XDR: below 2kb it doesn"t call onprogress)
+	                        // --> we might need to call onprogress ourselve.
+	                        if (xhr._isStream && !xhr._gotstreamed) {
+	                            xhr.onprogress(xhr.responseText);
+	                        }
+	                        if (xhr._fileProgress && !xhr._gotstreamed) {
+	                            xhr.onprogress({
+	                                lengthComputable: true,
+	                                loaded: 1,
+	                                total: 1
+	                            });
+	                        }
+	                        promise.fulfill(xhr);
+	                    } else {
+	                        promise.reject(xhr.statusText || UNKNOW_ERROR);
+	                    }
+	                }
+	            };
+	            xhr.onerror = function () {
+	                clearTimeout(xhr._timer);
+	                promise.reject(XHR_ERROR);
+	            };
+	        },
+
+	        /**
+	         * Stringifies an object into one string with every pair separated by `&`
+	         *
+	         * @method _toQueryString
+	         * @param data {Object} containing key-value pairs
+	         * @return {String} stringified presentation of the object, with every pair separated by `&`
+	         * @private
+	        */
+	        _toQueryString: function _toQueryString(data) {
+	            var paramArray = [],
+	                key,
+	                value;
+	            for (key in data) {
+	                value = data[key];
+	                key = ENCODE_URI_COMPONENT(key);
+	                paramArray.push(value === null ? key : key + "=" + ENCODE_URI_COMPONENT(value));
+	            }
+	            return paramArray.join("&");
+	        },
+
+	        /**
+	         * Aborts all running io-requests
+	        */
+	        abortAll: function abortAll() {
+	            var instance = this;
+	            instance._runningRequests.forEach(function (promise) {
+	                promise.abort();
+	            });
+	            instance._runningRequests.length = 0;
+	        },
+
+	        /**
+	         * Sends a HTTP request to the server and returns a Promise with an additional .abort() method to cancel the request.
+	         * This method is the standard way of doing xhr-requests without processing streams.
+	         *
+	         * @method request
+	         * @param options {Object}
+	         *    @param [options.url] {String} The url to which the request is sent.
+	         *    @param [options.method="GET"] {String} The HTTP method to use.
+	         *    can be ignored, even if streams are used --> the returned Promise will always hold all data
+	         *    @param [options.sync=false] {boolean} By default, all requests are sent asynchronously. To send synchronous requests, set to true.
+	         *    @param [options.data] {Object} Data to be sent to the server, either to be used by `query-params` or `body`.
+	         *    @param [options.headers] {Object} HTTP request headers.
+	         *    @param [options.responseType] {String} Force the response type.
+	         *    @param [options.timeout=3000] {number} to timeout the request, leading into a rejected Promise.
+	         *    @param [options.withCredentials=false] {boolean} Whether or not to send credentials on the request.
+	         *    @param [options.streamback] {Function} callbackfunction in case you want to process streams (needs io-stream module).
+	         *    @param [options.stayActive] {Number} minimal time the request should be pending, even if IO has finished
+	         * @return {Promise} Promise holding the request. Has an additional .abort() method to cancel the request.
+	         * <ul>
+	         *     <li>on success: xhr {XMLHttpRequest1|XMLHttpRequest2} xhr-response</li>
+	         *     <li>on failure: reason {Error}</li>
+	         * </ul>
+	        */
+	        request: function request(options) {
+	            var instance = this,
+	                props = {},
+	                xhr,
+	                promise;
+	            options = Object.itsa_isObject(options) ? options.itsa_deepClone() : {};
+	            promise = Promise.itsa_manage(options.streamback, options.stayActive);
+
+	            xhr = new XMLHttpRequest();
+	            props._isXHR2 = xhr2support;
+	            // it could be other modules like io-cors or io-stream have subscribed
+	            // xhr might be changed, also private properties might be extended
+	            instance._xhrList.forEach(function (fn) {
+	                xhr = fn(xhr, props, options, promise);
+	            });
+	            if (!xhr) {
+	                return Promise.reject(NO_XHR);
+	            }
+	            xhr.itsa_merge(props);
+
+	            // Don"t use xhr.timeout --> IE<10 throws an error when set xhr.timeout
+	            // We use a timer that aborts the request
+	            Object.defineProperty(xhr, "_timer", {
+	                configurable: false,
+	                enumerable: false,
+	                writable: false,
+	                value: setTimeout(function () {
+	                    promise.reject(REQUEST_TIMEOUT);
+	                    xhr._aborted = true; // must be set: IE9 won"t allow to read anything on xhr after being aborted
+	                    xhr.abort();
+	                }, options.timeout || instance.config.timeout || DEF_REQ_TIMEOUT)
+	            });
+
+	            instance._initXHR(xhr, options, promise);
+
+	            // add to interbal hash:
+	            instance._runningRequests.push(promise);
+	            // remove it when ready:
+	            promise.itsa_finally(function () {
+	                instance._runningRequests.itsa_remove(promise);
+	            });
+
+	            return promise;
+	        }
+
+	    };
+
+	    IO._xhrInitList = [IO._setReadyHandle, IO._setHeaders];
+
+	    return IO;
+	};
+
+/***/ },
 /* 187 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	__webpack_require__(188);
+	__webpack_require__(189);
+	__webpack_require__(190);
+	__webpack_require__(191);
+	__webpack_require__(192);
+	__webpack_require__(193);
+	__webpack_require__(194);
+
+/***/ },
+/* 188 */
+/***/ function(module, exports) {
+
+	/**
+	 *
+	 * Pollyfils for often used functionality for Functions
+	 *
+	 * <i>Copyright (c) 2014 ITSA - https://github.com/itsa</i>
+	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
+	 *
+	 * @module js-ext
+	 * @submodule lib/function.js
+	 * @class Function
+	 *
+	*/
+
+	"use strict";
+
+	(function (FunctionPrototype) {
+		/**
+	  * Sets the context of which the function will be execute. in the
+	  * supplied object's context, optionally adding any additional
+	  * supplied parameters to the end of the arguments the function
+	  * is executed with.
+	  *
+	  * @method itsa_rbind
+	  * @param [context] {Object} the execution context.
+	  *        The value is ignored if the bound function is constructed using the new operator.
+	  * @param [args*] {any} args* 0..n arguments to append to the end of
+	  *        arguments collection supplied to the function.
+	  * @return {function} the wrapped function.
+	  */
+		FunctionPrototype.itsa_rbind = function (context /*, args* */) {
+			var thisFunction = this,
+			    arrayArgs,
+			    slice = Array.prototype.slice;
+			context || (context = this);
+			if (arguments.length > 1) {
+				// removing `context` (first item) by slicing it out:
+				arrayArgs = slice.call(arguments, 1);
+			}
+
+			return arrayArgs ? function () {
+				// over here, `arguments` will be the "new" arguments when the final function is called!
+				return thisFunction.apply(context, slice.call(arguments, 0).concat(arrayArgs));
+			} : function () {
+				// over here, `arguments` will be the "new" arguments when the final function is called!
+				return thisFunction.apply(context, arguments);
+			};
+		};
+	})(Function.prototype);
+
+/***/ },
+/* 189 */
+/***/ function(module, exports) {
+
+	/**
+	 *
+	 * Pollyfils for often used functionality for Objects
+	 *
+	 * <i>Copyright (c) 2014 ITSA - https://github.com/itsa</i>
+	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
+	 *
+	 * @module js-ext
+	 * @submodule lib/object.js
+	 * @class Object
+	 *
+	*/
+
+	"use strict";
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var TYPES = {
+	    "undefined": true,
+	    "number": true,
+	    "boolean": true,
+	    "string": true,
+	    "[object Function]": true,
+	    "[object RegExp]": true,
+	    "[object Array]": true,
+	    "[object Date]": true,
+	    "[object Error]": true,
+	    "[object Blob]": true,
+	    "[object Promise]": true // DOES NOT WORK in all browsers
+	},
+	    FUNCTION = "function",
+
+
+	// Define configurable, writable and non-enumerable props
+	// if they don't exist.
+	defineProperty = function defineProperty(object, name, method, force) {
+	    if (!force && name in object) {
+	        return;
+	    }
+	    Object.defineProperty(object, name, {
+	        configurable: true,
+	        enumerable: false,
+	        writable: true,
+	        value: method
+	    });
+	},
+	    defineProperties = function defineProperties(object, map, force) {
+	    var names = Object.keys(map),
+	        l = names.length,
+	        i = -1,
+	        name;
+	    while (++i < l) {
+	        name = names[i];
+	        defineProperty(object, name, map[name], force);
+	    }
+	},
+	    cloneObj = function cloneObj(obj, descriptors) {
+	    var copy, i, len, value;
+
+	    // Handle Array
+	    if (obj instanceof Array) {
+	        copy = [];
+	        len = obj.length;
+	        for (i = 0; i < len; i++) {
+	            value = obj[i];
+	            copy[i] = Object.itsa_isObject(value) || Array.isArray(value) ? cloneObj(value, descriptors) : value;
+	        }
+	        return copy;
+	    }
+
+	    // Handle Date
+	    if (obj instanceof Date) {
+	        copy = new Date();
+	        copy.setTime(obj.getTime());
+	        return copy;
+	    }
+
+	    // Handle Object
+	    if (Object.itsa_isObject(obj)) {
+	        return obj.itsa_deepClone(descriptors);
+	    }
+
+	    return obj;
+	},
+	    valuesAreTheSame = function valuesAreTheSame(value1, value2) {
+	    var same, i, len;
+	    // complex values need to be inspected differently:
+	    if (Object.itsa_isObject(value1)) {
+	        same = Object.itsa_isObject(value2) ? value1.itsa_sameValue(value2) : false;
+	    } else if (Array.isArray(value1)) {
+	        if (Array.isArray(value2)) {
+	            len = value1.length;
+	            if (len === value2.length) {
+	                same = true;
+	                for (i = 0; same && i < len; i++) {
+	                    same = valuesAreTheSame(value1[i], value2[i]);
+	                }
+	            } else {
+	                same = false;
+	            }
+	        } else {
+	            same = false;
+	        }
+	    } else if (value1 instanceof Date) {
+	        same = value2 instanceof Date ? value1.getTime() === value2.getTime() : false;
+	    } else {
+	        same = value1 === value2;
+	    }
+	    return same;
+	},
+	    deepCloneObj = function deepCloneObj(source, target, descriptors, proto) {
+	    var m = target || Object.create(proto || Object.getPrototypeOf(source)),
+	        keys = Object.getOwnPropertyNames(source),
+	        l = keys.length,
+	        i = -1,
+	        key,
+	        value,
+	        propDescriptor;
+	    // loop through the members:
+	    while (++i < l) {
+	        key = keys[i];
+	        value = source[key];
+	        if (descriptors) {
+	            propDescriptor = Object.getOwnPropertyDescriptor(source, key);
+	            if (propDescriptor.writable) {
+	                Object.defineProperty(m, key, propDescriptor);
+	            }
+	            if ((Object.itsa_isObject(value) || Array.isArray(value)) && _typeof(propDescriptor.get) !== FUNCTION && _typeof(propDescriptor.set) !== FUNCTION) {
+	                m[key] = cloneObj(value, descriptors);
+	            } else {
+	                m[key] = value;
+	            }
+	        } else {
+	            m[key] = Object.itsa_isObject(value) || Array.isArray(value) ? cloneObj(value, descriptors) : value;
+	        }
+	    }
+	    return m;
+	};
+
+	/**
+	 * Pollyfils for often used functionality for objects
+	 * @class Object
+	*/
+	defineProperties(Object.prototype, {
+	    /**
+	     * Loops through all properties in the object.  Equivalent to Array.forEach.
+	     * The callback is provided with the value of the property, the name of the property
+	     * and a reference to the whole object itself.
+	     * The context to run the callback in can be overriden, otherwise it is undefined.
+	     *
+	     * @method itsa_each
+	     * @param fn {Function} Function to be executed on each item in the object.  It will receive
+	     *                      value {any} value of the property
+	     *                      key {string} name of the property
+	     *                      obj {Object} the whole of the object
+	     * @chainable
+	     */
+	    itsa_each: function itsa_each(fn, context) {
+	        var obj = this,
+	            keys = Object.keys(obj),
+	            l = keys.length,
+	            i = -1,
+	            key;
+	        while (++i < l) {
+	            key = keys[i];
+	            fn.call(context || obj, obj[key], key, obj);
+	        }
+	        return obj;
+	    },
+
+	    /**
+	     * Loops through the properties in an object until the callback function returns *truish*.
+	     * The callback is provided with the value of the property, the name of the property
+	     * and a reference to the whole object itself.
+	     * The order in which the elements are visited is not predictable.
+	     * The context to run the callback in can be overriden, otherwise it is undefined.
+	     *
+	     * @method itsa_some
+	     * @param fn {Function} Function to be executed on each item in the object.  It will receive
+	     *                      value {any} value of the property
+	     *                      key {string} name of the property
+	     *                      obj {Object} the whole of the object
+	     * @return {Boolean} true if the loop was interrupted by the callback function returning *truish*.
+	     */
+	    itsa_some: function itsa_some(fn, context) {
+	        var keys = Object.keys(this),
+	            l = keys.length,
+	            i = -1,
+	            key;
+	        while (++i < l) {
+	            key = keys[i];
+	            if (fn.call(context || this, this[key], key, this)) {
+	                return true;
+	            }
+	        }
+	        return false;
+	    },
+
+	    /*
+	     * Loops through the properties in an object until the callback assembling a new object
+	     * with its properties set to the values returned by the callback function.
+	     * If the callback function returns `undefined` the property will not be copied to the new object.
+	     * The resulting object will have the same keys as the original, except for those where the callback
+	     * returned `undefined` which will have dissapeared.
+	     * The callback is provided with the value of the property, the name of the property
+	     * and a reference to the whole object itself.
+	     * The context to run the callback in can be overriden, otherwise it is undefined.
+	     *
+	     * @method itsa_map
+	     * @param fn {Function} Function to be executed on each item in the object.  It will receive
+	     *                      value {any} value of the property
+	     *                      key {string} name of the property
+	     *                      obj {Object} the whole of the object
+	     * @return {Object} The new object with its properties set to the values returned by the callback function.
+	     */
+	    itsa_map: function itsa_map(fn, context) {
+	        var keys = Object.keys(this),
+	            l = keys.length,
+	            i = -1,
+	            m = {},
+	            val,
+	            key;
+	        while (++i < l) {
+	            key = keys[i];
+	            val = fn.call(context, this[key], key, this);
+	            if (val !== undefined) {
+	                m[key] = val;
+	            }
+	        }
+	        return m;
+	    },
+
+	    /**
+	     * Returns the keys of the object: the enumerable properties.
+	     *
+	     * @method itsa_keys
+	     * @return {Array} Keys of the object
+	     */
+	    itsa_keys: function itsa_keys() {
+	        return Object.keys(this);
+	    },
+
+	    /**
+	     * Checks whether the given property is a key: an enumerable property.
+	     *
+	     * @method itsa_hasKey
+	     * @param property {String} the property to check for
+	     * @return {Boolean} Keys of the object
+	     */
+	    itsa_hasKey: function itsa_hasKey(property) {
+	        return this.hasOwnProperty(property) && this.propertyIsEnumerable(property);
+	    },
+
+	    /**
+	     * Returns the number of keys of the object
+	     *
+	     * @method itsa_size
+	     * @param inclNonEnumerable {Boolean} wether to include non-enumeral members
+	     * @return {Number} Number of items
+	     */
+	    itsa_size: function itsa_size(inclNonEnumerable) {
+	        return inclNonEnumerable ? Object.getOwnPropertyNames(this).length : Object.keys(this).length;
+	    },
+
+	    /**
+	     * Loops through the object collection the values of all its properties.
+	     * It is the counterpart of the [`keys`](#method_keys).
+	     *
+	     * @method itsa_values
+	     * @return {Array} values of the object
+	     */
+	    itsa_values: function itsa_values() {
+	        var keys = Object.keys(this),
+	            i = -1,
+	            len = keys.length,
+	            values = [];
+
+	        while (++i < len) {
+	            values.push(this[keys[i]]);
+	        }
+
+	        return values;
+	    },
+
+	    /**
+	     * Returns true if the object has no own members
+	     *
+	     * @method itsa_isEmpty
+	     * @return {Boolean} true if the object is empty
+	     */
+	    itsa_isEmpty: function itsa_isEmpty() {
+	        for (var key in this) {
+	            if (this.hasOwnProperty(key)) return false;
+	        }
+	        return true;
+	    },
+
+	    /**
+	     * Returns a shallow copy of the object.
+	     * It does not clone objects within the object, it does a simple, shallow clone.
+	     * Fast, mostly useful for plain hash maps.
+	     *
+	     * @method itsa_shallowClone
+	     * @param [options.descriptors=false] {Boolean} If true, the full descriptors will be set. This takes more time, but avoids any info to be lost.
+	     * @return {Object} shallow copy of the original
+	     */
+	    itsa_shallowClone: function itsa_shallowClone(descriptors) {
+	        var instance = this,
+	            m = Object.create(Object.getPrototypeOf(instance)),
+	            keys = Object.getOwnPropertyNames(instance),
+	            l = keys.length,
+	            i = -1,
+	            key,
+	            propDescriptor;
+	        while (++i < l) {
+	            key = keys[i];
+	            if (descriptors) {
+	                propDescriptor = Object.getOwnPropertyDescriptor(instance, key);
+	                if (!propDescriptor.writable) {
+	                    m[key] = instance[key];
+	                } else {
+	                    Object.defineProperty(m, key, propDescriptor);
+	                }
+	            } else {
+	                m[key] = instance[key];
+	            }
+	        }
+	        return m;
+	    },
+
+	    /**
+	     * Compares this object with the reference-object whether they have the same value.
+	     * Not by reference, but their content as simple types.
+	     *
+	     * Compares both JSON.stringify objects
+	     *
+	     * @method itsa_sameValue
+	     * @param refObj {Object} the object to compare with
+	     * @return {Boolean} whether both objects have the same value
+	     */
+	    itsa_sameValue: function itsa_sameValue(refObj) {
+	        var instance = this,
+	            keys = Object.getOwnPropertyNames(instance),
+	            l = keys.length,
+	            i = -1,
+	            same,
+	            key;
+	        same = l === refObj.itsa_size(true);
+	        // loop through the members:
+	        while (same && ++i < l) {
+	            key = keys[i];
+	            same = refObj.hasOwnProperty(key) ? valuesAreTheSame(instance[key], refObj[key]) : false;
+	        }
+	        return same;
+	    },
+
+	    /**
+	     * Returns a deep copy of the object.
+	     * Only handles members of primary types, Dates, Arrays and Objects.
+	     * Will clone all the properties, also the non-enumerable.
+	     *
+	     * @method itsa_deepClone
+	     * @param [descriptors=false] {Boolean} If true, the full descriptors will be set. This takes more time, but avoids any info to be lost.
+	     * @param [proto] {Object} Another prototype for the new object.
+	     * @return {Object} deep-copy of the original
+	     */
+	    itsa_deepClone: function itsa_deepClone(descriptors, proto) {
+	        return deepCloneObj(this, null, descriptors, proto);
+	    },
+
+	    /**
+	     * Transforms the object into an array with  'key/value' objects
+	     *
+	     * @example
+	     * {country: 'USA', Continent: 'North America'} --> [{key: 'country', value: 'USA'}, {key: 'Continent', value: 'North America'}]
+	     *
+	     * @method itsa_toArray
+	     * @param [options] {Object}
+	     * @param [options.key] {String} to overrule the default `key`-property-name
+	     * @param [options.value] {String} to overrule the default `value`-property-name
+	     * @return {Array} the transformed Array-representation of the object
+	     */
+	    itsa_toArray: function itsa_toArray(options) {
+	        var newArray = [],
+	            keyIdentifier = options && options.key || "key",
+	            valueIdentifier = options && options.value || "value";
+	        this.itsa_each(function (value, key) {
+	            var obj = {};
+	            obj[keyIdentifier] = key;
+	            obj[valueIdentifier] = value;
+	            newArray[newArray.length] = obj;
+	        });
+	        return newArray;
+	    },
+
+	    /**
+	     * Merges into this object the properties of the given object.
+	     * If the second argument is true, the properties on the source object will be overwritten
+	     * by those of the second object of the same name, otherwise, they are preserved.
+	     *
+	     * @method itsa_merge
+	     * @param obj {Object} Object with the properties to be added to the original object
+	     * @param [options] {Object}
+	     * @param [options.force=false] {Boolean} If true, the properties in `obj` will override those of the same name
+	     *        in the original object
+	     * @param [options.full=false] {Boolean} If true, also any non-enumerable properties will be merged
+	     * @param [options.replace=false] {Boolean} If true, only properties that already exist on the instance will be merged (forced replaced). No need to set force as well.
+	     * @param [options.descriptors=false] {Boolean} If true, the full descriptors will be set. This takes more time, but avoids any info to be lost.
+	     * @chainable
+	     */
+	    itsa_merge: function itsa_merge(obj, options) {
+	        var instance = this,
+	            i = -1,
+	            keys,
+	            l,
+	            key,
+	            force,
+	            replace,
+	            descriptors,
+	            propDescriptor;
+	        if (!Object.itsa_isObject(obj)) {
+	            return instance;
+	        }
+	        options || (options = {});
+	        keys = options.full ? Object.getOwnPropertyNames(obj) : Object.keys(obj);
+	        l = keys.length;
+	        force = options.force;
+	        replace = options.replace;
+	        descriptors = options.descriptors;
+	        // we cannot use obj.each --> obj might be an object defined through Object.create(null) and missing Object.prototype!
+	        while (++i < l) {
+	            key = keys[i];
+	            if (force && !replace || !replace && !(key in instance) || replace && key in instance) {
+	                if (descriptors) {
+	                    propDescriptor = Object.getOwnPropertyDescriptor(obj, key);
+	                    if (!propDescriptor.writable) {
+	                        instance[key] = obj[key];
+	                    } else {
+	                        Object.defineProperty(instance, key, propDescriptor);
+	                    }
+	                } else {
+	                    instance[key] = obj[key];
+	                }
+	            }
+	        }
+	        return instance;
+	    },
+
+	    /**
+	     * Sets the properties of `obj` to the instance. This will redefine the object, while remaining the instance.
+	     * This way, external references to the object-instance remain valid.
+	     *
+	     * @method itsa_defineData
+	     * @param obj {Object} the Object that holds the new properties.
+	     * @param [clone=false] {Boolean} whether the properties should be cloned
+	     * @chainable
+	     */
+	    itsa_defineData: function itsa_defineData(obj, clone) {
+	        var thisObj = this;
+	        thisObj.itsa_emptyObject();
+	        if (clone) {
+	            deepCloneObj(obj, thisObj, true);
+	        } else {
+	            thisObj.itsa_merge(obj);
+	        }
+	        return thisObj;
+	    },
+
+	    /**
+	     * Empties the Object by deleting all its own properties (also non-enumerable).
+	     *
+	     * @method itsa_emptyObject
+	     * @chainable
+	     */
+	    itsa_emptyObject: function itsa_emptyObject() {
+	        var thisObj = this,
+	            props = Object.getOwnPropertyNames(thisObj),
+	            len = props.length,
+	            i;
+	        for (i = 0; i < len; i++) {
+	            delete thisObj[props[i]];
+	        }
+	        return thisObj;
+	    }
+
+	});
+
+	/**
+	* Returns true if the item is an object, but no Array, Function, RegExp, Date or Error object
+	*
+	* @method itsa_isObject
+	* @static
+	* @return {Boolean} true if the object is empty
+	*/
+	Object.itsa_isObject = function (item) {
+	    // cautious: some browsers detect Promises as [object Object] --> we always need to check instance of :(
+	    return !!(!TYPES[typeof item === "undefined" ? "undefined" : _typeof(item)] && !TYPES[{}.toString.call(item)] && item && !(item instanceof Promise));
+	};
+
+	/**
+	 * Returns a new object resulting of merging the properties of the given objects.
+	 * The copying is shallow, complex properties will reference the very same object.
+	 * Properties in later objects do **not overwrite** properties of the same name in earlier objects.
+	 * If any of the objects is missing, it will be skiped.
+	 *
+	 * @example
+	 *
+	 *  var foo = function (config) {
+	 *       config = Object.itsa_merge(config, defaultConfig);
+	 *  }
+	 *
+	 * @method itsa_merge
+	 * @static
+	 * @param obj* {Object} Objects whose properties are to be merged
+	 * @return {Object} new object with the properties merged in.
+	 */
+	Object.itsa_merge = function () {
+	    var m = {};
+	    Array.prototype.forEach.call(arguments, function (obj) {
+	        if (obj) m.itsa_merge(obj);
+	    });
+	    return m;
+	};
+
+	/**
+	 * Returns a new object with the prototype specified by `proto`.
+	 *
+	 *
+	 * @method itsa_newProto
+	 * @static
+	 * @param obj {Object} source Object
+	 * @param proto {Object} Object that should serve as prototype
+	 * @param [clone=false] {Boolean} whether the sourceobject should be deep-cloned. When false, the properties will be merged.
+	 * @return {Object} new object with the prototype specified.
+	 */
+	Object.itsa_newProto = function (obj, proto, clone) {
+	    return clone ? obj.itsa_deepClone(true, proto) : Object.create(proto).itsa_merge(obj, { force: true });
+	};
+
+	/**
+	 * Creates a protected property on the object.
+	 *
+	 * @method itsa_protectedProp
+	 * @static
+	 */
+	Object.itsa_protectedProp = function (obj, property, value) {
+	    Object.defineProperty(obj, property, {
+	        configurable: false,
+	        enumerable: false,
+	        writable: false,
+	        value: value
+	    });
+	};
+
+/***/ },
+/* 190 */
+/***/ function(module, exports) {
+
+	/**
+	 *
+	 * Pollyfils for often used functionality for Strings
+	 *
+	 * <i>Copyright (c) 2014 ITSA - https://github.com/itsa</i>
+	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
+	 *
+	 * @module js-ext
+	 * @submodule lib/string.js
+	 * @class String
+	 *
+	 */
+
+	"use strict";
+
+	(function (StringPrototype) {
+	    var SUBREGEX = /\{\s*([^|}]+?)\s*(?:\|([^}]*))?\s*\}/g,
+	        DATEPATTERN = /\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z/,
+	        WHITESPACE_CLASS = "[\\s﻿ ]+",
+	        TRIM_LEFT_REGEX = new RegExp("^" + WHITESPACE_CLASS),
+	        TRIM_RIGHT_REGEX = new RegExp(WHITESPACE_CLASS + "$"),
+	        TRIMREGEX = new RegExp(TRIM_LEFT_REGEX.source + "|" + TRIM_RIGHT_REGEX.source, "g"),
+	        PATTERN_EMAIL = new RegExp("^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]\\.)+[a-zA-Z]{2,}$"),
+	        PATTERN_URLEND = "([a-zA-Z0-9]+\\.)*(?:[a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]\\.)+[a-zA-Z]{2,}(/[\\w-]+)*$",
+	        PATTERN_URLHTTP = new RegExp("^http://" + PATTERN_URLEND),
+	        PATTERN_URLHTTPS = new RegExp("^https://" + PATTERN_URLEND),
+	        PATTERN_URL = new RegExp("^(https?://)?" + PATTERN_URLEND),
+	        PATTERN_INTEGER = /^(([-]?[1-9][0-9]*)|0)$/,
+	        PATTERN_FLOAT_START = "^([-]?(([1-9][0-9]*)|0))?(\\",
+	        PATTERN_FLOAT_END = "[0-9]+)?$",
+	        PATTERN_FLOAT_COMMA = new RegExp(PATTERN_FLOAT_START + "," + PATTERN_FLOAT_END),
+	        PATTERN_FLOAT_DOT = new RegExp(PATTERN_FLOAT_START + "." + PATTERN_FLOAT_END),
+	        PATTERN_HEX_COLOR_ALPHA = /^#?[0-9A-F]{4}([0-9A-F]{4})?$/,
+	        PATTERN_HEX_COLOR = /^#?[0-9A-F]{3}([0-9A-F]{3})?$/;
+
+	    /**
+	     * Checks whether the substring is part if this String.
+	     * Alias for (String.indexOf(substring) > -1)
+	     *
+	     * @method itsa_contains
+	     * @param substring {String} the substring to test for
+	     * @param [caseInsensitive=false] {Boolean} whether to ignore case-sensivity
+	     * @return {Boolean} whether the substring is found
+	     */
+	    StringPrototype.itsa_contains = function (substring, caseInsensitive) {
+	        return caseInsensitive ? this.toLowerCase().indexOf(substring.toLowerCase()) > -1 : this.indexOf(substring) > -1;
+	    };
+
+	    /**
+	     * Checks if the string ends with the value specified by `test`
+	     *
+	     * @method itsa_endsWith
+	     * @param test {String} the string to test for
+	     * @param [caseInsensitive=false] {Boolean} whether to ignore case-sensivity
+	     * @return {Boolean} whether the string ends with `test`
+	     */
+	    // NOTE: ES6 native `endsWith` lacks the second argument
+	    StringPrototype.itsa_endsWith = function (test, caseInsensitive) {
+	        return new RegExp(test + "$", caseInsensitive ? "i" : "").test(this);
+	    };
+
+	    /**
+	     * Checks if the string can be parsed into a number when using `parseInt()`
+	     *
+	     * @method itsa_isParsable
+	     * @return {Boolean} whether the string is parsable
+	     */
+	    StringPrototype.itsa_isParsable = function () {
+	        // strange enough, NaN doen't let compare itself, so we need a strange test:
+	        // parseInt(value, 10)===parseInt(value, 10)
+	        // which returns `true` for a parsable value, otherwise false
+	        return parseInt(this) === parseInt(this);
+	    };
+
+	    /**
+	     * Checks if the string starts with the value specified by `test`
+	     *
+	     * @method itsa_startsWith
+	     * @param test {String} the string to test for
+	     * @param [caseInsensitive=false] {Boolean} whether to ignore case-sensivity
+	     * @return {Boolean} whether the string starts with `test`
+	     */
+	    // NOTE: ES6 native `startsWith` lacks the second argument
+	    StringPrototype.itsa_startsWith = function (test, caseInsensitive) {
+	        return new RegExp("^" + test, caseInsensitive ? "i" : "").test(this);
+	    };
+
+	    /**
+	     * Performs `{placeholder}` substitution on a string. The object passed
+	     * provides values to replace the `{placeholder}`s.
+	     * `{placeholder}` token names must match property names of the object.
+	     *
+	     * `{placeholder}` tokens that are undefined on the object map will be removed.
+	     *
+	     * @example
+	     * var greeting = '{message} {who}!';
+	     * greeting.itsa_substitute({message: 'Hello'}); // results into 'Hello !'
+	     *
+	     * @method itsa_substitute
+	     * @param obj {Object} Object containing replacement values.
+	     * @return {String} the substitute result.
+	     */
+	    StringPrototype.itsa_substitute = function (obj) {
+	        return this.itsa_replace(SUBREGEX, function (match, key) {
+	            return obj[key] === undefined ? "" : obj[key];
+	        });
+	    };
+
+	    /**
+	     * Returns a ISO-8601 Date-object build by the String's value.
+	     * If the String-value doesn't match ISO-8601, `null` will be returned.
+	     *
+	     * ISO-8601 Date's are generated by JSON.stringify(), so it's very handy to be able to reconvert them.
+	     *
+	     * @example
+	     * var birthday = '2010-02-10T14:45:30.000Z';
+	     * birthday.itsa_toDate(); // --> Wed Feb 10 2010 15:45:30 GMT+0100 (CET)
+	     *
+	     * @method itsa_toDate
+	     * @return {Date|null} the Date represented by the String's value or null when invalid
+	     */
+	    StringPrototype.itsa_toDate = function () {
+	        return DATEPATTERN.test(this) ? new Date(this) : null;
+	    };
+
+	    /**
+	     * Generated the string without any white-spaces at the start or end.
+	     *
+	     * @method itsa_trim
+	     * @return {String} new String without leading and trailing white-spaces
+	     */
+	    StringPrototype.itsa_trim = function () {
+	        return this.itsa_replace(TRIMREGEX, "");
+	    };
+
+	    /**
+	     * Generated the string without any white-spaces at the beginning.
+	     *
+	     * @method itsa_trimLeft
+	     * @return {String} new String without leading white-spaces
+	     */
+	    StringPrototype.itsa_trimLeft = function () {
+	        return this.itsa_replace(TRIM_LEFT_REGEX, "");
+	    };
+
+	    /**
+	     * Generated the string without any white-spaces at the end.
+	     *
+	     * @method itsa_trimRight
+	     * @return {String} new String without trailing white-spaces
+	     */
+	    StringPrototype.itsa_trimRight = function () {
+	        return this.itsa_replace(TRIM_RIGHT_REGEX, "");
+	    };
+
+	    /**
+	     * Replaces search-characters by a replacement. Replaces only the firts occurence.
+	     * Does not alter the String itself, but returns a new String with the replacement.
+	     *
+	     * @method itsa_replace
+	     * @param search {String} the character(s) to be replaced
+	     * @param replacement {String} the replacement
+	     * @param [caseInsensitive=false] {Boolean} whether to do search case-insensitive
+	     * @return {String} new String with the replacement
+	     */
+	    StringPrototype.itsa_replace = function (search, replacement, caseInsensitive) {
+	        return StringPrototype.replace.call(this, caseInsensitive ? new RegExp(search, "i") : search, replacement);
+	    };
+
+	    /**
+	     * Replaces search-characters by a replacement. Replaces all occurences.
+	     * Does not alter the String itself, but returns a new String with the replacements.
+	     *
+	     * @method itsa_replaceAll
+	     * @param search {String} the character(s) to be replaced
+	     * @param replacement {String} the replacement
+	     * @param [caseInsensitive=false] {Boolean} whether to do search case-insensitive
+	     * @return {String} new String with the replacements
+	     */
+	    StringPrototype.itsa_replaceAll = function (search, replacement, caseInsensitive) {
+	        return StringPrototype.replace.call(this, new RegExp(search, "g" + (caseInsensitive ? "i" : "")), replacement);
+	    };
+
+	    /**
+	     * Validates if the String's value represents a valid emailaddress.
+	     *
+	     * @method itsa_isValidEmail
+	     * @return {Boolean} whether the String's value is a valid emailaddress.
+	     */
+	    StringPrototype.itsa_isValidEmail = function () {
+	        return PATTERN_EMAIL.test(this);
+	    };
+
+	    /**
+	     * Validates if the String's value represents a valid floated number.
+	     *
+	     * @method itsa_isValidFloat
+	     * @param [comma] {Boolean} whether to use a comma as decimal separator instead of a dot
+	     * @return {Boolean} whether the String's value is a valid floated number.
+	     */
+	    StringPrototype.itsa_isValidFloat = function (comma) {
+	        return comma ? PATTERN_FLOAT_COMMA.test(this) : PATTERN_FLOAT_DOT.test(this);
+	    };
+
+	    /**
+	     * Validates if the String's value represents a hexadecimal color.
+	     *
+	     * @method itsa_isValidHexaColor
+	     * @param [alpha=false] {Boolean} whether to accept alpha transparancy
+	     * @return {Boolean} whether the String's value is a valid hexadecimal color.
+	     */
+	    StringPrototype.itsa_isValidHexaColor = function (alpha) {
+	        return alpha ? PATTERN_HEX_COLOR_ALPHA.test(this) : PATTERN_HEX_COLOR.test(this);
+	    };
+
+	    /**
+	     * Validates if the String's value represents a valid integer number.
+	     *
+	     * @method itsa_isValidNumber
+	     * @return {Boolean} whether the String's value is a valid integer number.
+	     */
+	    StringPrototype.itsa_isValidNumber = function () {
+	        return PATTERN_INTEGER.test(this);
+	    };
+
+	    /**
+	     * Validates if the String's value represents a valid boolean.
+	     *
+	     * @method itsa_isValidBoolean
+	     * @return {Boolean} whether the String's value is a valid boolean.
+	     */
+	    StringPrototype.itsa_isValidBoolean = function () {
+	        var length = this.length,
+	            check;
+	        if (length < 4 || length > 5) {
+	            return false;
+	        }
+	        check = this.toUpperCase();
+	        return check === "TRUE" || check === "FALSE";
+	    };
+
+	    /**
+	     * Validates if the String's value represents a valid Date.
+	     *
+	     * @method itsa_isValidDate
+	     * @return {Boolean} whether the String's value is a valid Date object.
+	     */
+	    StringPrototype.itsa_isValidDate = function () {
+	        return DATEPATTERN.test(this);
+	    };
+
+	    /**
+	     * Validates if the String's value represents a valid URL.
+	     *
+	     * @method itsa_isValidURL
+	     * @param [options] {Object}
+	     * @param [options.http] {Boolean} to force matching starting with `http://`
+	     * @param [options.https] {Boolean} to force matching starting with `https://`
+	     * @return {Boolean} whether the String's value is a valid URL.
+	     */
+	    StringPrototype.itsa_isValidURL = function (options) {
+	        var instance = this;
+	        options || (options = {});
+	        if (options.http && options.https) {
+	            return false;
+	        }
+	        return options.http ? PATTERN_URLHTTP.test(instance) : options.https ? PATTERN_URLHTTPS.test(instance) : PATTERN_URL.test(instance);
+	    };
+	})(String.prototype);
+
+/***/ },
+/* 191 */
+/***/ function(module, exports) {
+
+	/**
+	 *
+	 * Pollyfils for often used functionality for Arrays
+	 *
+	 * <i>Copyright (c) 2014 ITSA - https://github.com/itsa</i>
+	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
+	 *
+	 * @module js-ext
+	 * @submodule lib/array.js
+	 * @class Array
+	 *
+	 */
+
+	"use strict";
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var TYPES = {
+	    "undefined": true,
+	    "number": true,
+	    "boolean": true,
+	    "string": true,
+	    "[object Function]": true,
+	    "[object RegExp]": true,
+	    "[object Array]": true,
+	    "[object Date]": true,
+	    "[object Error]": true,
+	    "[object Promise]": true
+	},
+	    FUNCTION = "function",
+	    isObject,
+	    objSameValue,
+	    _cloneObj,
+	    deepCloneObj,
+	    valuesAreTheSame;
+
+	isObject = function isObject(item) {
+	    return !!(!TYPES[typeof item === "undefined" ? "undefined" : _typeof(item)] && !TYPES[{}.toString.call(item)] && item);
+	};
+
+	objSameValue = function objSameValue(obj1, obj2) {
+	    var keys = Object.getOwnPropertyNames(obj1),
+	        keysObj2 = Object.getOwnPropertyNames(obj2),
+	        l = keys.length,
+	        i = -1,
+	        same,
+	        key;
+	    same = l === keysObj2.length;
+	    // loop through the members:
+	    while (same && ++i < l) {
+	        key = keys[i];
+	        same = obj2.hasOwnProperty(key) ? valuesAreTheSame(obj1[key], obj2[key]) : false;
+	    }
+	    return same;
+	};
+
+	deepCloneObj = function deepCloneObj(obj, descriptors) {
+	    var m = Object.create(Object.getPrototypeOf(obj)),
+	        keys = Object.getOwnPropertyNames(obj),
+	        l = keys.length,
+	        i = -1,
+	        key,
+	        value,
+	        propDescriptor;
+	    // loop through the members:
+	    while (++i < l) {
+	        key = keys[i];
+	        value = obj[key];
+	        if (descriptors) {
+	            propDescriptor = Object.getOwnPropertyDescriptor(obj, key);
+	            if (propDescriptor.writable) {
+	                Object.defineProperty(m, key, propDescriptor);
+	            }
+	            if ((isObject(value) || Array.isArray(value)) && _typeof(propDescriptor.get) !== FUNCTION && _typeof(propDescriptor.set) !== FUNCTION) {
+	                m[key] = _cloneObj(value, descriptors);
+	            } else {
+	                m[key] = value;
+	            }
+	        } else {
+	            m[key] = isObject(value) || Array.isArray(value) ? _cloneObj(value, descriptors) : value;
+	        }
+	    }
+	    return m;
+	};
+
+	_cloneObj = function cloneObj(obj, descriptors, target) {
+	    var copy, i, len, value;
+
+	    // Handle Array
+	    if (obj instanceof Array) {
+	        copy = target || [];
+	        len = obj.length;
+	        for (i = 0; i < len; i++) {
+	            value = obj[i];
+	            copy[i] = isObject(value) || Array.isArray(value) ? _cloneObj(value, descriptors) : value;
+	        }
+	        return copy;
+	    }
+
+	    // Handle Date
+	    if (obj instanceof Date) {
+	        copy = new Date();
+	        copy.setTime(obj.getTime());
+	        return copy;
+	    }
+
+	    // Handle Object
+	    if (isObject(obj)) {
+	        return deepCloneObj(obj, descriptors);
+	    }
+
+	    return obj;
+	};
+
+	valuesAreTheSame = function valuesAreTheSame(value1, value2) {
+	    var same;
+	    // complex values need to be inspected differently:
+	    if (isObject(value1)) {
+	        same = isObject(value2) ? objSameValue(value1, value2) : false;
+	    } else if (Array.isArray(value1)) {
+	        same = Array.isArray(value2) ? value1.itsa_sameValue(value2) : false;
+	    } else if (value1 instanceof Date) {
+	        same = value2 instanceof Date ? value1.getTime() === value2.getTime() : false;
+	    } else {
+	        same = value1 === value2;
+	    }
+	    return same;
+	};
+
+	(function (ArrayPrototype) {
+
+	    /**
+	     * Checks whether an item is inside the Array.
+	     * Alias for (array.indexOf(item) > -1)
+	     *
+	     * @method itsa_contains
+	     * @param item {Any} the item to seek
+	     * @return {Boolean} whether the item is part of the Array
+	     */
+	    ArrayPrototype.itsa_contains = function (item) {
+	        return this.indexOf(item) > -1;
+	    };
+
+	    /**
+	     * Removes an item from the array
+	     *
+	     * @method itsa_remove
+	     * @param item {any|Array} the item (or an hash of items) to be removed
+	     * @param [arrayItem=false] {Boolean} whether `item` is an arrayItem that should be treated as a single item to be removed
+	     *        You need to set `arrayItem=true` in those cases. Otherwise, all single items from `item` are removed separately.
+	     * @chainable
+	     */
+	    ArrayPrototype.itsa_remove = function (item, arrayItem) {
+	        var instance = this,
+	            removeItem = function removeItem(oneItem) {
+	            var index = instance.indexOf(oneItem);
+	            index > -1 && instance.splice(index, 1);
+	        };
+	        if (!arrayItem && Array.isArray(item)) {
+	            item.forEach(removeItem);
+	        } else {
+	            removeItem(item);
+	        }
+	        return instance;
+	    };
+
+	    /**
+	     * Replaces an item in the array. If the previous item is not part of the array, the new item is appended.
+	     *
+	     * @method itsa_replace
+	     * @param prevItem {any} the item to be replaced
+	     * @param newItem {any} the item to be added
+	     * @chainable
+	     */
+	    ArrayPrototype.itsa_replace = function (prevItem, newItem) {
+	        var instance = this,
+	            index = instance.indexOf(prevItem);
+	        index !== -1 ? instance.splice(index, 1, newItem) : instance.push(newItem);
+	        return instance;
+	    };
+
+	    /**
+	     * Inserts an item in the array at the specified position. If index is larger than array.length, the new item(s) will be appended.
+	     * If the item already exists, it will be moved to its new position, unless `duplicate` is set true
+	     *
+	     * @method itsa_insertAt
+	     * @param item {any|Array} the item to be replaced, may be an Array of items
+	     * @param index {Number} the position where to add the item(s). When larger than Array.length, the item(s) will be appended.
+	     * @param [duplicate=false] {boolean} if an item should be duplicated when already in the array
+	     * @chainable
+	     */
+	    ArrayPrototype.itsa_insertAt = function (item, index, duplicate) {
+	        var instance = this,
+	            prevIndex;
+	        if (!duplicate) {
+	            prevIndex = instance.indexOf(item);
+	            if (prevIndex === index) {
+	                return instance;
+	            }
+	            prevIndex > -1 && instance.splice(prevIndex, 1);
+	        }
+	        instance.splice(index, 0, item);
+	        return instance;
+	    };
+
+	    /**
+	     * Shuffles the items in the Array randomly
+	     *
+	     * @method itsa_shuffle
+	     * @chainable
+	     */
+	    ArrayPrototype.itsa_shuffle = function () {
+	        var instance = this,
+	            counter = instance.length,
+	            temp,
+	            index;
+	        // While there are elements in the instance
+	        while (counter > 0) {
+	            // Pick a random index
+	            index = Math.floor(Math.random() * counter);
+
+	            // Decrease counter by 1
+	            counter--;
+
+	            // And swap the last element with it
+	            temp = instance[counter];
+	            instance[counter] = instance[index];
+	            instance[index] = temp;
+	        }
+	        return instance;
+	    };
+
+	    /**
+	     * Returns a deep copy of the Array.
+	     * Only handles members of primary types, Dates, Arrays and Objects.
+	     *
+	     * @method itsa_deepClone
+	     * @param [descriptors=false] {Boolean} whether to use the descriptors when cloning
+	     * @return {Array} deep-copy of the original
+	     */
+	    ArrayPrototype.itsa_deepClone = function (descriptors) {
+	        return _cloneObj(this, descriptors);
+	    };
+
+	    /**
+	     * Compares this object with the reference-object whether they have the same value.
+	     * Not by reference, but their content as simple types.
+	     *
+	     * Compares both JSON.stringify objects
+	     *
+	     * @method itsa_sameValue
+	     * @param refObj {Object} the object to compare with
+	     * @return {Boolean} whether both objects have the same value
+	     */
+	    ArrayPrototype.itsa_sameValue = function (refArray) {
+	        var instance = this,
+	            len = instance.length,
+	            i = -1,
+	            same;
+	        same = len === refArray.length;
+	        // loop through the members:
+	        while (same && ++i < len) {
+	            same = valuesAreTheSame(instance[i], refArray[i]);
+	        }
+	        return same;
+	    };
+
+	    /**
+	     * Sets the items of `array` to the instance. This will refill the array, while remaining the instance.
+	     * This way, external references to the array-instance remain valid.
+	     *
+	     * @method itsa_defineData
+	     * @param array {Array} the Array that holds the new items.
+	     * @param [clone=false] {Boolean} whether the items should be cloned
+	     * @chainable
+	     */
+	    ArrayPrototype.itsa_defineData = function (array, clone) {
+	        var thisArray = this,
+	            len,
+	            i;
+	        thisArray.itsa_makeEmpty();
+	        if (clone) {
+	            _cloneObj(array, true, thisArray);
+	        } else {
+	            len = array.length;
+	            for (i = 0; i < len; i++) {
+	                thisArray[i] = array[i];
+	            }
+	        }
+	        return thisArray;
+	    },
+
+	    /**
+	     * Concats `array` into this array (appended by default).
+	     *
+	     * @method itsa_concat
+	     * @param array {Array} the Array to be merged
+	     * @param [prepend=false] {Boolean} whether the items prepended
+	     * @param [clone=false] {Boolean} whether the items should be cloned
+	     * @param [descriptors=false] {Boolean} whether to use the descriptors when cloning
+	     * @chainable
+	     */
+	    ArrayPrototype.itsa_concat = function (array, prepend, clone, descriptors) {
+	        var instance = this,
+	            mergeArray = clone ? array.itsa_deepClone(descriptors) : array;
+	        if (prepend) {
+	            mergeArray.reduceRight(function (coll, item) {
+	                coll.unshift(item);
+	                return coll;
+	            }, instance);
+	        } else {
+	            mergeArray.reduce(function (coll, item) {
+	                coll[coll.length] = item;
+	                return coll;
+	            }, instance);
+	        }
+	        return instance;
+	    };
+
+	    /**
+	     * Empties the Array by setting its length to zero.
+	     *
+	     * @method itsa_makeEmpty
+	     * @chainable
+	     */
+	    ArrayPrototype.itsa_makeEmpty = function () {
+	        this.length = 0;
+	        return this;
+	    };
+	})(Array.prototype);
+
+/***/ },
+/* 192 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 *
+	 * Pollyfils for often used functionality for Arrays
+	 *
+	 * <i>Copyright (c) 2014 ITSA - https://github.com/itsa</i>
+	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
+	 *
+	 * @module js-ext
+	 * @submodule lib/json.js
+	 * @class JSON
+	 *
+	 */
+
+	"use strict";
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	__webpack_require__(189);
+	__webpack_require__(191);
+	__webpack_require__(190);
+
+	var STRING = "string";
+
+	var REVIVER = function REVIVER(key, value) {
+	    return typeof value === 'string' && value.itsa_toDate() || value;
+	},
+	    _objectStringToDates,
+	    _arrayStringToDates;
+
+	_objectStringToDates = function objectStringToDates(obj) {
+	    var date;
+	    obj.itsa_each(function (value, key) {
+	        if ((typeof value === "undefined" ? "undefined" : _typeof(value)) === STRING) {
+	            (date = value.itsa_toDate()) && (obj[key] = date);
+	        } else if (Object.itsa_isObject(value)) {
+	            _objectStringToDates(value);
+	        } else if (Array.isArray(value)) {
+	            _arrayStringToDates(value);
+	        }
+	    });
+	};
+
+	_arrayStringToDates = function arrayStringToDates(array) {
+	    var i, len, arrayItem, date;
+	    len = array.length;
+	    for (i = 0; i < len; i++) {
+	        arrayItem = array[i];
+	        if ((typeof arrayItem === "undefined" ? "undefined" : _typeof(arrayItem)) === STRING) {
+	            (date = arrayItem.itsa_toDate()) && (array[i] = date);
+	        } else if (Object.itsa_isObject(arrayItem)) {
+	            _objectStringToDates(arrayItem);
+	        } else if (Array.isArray(arrayItem)) {
+	            _arrayStringToDates(arrayItem);
+	        }
+	    }
+	};
+
+	/**
+	 * Parses a stringified object and creates true `Date` properties.
+	 *
+	 * @method itsa_parseWithDate
+	 * @param stringifiedObj {Number} lower-edgde
+	 * @return {Number|undefined} the value, forced to be inbetween the edges. Returns `undefined` if `max` is lower than `min`.
+	 */
+	JSON.itsa_parseWithDate = function (stringifiedObj) {
+	    return this.parse(stringifiedObj, REVIVER);
+	};
+
+	/**
+	* Transforms `String`-properties into true Date-objects in case they match the Date-syntax.
+	* To be used whenever you have parsed a JSON.stringified object without a Date-reviver.
+	*
+	* @method itsa_stringToDates
+	* @param item {Object|Array} the JSON-parsed object which the date-string fields should be transformed into Dates.
+	* @param clone {Boolean=false} whether to clone `item` and leave it unspoiled. Cloning means a performancehit,
+	* better leave it `false`, which will lead into changing `item` which in fact will equal the returnvalue.
+	* @static
+	* @return {Object|Array} the transormed item
+	*/
+	JSON.itsa_stringToDates = function (item, clone) {
+	    var newItem = clone ? item.itsa_deepClone() : item;
+	    if (Object.itsa_isObject(newItem)) {
+	        _objectStringToDates(newItem);
+	    } else if (Array.isArray(newItem)) {
+	        _arrayStringToDates(newItem);
+	    }
+	    return newItem;
+	};
+
+/***/ },
+/* 193 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	/**
+	 * Provides additional Promise-methods. These are extra methods which are not part of the PromiseA+ specification,
+	 * But are all Promise/A+ compatable.
+	 *
+	 * <i>Copyright (c) 2014 ITSA - https://github.com/itsa</i>
+	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
+	 *
+	 *
+	 * @module js-ext
+	 * @submodule lib/promise.s
+	 * @class Promise
+	*/
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var FUNCTION_EXPECTED = " expects an array of function-references",
+	    // include leading space
+	FUNCTION = "function",
+	    PROMISE_CHAIN = "Promise.chain";
+
+	(function (PromisePrototype) {
+	    /**
+	     * Promise which can be put at the very end of a chain, even after .catch().
+	     * Will invoke the callback function regardless whether the chain resolves or rejects.
+	     *
+	     * The argument of the callback will be either its fulfilled or rejected argument, but
+	     * it is wisely not to handle it. The results should have been handled in an earlier step
+	     * of the chain: .itsa_finally() basicly means you want to execute code after the chain, regardless
+	     * whether it's resolved or rejected.
+	     *
+	     * **Note:** .itsa_finally() <u>does not return a Promise</u>: it should be used as the very last step of a Promisechain.
+	     * If you need an intermediate method, you should take .itsa_fulfillThen().
+	     *
+	     * @method itsa_finally
+	     * @param finallyback {Function} the callback-function to be invoked.
+	     * @return {Promise}
+	     */
+	    PromisePrototype.itsa_finally = function (finallyback) {
+	        return this.then(finallyback, finallyback);
+	    };
+
+	    /**
+	     * Will always return a fulfilled Promise.
+	     *
+	     * Typical usage will be by making it part of a Promisechain: it makes the chain go
+	     * into its fulfilled phase.
+	     *
+	     * @example
+	     *
+	     * promise1
+	     * .then(promise2)
+	     * .itsa_fulfillThen()
+	     * .then(handleFulfilled, handleRejected) // handleFulfilled always gets invoked
+	     * @method itsa_fulfillThen
+	     * @param [response] {Object} parameter to pass through which overrules the original Promise-response.
+	     * @return {Promise} Resolved Promise. `response` will be passed trough as parameter when set.
+	     *         When not set: in case the original Promise resolved, its parameter is passed through.
+	     *         in case of a rejection, no parameter will be passed through.
+	     */
+	    PromisePrototype.itsa_fulfillThen = function (callback) {
+	        return this.then(function (r) {
+	            return r;
+	        }, function (r) {
+	            return r;
+	        }).then(callback);
+	    };
+	})(Promise.prototype);
+
+	/**
+	 * Returns a Promise that always fulfills. It is fulfilled when ALL items are resolved (either fulfilled
+	 * or rejected). This is useful for waiting for the resolution of multiple
+	 * promises, such as reading multiple files in Node.js or making multiple XHR
+	 * requests in the browser. Because -on the contrary of `Promise.all`- **finishAll** waits until
+	 * all single Promises are resolved, you can handle all promises, even if some gets rejected.
+	 *
+	 * @method itsa_finishAll
+	 * @param items {Any[]} an array of any kind of items, promises or not. If a value is not a promise,
+	 * its transformed into a resolved promise.
+	 * @return {Promise} A promise for an array of all the fulfillment items:
+	 * <ul>
+	 *     <li>Fulfilled: o {Object}
+	 *         <ul>
+	 *             <li>fulfilled {Array} all fulfilled responses, any item that was rejected will have a value of `undefined`</li>
+	 *             <li>rejected {Array} all rejected responses, any item that was fulfilled will have a value of `undefined`</li>
+	 *         </ul>
+	 *     </li>
+	 *     <li>Rejected: this promise **never** rejects</li>
+	 * </ul>
+	 * @static
+	 */
+	Promise.itsa_finishAll = function (items) {
+	    return new Promise(function (fulfill) {
+	        // Array.isArray assumes ES5
+	        Array.isArray(items) || (items = [items]);
+
+	        var remaining = items.length,
+	            length = items.length,
+	            fulfilledresults = [],
+	            rejectedresults = [],
+	            i;
+
+	        function oneDone(index, fulfilled) {
+	            return function (value) {
+	                fulfilled ? fulfilledresults[index] = value : rejectedresults[index] = value;
+	                remaining--;
+	                if (!remaining) {
+	                    fulfill({
+	                        fulfilled: fulfilledresults,
+	                        rejected: rejectedresults
+	                    });
+	                }
+	            };
+	        }
+
+	        if (length < 1) {
+	            return fulfill({
+	                fulfilled: fulfilledresults,
+	                rejected: rejectedresults
+	            });
+	        }
+
+	        fulfilledresults.length = length;
+	        rejectedresults.length = length;
+	        for (i = 0; i < length; i++) {
+	            Promise.resolve(items[i]).then(oneDone(i, true), oneDone(i, false));
+	        }
+	    });
+	};
+
+	/**
+	 * Returns a Promise which chains the function-calls. Like an automated Promise-chain.
+	 * Invokes the functionreferences in a chain. You MUST supply function-references, it doesn't
+	 * matter wheter these functions return a Promise or not. Any returnvalues are passed through to
+	 * the next function.
+	 *
+	 * **Cautious:** you need to pass function-references, not invoke them!
+	 * chainFns will invoke them when the time is ready. Regarding to this, there is a difference with
+	 * using Promise.all() where you should pass invoked Promises.
+	 *
+	 * If one of the functions returns a Promise, the chain
+	 * will wait its execution for this function to be resolved.
+	 *
+	 * If you need specific context or arguments: use Function.bind for these items.
+	 * If one of the items returns a rejected Promise, by default: the whole chain rejects
+	 * and following functions in the chain will not be invoked. When `finishAll` is set `true`
+	 * the chain will always continue even with rejected Promises.
+	 *
+	 * Returning functionvalues are passed through the chain adding them as an extra argument
+	 * to the next function in the chain (argument is added on the right)
+	 *
+	 * @example
+	 *     var a = [], p1, p2, p3;
+	 *     p1 = function(a) {
+	 *         return new Promise(function(resolve, reject) {
+	 *             I.later(function() {
+	 *                 console.log('resolving promise p1: '+a);
+	 *                 resolve(a);
+	 *             }, 1000);
+	 *         });
+	 *     };
+	 *     p2 = function(b, r) {
+	 *         var value = b+r;
+	 *         console.log('returning p2: '+value);
+	 *         return value;
+	 *     };
+	 *     p3 = function(c, r) {
+	 *         return new Promise(function(resolve, reject) {
+	 *             I.later(function() {
+	 *                 var value = b+r;
+	 *                 console.log('resolving promise p3: '+value);
+	 *                 resolve(value);
+	 *             }, 1000);
+	 *         });
+	 *     };
+	 *     a.push(p1.bind(undefined, 100));
+	 *     a.push(p2.bind(undefined, 200));
+	 *     a.push(p3.bind(undefined, 300));
+	 *     Promise.itsa_chainFns(a).then(
+	 *         function(r) {
+	 *             console.log('chain resolved with '+r);
+	 *         },
+	 *         function(err) {
+	 *             console.log('chain-error '+err);
+	 *         }
+	 *     );
+	 *
+	 * @method itsa_chainFns
+	 * @param funcs {function[]} an array of function-references
+	 * @param [finishAll=false] {boolean} to force the chain to continue, even if one of the functions
+	 *        returns a rejected Promise
+	 * @return {Promise}
+	 * on success:
+	    * o {Object} returnvalue of the laste item in the Promisechain
+	 * on failure an Error object
+	    * reason {Error}
+	 * @static
+	 */
+	Promise.itsa_chainFns = function (funcs, finishAll) {
+	    var handleFn,
+	        length,
+	        _handlePromiseChain,
+	        promiseErr,
+	        i = 0;
+	    // Array.isArray assumes ES5
+	    Array.isArray(funcs) || (funcs = [funcs]);
+	    length = funcs.length;
+	    handleFn = function handleFn() {
+	        var nextFn = funcs[i],
+	            promise;
+	        if ((typeof nextFn === "undefined" ? "undefined" : _typeof(nextFn)) !== FUNCTION) {
+	            return Promise.reject(new TypeError(PROMISE_CHAIN + FUNCTION_EXPECTED));
+	        }
+	        promise = Promise.resolve(nextFn.apply(null, arguments));
+	        // by using "promise.catch(function(){})" we return a resolved Promise
+	        return finishAll ? promise.catch(function (err) {
+	            promiseErr = err;
+	            return err;
+	        }) : promise;
+	    };
+	    _handlePromiseChain = function handlePromiseChain() {
+	        // will loop until rejected, which is at destruction of the class
+	        return handleFn.apply(null, arguments).then(++i < length ? _handlePromiseChain : undefined);
+	    };
+	    return _handlePromiseChain().then(function (response) {
+	        // if (promiseErr) {
+	        //     throw new Error(promiseErr);
+	        // }
+	        return promiseErr || response;
+	    });
+	};
+
+	/**
+	 * Returns a Promise with 5 additional methods:
+	 *
+	 * promise.fulfill
+	 * promise.reject
+	 * promise.callback
+	 * promise.setCallback
+	 * promise.pending
+	 * promise.stayActive --> force the promise not to resolve in the specified time
+	 *
+	 * With Promise.manage, you get a Promise which is managable from outside, not inside as Promise A+ work.
+	 * You can invoke promise.**callback**() which will invoke the original passed-in callbackFn - if any.
+	 * promise.**fulfill**() and promise.**reject**() are meant to resolve the promise from outside, just like deferred can do.
+	 *
+	 * If `stayActive` is defined, the promise will only be resolved after this specified time (ms). When `fulfill` or `reject` is
+	 * called, it will be applied after this specified time.
+	 *
+	 * @example
+	 *     var promise = Promise.itsa_manage(
+	 *         function(msg) {
+	 *             alert(msg);
+	 *         }
+	 *     );
+	 *
+	 *     promise.then(
+	 *         function() {
+	 *             // promise is fulfilled, no further actions can be taken
+	 *         }
+	 *     );
+	 *
+	 *     setTimeout(function() {
+	 *         promise.callback('hey, I\'m still busy');
+	 *     }, 1000);
+	 *
+	 *     setTimeout(function() {
+	 *         promise.fulfill();
+	 *     }, 2000);
+	 *
+	 * @method itsa_manage
+	 * @param [callbackFn] {Function} invoked everytime promiseinstance.callback() is called.
+	 *        You may as weel (re)set this method atny time lare by using promise.setCallback()
+	 * @param [stayActive=false] {Boolean} specified time to wait before the promise really gets resolved
+	 * @return {Promise} with three handles: fulfill, reject and callback.
+	 * @static
+	 */
+	Promise.itsa_manage = function (callbackFn, stayActive) {
+	    var fulfillHandler, rejectHandler, promise, finished, stayActivePromise, resolved, isFulfilled, isRejected;
+
+	    promise = new Promise(function (fulfill, reject) {
+	        fulfillHandler = fulfill;
+	        rejectHandler = reject;
+	    });
+
+	    promise.fulfill = function (value) {
+	        if (!resolved) {
+	            resolved = true;
+	            if (stayActivePromise) {
+	                stayActivePromise.then(function () {
+	                    finished = true;
+	                    fulfillHandler(value);
+	                });
+	            } else {
+	                finished = true;
+	                fulfillHandler(value);
+	            }
+	        }
+	    };
+
+	    promise.reject = function (reason) {
+	        if (!resolved) {
+	            resolved = true;
+	            if (stayActivePromise) {
+	                stayActivePromise.then(function () {
+	                    finished = true;
+	                    rejectHandler(reason);
+	                });
+	            } else {
+	                finished = true;
+	                rejectHandler(reason);
+	            }
+	        }
+	    };
+
+	    promise.pending = function () {
+	        return !finished;
+	    };
+
+	    promise.isFulfilled = function () {
+	        return !!isFulfilled;
+	    };
+
+	    promise.isRejected = function () {
+	        return !!isRejected;
+	    };
+
+	    promise.stayActive = function (time) {
+	        stayActivePromise = new Promise(function (fulfill) {
+	            setTimeout(fulfill, time);
+	        });
+	    };
+
+	    promise.callback = function () {
+	        if (!finished && callbackFn) {
+	            callbackFn.apply(undefined, arguments);
+	        }
+	    };
+
+	    promise.setCallback = function (newCallbackFn) {
+	        callbackFn = newCallbackFn;
+	    };
+
+	    stayActive && promise.stayActive(stayActive);
+
+	    promise.then(function () {
+	        isFulfilled = true;
+	    }, function () {
+	        isRejected = true;
+	    });
+
+	    return promise;
+	};
+
+/***/ },
+/* 194 */
+/***/ function(module, exports) {
+
+	/**
+	 *
+	 * Extension of Math
+	 *
+	 * <i>Copyright (c) 2014 ITSA - https://github.com/itsa</i>
+	 * New BSD License - http://choosealicense.com/licenses/bsd-3-clause/
+	 *
+	 * @module js-ext
+	 * @submodule lib/math.js
+	 * @class Math
+	 *
+	 */
+
+	"use strict";
+
+	/**
+	 * Returns the value, while forcing it to be inbetween the specified edges.
+	 *
+	 * @method itsa_inbetween
+	 * @param min {Number} lower-edgde
+	 * @param value {Number} the original value that should be inbetween the edges
+	 * @param max {Number} upper-edgde
+	 * @param [absoluteValue] {boolean} whether `value` should be treaded as an absolute value
+	 * @return {Number|undefined} the value, forced to be inbetween the edges. Returns `undefined` if `max` is lower than `min`.
+	 */
+
+	Math.itsa_inbetween = function (min, value, max, absoluteValue) {
+	  var val = absoluteValue ? Math.abs(value) : value;
+	  return max >= min ? this.min(max, this.max(min, val)) : undefined;
+	};
+
+	/**
+	 * Floors a value in the direction to zero. Native Math.floor does this for positive values,
+	 * but negative values are floored more into the negative (Math.floor(-2.3) === -3).
+	 * This method floores into the direction of zero: (Math.itsa_floorToZero(-2.3) === -2)
+	 *
+	 * @method itsa_floorToZero
+	 * @param value {Number} the original value that should be inbetween the edges
+	 * @return {Number} the floored value
+	 */
+	Math.itsa_floorToZero = function (value) {
+	  return value >= 0 ? Math.floor(value) : Math.ceil(value);
+	};
+
+	/**
+	 * Ceils a value from zero up. Native Math.ceil does this for positive values,
+	 * but negative values are ceiled more into the less negative (Math.ceil(-2.3) === -2).
+	 * This method ceiles up from zero: (Math.itsa_ceilFromZero(-2.3) === -3)
+	 *
+	 * @method itsa_ceilFromZero
+	 * @param value {Number} the original value that should be inbetween the edges
+	 * @return {Number} the floored value
+	 */
+	Math.itsa_ceilFromZero = function (value) {
+	  return value >= 0 ? Math.ceil(value) : Math.floor(value);
+	};
+
+/***/ },
+/* 195 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23892,7 +26056,7 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	__webpack_require__(179);
+	__webpack_require__(187);
 
 	/*jshint proto:true */
 	var NAME = "itsa-fetch",
@@ -24336,7 +26500,7 @@
 	};
 
 /***/ },
-/* 188 */
+/* 196 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
@@ -24469,7 +26633,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 189 */
+/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -24482,18 +26646,19 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	__webpack_require__(179);
+	__webpack_require__(187);
 
 	var GENERATOR_ID = "ITSA-FILETRANS",
 	    MIME_BLOB = "application/octet-stream",
 	    CONTENT_TYPE = "Content-Type",
-	    idGenerator = __webpack_require__(190).idGenerator,
+	    idGenerator = __webpack_require__(198).idGenerator,
 	    DEFAULT_TIMEOUT = 300000,
 	    // 5 minutes
 	STRING = "string",
 	    REVIVER = function REVIVER(key, value) {
 	    return (typeof value === "undefined" ? "undefined" : _typeof(value)) === STRING && value.itsa_toDate() || value;
 	},
+	    NOOP = function NOOP() {},
 	    ABORTED = "Request aborted",
 	    KB_25 = 25 * 1024,
 	    // 25kb
@@ -24759,6 +26924,7 @@
 	                    // we need to inspect the response for status==="busy" to know which promise holds the final
 	                    // value and should be used as the returnvalue. Therefore, create `hashPromise`
 	                    hashPromise = ioPromise.then(setXHR);
+	                    hashPromise.catch(NOOP);
 	                    ioHash.push(hashPromise);
 	                }
 
@@ -24791,24 +26957,24 @@
 	};
 
 /***/ },
-/* 190 */
+/* 198 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
 	module.exports = {
-	   idGenerator: __webpack_require__(191).idGenerator,
-	   later: __webpack_require__(195).later,
-	   async: __webpack_require__(195).async
+	   idGenerator: __webpack_require__(199).idGenerator,
+	   later: __webpack_require__(203).later,
+	   async: __webpack_require__(203).async
 	};
 
 /***/ },
-/* 191 */
+/* 199 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	__webpack_require__(192);
+	__webpack_require__(200);
 
 	var UNDEFINED_NS = "__undefined__",
 	    namespaces = {};
@@ -24861,16 +27027,16 @@
 	};
 
 /***/ },
-/* 192 */
+/* 200 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	__webpack_require__(193);
-	__webpack_require__(194);
+	__webpack_require__(201);
+	__webpack_require__(202);
 
 /***/ },
-/* 193 */
+/* 201 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
@@ -24894,7 +27060,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 194 */
+/* 202 */
 /***/ function(module, exports) {
 
 	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
@@ -24916,7 +27082,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 195 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(setImmediate, process) {/**
@@ -24933,7 +27099,7 @@
 
 	"use strict";
 
-	__webpack_require__(192);
+	__webpack_require__(200);
 
 	var _asynchronizer, _async;
 
@@ -25045,10 +27211,10 @@
 	    }
 	  };
 	};
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(175).setImmediate, __webpack_require__(4)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(183).setImmediate, __webpack_require__(4)))
 
 /***/ },
-/* 196 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25059,7 +27225,7 @@
 	 * @since 0.0.1
 	*/
 
-	var async = __webpack_require__(190).async;
+	var async = __webpack_require__(198).async;
 
 	var extendIO = function extendIO(IO) {
 	    /**
@@ -25127,7 +27293,7 @@
 	};
 
 /***/ },
-/* 197 */
+/* 205 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -25138,7 +27304,7 @@
 	 * @since 0.0.1
 	*/
 
-	var XmlDOMParser = __webpack_require__(198).DOMParser,
+	var XmlDOMParser = __webpack_require__(206).DOMParser,
 	    UNKNOW_ERROR = "Unknown XDR-error",
 	    // XDR doesn"t specify the error
 	REGEXP_EXTRACT_URL = new RegExp("^((([a-z][a-z0-9-.]*):\/\/)?(([^\/?#:]+)(:(\\d+))?)?)?(\/?[a-z0-9-._~%!$&'()*+,;=@]+(\/[a-z0-9-._~%!$&'()*+,;=:@]+)*\/?|\/)?([#?](.*)|$)", "i"),
@@ -25226,7 +27392,7 @@
 	};
 
 /***/ },
-/* 198 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -25476,14 +27642,14 @@
 	} //appendChild and setAttributeNS are preformance key
 
 	if (true) {
-		var XMLReader = __webpack_require__(199).XMLReader;
-		var DOMImplementation = exports.DOMImplementation = __webpack_require__(200).DOMImplementation;
-		exports.XMLSerializer = __webpack_require__(200).XMLSerializer;
+		var XMLReader = __webpack_require__(207).XMLReader;
+		var DOMImplementation = exports.DOMImplementation = __webpack_require__(208).DOMImplementation;
+		exports.XMLSerializer = __webpack_require__(208).XMLSerializer;
 		exports.DOMParser = DOMParser;
 	}
 
 /***/ },
-/* 199 */
+/* 207 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -26086,7 +28252,7 @@
 	}
 
 /***/ },
-/* 200 */
+/* 208 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27224,7 +29390,7 @@
 	}
 
 /***/ },
-/* 201 */
+/* 209 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -27353,7 +29519,7 @@
 	};
 
 /***/ },
-/* 202 */
+/* 210 */
 /***/ function(module, exports) {
 
 	"use strict";

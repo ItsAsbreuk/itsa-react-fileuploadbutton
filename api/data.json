@@ -1,7 +1,7 @@
 {
     "project": {
-        "name": "itsa-checkbox",
-        "description": "React-Component: iOS-stylish checkbox",
+        "name": "itsa-fileuploadbutton",
+        "description": "React-Component: File upload-button",
         "logo": "https://avatars0.githubusercontent.com/u/8314644?v=3&s=84",
         "version": "0.0.1"
     },
@@ -9,174 +9,398 @@
         "lib/component.jsx": {
             "name": "lib/component.jsx",
             "modules": {
-                "component.jsx": 1
+                "itsa-react-fileuploadbutton": 1
             },
             "classes": {
-                "Component": 1
+                "FileUploadButton": 1
             },
             "fors": {},
             "namespaces": {}
         }
     },
     "modules": {
-        "component.jsx": {
-            "name": "component.jsx",
+        "itsa-react-fileuploadbutton": {
+            "name": "itsa-react-fileuploadbutton",
             "submodules": {},
             "elements": {},
             "classes": {
-                "Component": 1
+                "FileUploadButton": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
             "file": "lib/component.jsx",
             "line": 3,
-            "description": "Description here\n\n\n\n<i>Copyright (c) 2016 ItsAsbreuk - http://itsasbreuk.nl</i><br>\nNew BSD License - http://choosealicense.com/licenses/bsd-3-clause/",
-            "since": "2.0.0"
+            "description": "React-component: File upload-button.\n\n\n\n<i>Copyright (c) 2016 ItsAsbreuk - http://itsasbreuk.nl</i><br>\nNew BSD License - http://choosealicense.com/licenses/bsd-3-clause/",
+            "since": "0.0.1"
         }
     },
     "classes": {
-        "Component": {
-            "name": "Component",
-            "shortname": "Component",
+        "FileUploadButton": {
+            "name": "FileUploadButton",
+            "shortname": "FileUploadButton",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "component.jsx",
+            "module": "itsa-react-fileuploadbutton",
             "namespace": "",
             "file": "lib/component.jsx",
             "line": 3,
-            "description": "Description here\n\n\n\n<i>Copyright (c) 2016 ItsAsbreuk - http://itsasbreuk.nl</i><br>\nNew BSD License - http://choosealicense.com/licenses/bsd-3-clause/"
+            "description": "React-component: File upload-button.\n\n\n\n<i>Copyright (c) 2016 ItsAsbreuk - http://itsasbreuk.nl</i><br>\nNew BSD License - http://choosealicense.com/licenses/bsd-3-clause/"
         }
     },
     "elements": {},
     "classitems": [
         {
             "file": "lib/component.jsx",
-            "line": 36,
-            "description": "The Component its children",
-            "itemtype": "property",
-            "name": "children",
-            "type": "Object",
-            "since": "2.0.0",
-            "class": "Component",
-            "module": "component.jsx"
-        },
-        {
-            "file": "lib/component.jsx",
-            "line": 58,
+            "line": 37,
             "description": "Whether to autofocus the Component.",
             "itemtype": "property",
             "name": "autoFocus",
             "type": "Boolean",
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 67,
+            "line": 46,
+            "description": "Whether to automaticly send the file(s) after being selected. When set `false`, you need to manually send the files\nwith the `send`-method.",
+            "itemtype": "property",
+            "name": "autoSend",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 56,
+            "description": "The aria-label. When not set, it will equal the buttonText",
+            "itemtype": "property",
+            "name": "aria-label",
+            "type": "String",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 65,
+            "description": "The Button-text. Will be escaped. If you need HTML, then use `buttonHTML` instead.",
+            "itemtype": "property",
+            "name": "buttonText",
+            "type": "String",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 74,
+            "description": "The Button-text, retaining html-code. If you don't need HTML,\nthen `buttonText` is preferred.",
+            "itemtype": "property",
+            "name": "buttonHTML",
+            "type": "String",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 84,
+            "description": "Whether the button is disabled",
+            "itemtype": "property",
+            "name": "disabled",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 93,
+            "description": "Whether to empty the file(s) after sent to the server.\nDefault: true",
+            "itemtype": "property",
+            "name": "emptyAfterSent",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 103,
             "description": "The error-message that appears when the element is wrong validated.",
             "itemtype": "property",
             "name": "errorMsg",
             "type": "String",
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 76,
-            "description": "The text that should appear when the element is wrong validated.",
+            "line": 112,
+            "description": "To force the component to use form-submit instead of XHR2. This is NOT recomended.\nIn case the browser does not support XHR2, it will automaticly fall back to form-submit.\nDefault: false",
+            "itemtype": "property",
+            "name": "formSubmitMode",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 123,
+            "description": "Help text to assist. Appears just below the button.",
             "itemtype": "property",
             "name": "helpText",
             "type": "String",
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 85,
-            "description": "Whether to mark the Component when successfully validated.",
+            "line": 132,
+            "description": "Whether to mark the Component when the file(s) are successfully sent.",
             "itemtype": "property",
-            "name": "markValidated",
+            "name": "markSuccess",
             "type": "Boolean",
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 94,
+            "line": 141,
             "description": "Whether the Component should show an validate-reclamation (star)",
             "itemtype": "property",
-            "name": "markValidated",
+            "name": "markRequired",
             "type": "Boolean",
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 103,
+            "line": 150,
+            "description": "The maximum allowed file-size of each separate file.",
+            "itemtype": "property",
+            "name": "maxFileSize",
+            "type": "Number",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 159,
+            "description": "Whether to support the selection of multiple files.",
+            "itemtype": "property",
+            "name": "multipleFiles",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 168,
             "description": "The `name` for the element.",
             "itemtype": "property",
             "name": "name",
             "type": "String",
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 112,
+            "line": 177,
             "description": "The `onBlur` function, when happening on the DOM-Element.",
             "itemtype": "property",
-            "name": "onChange",
+            "name": "onBlur",
             "type": "Function",
             "since": "0.1.0",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 120,
-            "description": "The `onFocus` function, when happening on the DOM-Element.",
+            "line": 186,
+            "description": "The `onClick` function, when happening on the DOM-Element.",
             "itemtype": "property",
-            "name": "onChange",
+            "name": "onClick",
             "type": "Function",
-            "since": "0.1.0",
-            "class": "Component",
-            "module": "component.jsx"
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 128,
+            "line": 195,
+            "description": "The `onError` function, when filetransfer errors.",
+            "itemtype": "property",
+            "name": "onError",
+            "type": "Function",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 204,
+            "description": "The `onFileChange` function, when the users has selected files.",
+            "itemtype": "property",
+            "name": "onFileChange",
+            "type": "Function",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 213,
+            "description": "The `onFocus` function, when the Component gets focussed.",
+            "itemtype": "property",
+            "name": "onFocus",
+            "type": "Function",
+            "since": "0.1.0",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 222,
+            "description": "The `onProgress` function: callback during tranfer.",
+            "itemtype": "property",
+            "name": "onProgress",
+            "type": "Function",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 231,
+            "description": "The `onSend` function, when the transfer starts.",
+            "itemtype": "property",
+            "name": "onSend",
+            "type": "Function",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 240,
+            "description": "The `onSuccess` function, transfer succeeded.",
+            "itemtype": "property",
+            "name": "onSuccess",
+            "type": "Function",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 249,
+            "description": "Additional params that can be send with the request.",
+            "itemtype": "property",
+            "name": "params",
+            "type": "Object",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 258,
+            "description": "Options to be passed through to the request.",
+            "itemtype": "property",
+            "name": "requestOptions",
+            "type": "Object",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 267,
+            "description": "Whether to show the progress inside the button.\nDefault: true",
+            "itemtype": "property",
+            "name": "showProgress",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 277,
             "description": "The tabindex of the Component.",
             "itemtype": "property",
-            "name": "type",
+            "name": "tabIndex",
             "type": "Number",
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 137,
-            "description": "Whether the property is validated right.",
+            "line": 286,
+            "description": "The total maximum allowed file-size of all files altogether.",
+            "itemtype": "property",
+            "name": "totalFileSize",
+            "type": "Number",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 295,
+            "description": "The url to send to files to.",
+            "required": 1,
+            "itemtype": "property",
+            "name": "url",
+            "type": "Boolean",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 305,
+            "description": "Whether the selected files are is validated right. This value can be set inside the `onFileChange` callback.",
             "itemtype": "property",
             "name": "validated",
             "type": "Boolean",
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 161,
+            "line": 315,
+            "description": "Returns the default properties of the Component",
+            "itemtype": "method",
+            "name": "getDefaultProps",
+            "return": {
+                "description": "the default properties",
+                "type": "Object"
+            },
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 339,
             "description": "Returns the number of files that are currently selected.",
             "itemtype": "method",
             "name": "count",
@@ -185,26 +409,67 @@
                 "type": "Number"
             },
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 201,
+            "line": 351,
+            "description": "componentWillMount does some initialization.",
+            "itemtype": "method",
+            "name": "componentWillMount",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 361,
+            "description": "componentDidMount does some initialization.",
+            "itemtype": "method",
+            "name": "componentDidMount",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 381,
+            "description": "componentWilUnmount does some cleanup.",
+            "itemtype": "method",
+            "name": "componentWillUnmount",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 399,
+            "description": "Sets the focus on the Component.",
+            "itemtype": "method",
+            "name": "focus",
+            "chainable": 1,
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 411,
             "description": "Returns the currently selected files. This is an `Array-like` object, not a true Array.",
             "itemtype": "method",
             "name": "getFiles",
             "return": {
-                "description": "protected `input`-domNode",
+                "description": "protected list of files (of the `input`-domNode)",
                 "type": "Array-like"
             },
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 212,
+            "line": 422,
             "description": "Returns the last send-files.\nThis is handy to know, because after transmission, getFiles() will return empty.\nThis is an true Array with objects of this structure: {name: xxx, size: xxx}",
             "itemtype": "method",
             "name": "getLastSent",
@@ -213,12 +478,25 @@
                 "type": "Array"
             },
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 225,
+            "line": 435,
+            "description": "Returns the initial state.",
+            "itemtype": "method",
+            "name": "getInitialState",
+            "return": {
+                "description": "object"
+            },
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 450,
             "description": "Returns the total size of all files that are currently selected.",
             "itemtype": "method",
             "name": "getTotalFileSize",
@@ -227,12 +505,12 @@
                 "type": "Number"
             },
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 245,
+            "line": 470,
             "description": "Whether there are currently files selected.",
             "itemtype": "method",
             "name": "hasFiles",
@@ -241,132 +519,272 @@
                 "type": "Number"
             },
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 293,
-            "description": "Send the selected files, by emitting the \"uploader:send\"-event.\nIf `payload.url`, `payload.url` or `payload.url` is set, then these will overrule the default\nvalues (the way they were set at initiation, or by using `setDefaults`).\nYou also can set other properties at the payload --> these will be available at the listeners.",
+            "line": 481,
+            "description": "Aborts the transfer (if files are being sent).",
             "itemtype": "method",
-            "name": "send",
+            "name": "abort",
             "params": [
                 {
-                    "name": "payload",
-                    "description": "",
-                    "type": "Object",
-                    "optional": true,
-                    "props": [
-                        {
-                            "name": "url",
-                            "description": "",
-                            "type": "String",
-                            "optional": true
-                        },
-                        {
-                            "name": "params",
-                            "description": "",
-                            "type": "Object",
-                            "optional": true
-                        },
-                        {
-                            "name": "options",
-                            "description": "",
-                            "type": "Object",
-                            "optional": true
-                        }
-                    ]
+                    "name": "reset",
+                    "description": "Whether to clean the file-list",
+                    "type": "Boolean"
                 }
             ],
-            "chainable": 1,
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 437,
+            "line": 496,
             "description": "React render-method --> renderes the Component.",
             "itemtype": "method",
             "name": "render",
             "return": {
                 "description": "ReactComponent"
             },
-            "since": "2.0.0",
-            "class": "Component",
-            "module": "component.jsx"
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 512,
+            "line": 610,
+            "description": "Send the selected files. Will also invoke the onSend callback, from within `e.preventDefault()` can be used.",
+            "itemtype": "method",
+            "name": "send",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 752,
+            "description": "Clears the internal timer set by `_setRemoveTimer`",
+            "itemtype": "method",
+            "name": "_clearRemoveTimer",
+            "access": "private",
+            "tagname": "",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 763,
             "description": "Returns the size of the largest file that is currently selected.",
             "itemtype": "method",
             "name": "_getLargestFileSize",
+            "access": "private",
+            "tagname": "",
             "return": {
                 "description": "The size of the largest file in bytes",
                 "type": "Number"
             },
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 532,
-            "description": "Default function for the `uploader:_handleClick`-event",
+            "line": 784,
+            "description": "Returns the validation-message when file-size is exceeded.",
             "itemtype": "method",
-            "name": "_defFnSelectFiles",
-            "params": [
-                {
-                    "name": "e",
-                    "description": "eventobject",
-                    "type": "Object",
-                    "props": [
-                        {
-                            "name": "multiple",
-                            "description": "whether to support multiple selected files",
-                            "type": "Boolean",
-                            "optional": true
-                        }
-                    ]
-                }
-            ],
+            "name": "_getSizeValidationMsg",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "Message in case limits are exceeded",
+                "type": "String"
+            },
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 813,
+            "description": "Callback whenever the button gets clicked.",
+            "itemtype": "method",
+            "name": "_handleClick",
             "access": "private",
             "tagname": "",
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         },
         {
             "file": "lib/component.jsx",
-            "line": 668,
+            "line": 839,
+            "description": "Error-Callback for the promised-request",
+            "itemtype": "method",
+            "name": "_handleError",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "err",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 867,
+            "description": "Callback whenever the `input`-element's files are changed. Will invoke `onFileChange` when present.\nIf the property `autoSend` is true (and `onFileChange` did no `preventDefault()`), then the `send()`-method gets invoked.",
+            "itemtype": "method",
+            "name": "_handleFileChange",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "The size of the largest file in bytes",
+                "type": "Number"
+            },
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 891,
+            "description": "Error-Callback for the promised-request",
+            "itemtype": "method",
+            "name": "_handleSuccess",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "err",
+                    "description": "",
+                    "type": "Data"
+                }
+            ],
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 917,
+            "description": "Callback whenever the iframe recieves an error (most likely by an invalid server-response).\nWill abort the request-promise.",
+            "itemtype": "method",
+            "name": "_iframeError",
+            "access": "private",
+            "tagname": "",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 929,
+            "description": "Callback whenever the iframe recieves a response from the server. Depending on the response, it will\neither fulfill or reject the request-promise.",
+            "itemtype": "method",
+            "name": "_iframeLoad",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "The size of the largest file in bytes",
+                "type": "Number"
+            },
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 959,
+            "description": "Renderes the HTMLInputElement",
+            "itemtype": "method",
+            "name": "_renderInputElement",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "The Input-element (jsx)",
+                "type": "Component"
+            },
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 979,
+            "description": "Renderes a HTMLFormElement (in case no XHR2 is used)",
+            "itemtype": "method",
+            "name": "_renderFormElement",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "The Form-element (jsx)",
+                "type": "Component"
+            },
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 1024,
+            "description": "Renderes an iFrame-element (in case no XHR2 is used), which is needed for the response-target of the form-submission.",
+            "itemtype": "method",
+            "name": "_renderIframe",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "The iframe-element (jsx)",
+                "type": "Component"
+            },
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 1046,
+            "description": "Sets a timer that will remove the progress-bar.",
+            "itemtype": "method",
+            "name": "_setRemoveTimer",
+            "access": "private",
+            "tagname": "",
+            "since": "0.0.1",
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
+        },
+        {
+            "file": "lib/component.jsx",
+            "line": 1057,
             "description": "Stores the files that are sent into an internal hash, which can be read by `getLastSent()`.",
             "itemtype": "method",
             "name": "_storeLastSent",
             "access": "private",
             "tagname": "",
-            "chainable": 1,
             "since": "0.0.1",
-            "class": "Component",
-            "module": "component.jsx"
+            "class": "FileUploadButton",
+            "module": "itsa-react-fileuploadbutton"
         }
     ],
     "warnings": [
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " lib/component.jsx:293"
+            "line": " lib/component.jsx:481"
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " lib/component.jsx:293"
+            "line": " lib/component.jsx:839"
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " lib/component.jsx:293"
-        },
-        {
-            "message": "replacing incorrect tag: params with param",
-            "line": " lib/component.jsx:293"
+            "line": " lib/component.jsx:891"
         }
     ]
 }

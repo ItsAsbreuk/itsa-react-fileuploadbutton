@@ -1,6 +1,6 @@
 {
-    "name": "itsa-checkbox",
-    "description": "React-Component: iOS-stylish checkbox",
+    "name": "itsa-fileuploadbutton",
+    "description": "React-Component: File upload-button",
     "logo": "https://avatars0.githubusercontent.com/u/8314644?v=3&s=84",
     "version": "0.0.1",
     "options": {
