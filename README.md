@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/ItsAsbreuk/COMPONENT_NAME.svg?branch=master)](https://travis-ci.org/ItsAsbreuk/COMPONENT_NAME)
-
 File upload-button for react, without input-element.
 
 It has the following features:
