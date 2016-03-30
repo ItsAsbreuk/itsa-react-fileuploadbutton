@@ -19,6 +19,7 @@ import React, {PropTypes} from "react";
 import ReactDOM from "react-dom";
 import Button from "itsa-react-button";
 import {io} from "itsa-fetch";
+import FileLikeObject from "./file-like-object";
 import {idGenerator, async, later} from "itsa-utils";
 
 const isNode = (typeof global!=="undefined") && ({}.toString.call(global)==="[object global]") && (!global.document || ({}.toString.call(global.document)!=="[object HTMLDocument]")),
@@ -345,7 +346,7 @@ const Component = React.createClass({
     */
     count() {
         // need to inspect `this._inputNode` --> at first rendering it will be undefined
-        return this._inputNode ? this._inputNode.files.length : 0;
+        return this.getFiles().length;
     },
 
     /**
@@ -356,6 +357,7 @@ const Component = React.createClass({
      */
     componentWillMount() {
         this._iframeName = idGenerator("itsa-iframe");
+        this._lastfiles = [];
     },
 
     /**
@@ -416,7 +418,7 @@ const Component = React.createClass({
      * @since 0.0.1
     */
     getFiles() {
-        return this._inputNode.files;
+        return this._inputNode ? (this._inputNode.files || [FileLikeObject.createFile(this._inputNode)]) : [];
     },
 
     /**
@@ -443,7 +445,8 @@ const Component = React.createClass({
         return {
             serverError: "",
             serverSuccess: false,
-            percent: null
+            percent: null,
+            inputElement: true
         };
     },
 
@@ -456,7 +459,7 @@ const Component = React.createClass({
     */
     getTotalFileSize() {
         var instance = this,
-            files = instance._inputNode.files,
+            files = instance.getFiles(),
             len = files.length,
             total = 0,
             i, file;
@@ -599,12 +602,20 @@ const Component = React.createClass({
     },
 
     reset() {
-        var inputNode = this._inputNode;
-        // force the fileselector-popup up to disappear and become empty
-        // direct dom-manipulation: it will be reset at once
-        inputNode.setAttribute("type", "text");
-        inputNode.value = "";
-        inputNode.setAttribute("type", "file");
+        const instance = this;
+        // the only way that works with ALL browsers, is by removing the DOMnode and replacing it.
+        delete instance._inputNode;
+        instance.setState({
+            inputElement: false,
+        });
+        async(() => {
+            instance.setState({
+                inputElement: true,
+            });
+            async(() => {
+                instance._inputNode = ReactDOM.findDOMNode(instance.refs.fileinput);
+            });
+        });
     },
 
     /**
@@ -621,7 +632,7 @@ const Component = React.createClass({
             promise, ioPromise, file, i, totalsize, originalProgressFn, options, params, url, errorMsg;
         const instance = this,
               props = instance.props,
-              files = instance._inputNode.files,
+              files = instance.getFiles(),
               len = files.length,
               onSend = props.onSend;
 
@@ -770,7 +781,7 @@ const Component = React.createClass({
     */
     _getLargestFileSize() {
         var instance = this,
-            files = instance._inputNode.files,
+            files = instance.getFiles(),
             len = files.length,
             largest = 0,
             i, file;
@@ -966,6 +977,10 @@ const Component = React.createClass({
     */
     _renderInputElement() {
         const inputStyles = {display: "none !important"};
+        if (!this.state.inputElement) {
+            // keep the number of nodes consisten to prevent shuffling of the parent childnodes
+            return (<div style={inputStyles} />);
+        }
         return (
             <input
                 multiple={this.props.multipleFiles}
@@ -985,9 +1000,10 @@ const Component = React.createClass({
      * @since 0.0.1
     */
     _renderFormElement() {
+        let inputElement;
         const instance = this,
               props = instance.props,
-              formStyles = {display: "none !important"},
+              hiddenStyles = {display: "none !important"},
               hiddenFields = [];
 
         props.params.itsa_each((value, key) => {
@@ -1001,6 +1017,20 @@ const Component = React.createClass({
             hiddenFields.push(<input key={key} type="hidden" name={key} value={keyValue} />);
         })
 
+        if (!instance.state.inputElement) {
+            // keep the number of nodes consisten to prevent shuffling of the parent childnodes
+            inputElement = (<div style={hiddenStyles} />);
+        }
+        else {
+            inputElement = (
+                <input
+                    multiple={props.multipleFiles}
+                    name="uploadfiles"
+                    onChange={instance._handleFileChange}
+                    ref="fileinput"
+                    type="file" />
+            );
+        }
         return (
             <form
                 action={props.url}
@@ -1008,15 +1038,10 @@ const Component = React.createClass({
                 method="post"
                 noValidate={true}
                 ref="fileform"
-                style={formStyles}
+                style={hiddenStyles}
                 target={instance._iframeName} >
                 {hiddenFields}
-                <input
-                    multiple={props.multipleFiles}
-                    name="uploadfiles"
-                    onChange={instance._handleFileChange}
-                    ref="fileinput"
-                    type="file" />
+                {inputElement}
             </form>
         );
     },
@@ -1034,7 +1059,7 @@ const Component = React.createClass({
               iframeStyles = {display: "none !important"};
         return (
             <iframe
-                id="marco"
+                src={instance.props.url}
                 ref="iframenode"
                 name={instance._iframeName}
                 onLoad={instance._iframeLoad}
@@ -1063,14 +1088,13 @@ const Component = React.createClass({
     */
     _storeLastSent() {
         var instance = this,
-            lastFiles = instance._lastfiles,
-            files = instance._inputNode.files,
+            files = instance.getFiles(),
             len = files.length,
             i, file;
-        lastFiles.length = 0;
+        instance._lastfiles.length = 0;
         for (i=0; i<len; i++) {
             file = files[i];
-            lastFiles.push({
+            instance._lastfiles.push({
                 name: file.name,
                 size: file.size
             });

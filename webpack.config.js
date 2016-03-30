@@ -2,7 +2,7 @@ module.exports = {
     entry: "./app.js",
     output: {
         path: "./examples",
-        filename: "app.js" // Template based on keys in entry above
+        filename: "mainapp.js" // Template based on keys in entry above
     },
 
     module: {
