@@ -188,3 +188,15 @@ server.start(function(err) {
     console.log(message);
 });
 ```
+
+## IE<10
+IE8 and IE8 don't support multiple file-uploads. Thus, when using `multipleFiles: true`, these browsers can only select one file at a time.
+These browsers don't support a progess-status either: the `this.props.onProgress` won't be invoked on these browsers.
+
+## Special Note: X-Frame-Origin
+
+If your app uses the http-header `X-Frame-Origin` (which it should!) then you **need to test** if file-uploading succeeds
+with the property `formSubmitMode :true`.
+
+Reason for this is, that older browsers (<IE10) are using this mode for uploading files. The `X-Frame-Origin` rules might prevent
+this module from working right when you're uploading CORS: you may need to set these headers to accept a specific cross-domain you're uploading to.

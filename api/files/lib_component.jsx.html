@@ -109,11 +109,12 @@ const isNode = (typeof global!==&quot;undefined&quot;) &amp;&amp; ({}.toString.c
       MAIN_CLASS = &quot;itsa-fileuploadbutton&quot;,
       MAIN_CLASS_PREFIX = MAIN_CLASS+&quot;-&quot;,
       SPACED_MAIN_CLASS_PREFIX = &quot; &quot;+MAIN_CLASS_PREFIX,
-      NOOP = function() {},
+      NOOP = () =&gt; {},
       DEF_MAX_SIZE = 100*1024*1024, // 100 Mb
       CLICK = &quot;click&quot;,
       ABORTED = &quot;Request aborted&quot;,
-      XHR2support = (&quot;withCredentials&quot; in new XMLHttpRequest());
+      XHR2support = (&quot;withCredentials&quot; in new XMLHttpRequest()),
+      DEF_BUTTON_PRESS_TIME = 300;
 
 const Component = React.createClass({
 
@@ -377,6 +378,15 @@ const Component = React.createClass({
         totalFileSize: PropTypes.number,
 
         /**
+         * Whether the file can only be uploaded once. To reset, use &#x60;reactivate()&#x60;.
+         *
+         * @property uploadOnlyOnce
+         * @type Boolean
+         * @since 0.0.8
+        */
+        uploadOnlyOnce: PropTypes.bool,
+
+        /**
          * The url to send to files to.
          *
          * @required
@@ -416,8 +426,24 @@ const Component = React.createClass({
             showProgress: true,
             params: {},
             requestOptions: {},
-            totalFileSize: DEF_MAX_SIZE
+            totalFileSize: DEF_MAX_SIZE,
+            uploadOnlyOnce: false
         };
+    },
+
+    /**
+     * Aborts the transfer (if files are being sent).
+     *
+     * @method abort
+     * @params reset {Boolean} Whether to clean the file-list
+     * @since 0.0.1
+    */
+    abort(reset) {
+        // because, inside &#x60;onSend&#x60;, this._io might not be set yet, we need to go async:
+        async(() =&gt; {
+            this._io &amp;&amp; this._io.abort();
+            reset &amp;&amp; this.reset();
+        });
     },
 
     /**
@@ -451,6 +477,7 @@ const Component = React.createClass({
      */
     componentDidMount() {
         const instance = this;
+        instance._onlyOnceUploaded = false;
         instance._inputNode = ReactDOM.findDOMNode(instance.refs.fileinput);
         instance._buttonNode = ReactDOM.findDOMNode(instance.refs.uploadbutton);
         instance.IE8_Events = !instance._buttonNode.addEventListener;
@@ -526,10 +553,13 @@ const Component = React.createClass({
      */
     getInitialState() {
         return {
-            serverError: &quot;&quot;,
-            serverSuccess: false,
+            btnClicked: false,
+            inputElement: true,
+            btnMouseOver: false,
+            isUploading: false,
             percent: null,
-            inputElement: true
+            serverError: &quot;&quot;,
+            serverSuccess: false
         };
     },
 
@@ -564,19 +594,20 @@ const Component = React.createClass({
         return (this.count()&gt;0);
     },
 
+
     /**
-     * Aborts the transfer (if files are being sent).
+     * Reactivates the uploadbutton in case a file has been uploaded and a new upload
+     * cannot be done because of the props: &#x60;uploadOnlyOnce&#x60; was set &#x60;true&#x60;
      *
-     * @method abort
-     * @params reset {Boolean} Whether to clean the file-list
-     * @since 0.0.1
-    */
-    abort(reset) {
-        // because, inside &#x60;onSend&#x60;, this._io might not be set yet, we need to go async:
-        async(() =&gt; {
-            this._io &amp;&amp; this._io.abort();
-            reset &amp;&amp; this.reset();
-        });
+     * Is only usable in combination with &#x60;uploadOnlyOnce===true&#x60;
+     *
+     * @method reactivate
+     * @chainable
+     * @since 0.0.6
+     */
+    reactivate() {
+        this._onlyOnceUploaded = false;
+        return this;
     },
 
     /**
@@ -587,16 +618,18 @@ const Component = React.createClass({
      * @since 0.0.1
      */
     render() {
-        let errorMsg, help, iframe, element, sizeValidationMsg, shiftLeft,
+        let errorMsg, help, iframe, element, sizeValidationMsg, shiftLeft, btnClassName,
             progressBar, classNameProgressBar, classNameProgressBarInner, progressBarInnerStyles;
         const instance = this,
               state = instance.state,
               serverError = state.serverError,
               props = instance.props.itsa_deepClone(),
-              serverSuccess = state.serverSuccess,
+              serverSuccess = state.serverSuccess &amp;&amp; props.validated,
               markServerSuccess = props.markSuccess &amp;&amp; serverSuccess,
               XHR2 = (XHR2support &amp;&amp; !props.formSubmitMode),
               showProgress = props.showProgress,
+              uploadBlocked = props.uploadOnlyOnce &amp;&amp; instance._onlyOnceUploaded,
+              disabled = props.disabled || state.isUploading || uploadBlocked,
               onProgress = props.onProgress;
 
         delete props.onClick; // we needed to create a native click-event and don&#x27;t want to invoke onClick twice
@@ -614,7 +647,7 @@ const Component = React.createClass({
             props.className += &quot; &quot;+MAIN_CLASS_PREFIX+&quot;wide&quot;;
         }
 
-        if (typeof state.percent===&quot;number&quot;) {
+        if (XHR2 &amp;&amp; (typeof state.percent===&quot;number&quot;)) {
             classNameProgressBar = MAIN_CLASS_PREFIX+&quot;progress&quot;;
             classNameProgressBarInner = classNameProgressBar + &quot;-inner&quot;;
             serverSuccess &amp;&amp; (classNameProgressBar+=&quot; &quot;+classNameProgressBar+&quot;-completed&quot;);
@@ -672,11 +705,16 @@ const Component = React.createClass({
             element = instance._renderFormElement();
         }
 
+        btnClassName = props.className || &quot;&quot;;
+        state.btnClicked &amp;&amp; (btnClassName += (btnClassName ? &quot; &quot; : &quot;&quot;) + &quot;itsa-button-active&quot;);
+        state.btnMouseOver &amp;&amp; (btnClassName += (btnClassName ? &quot; &quot; : &quot;&quot;) + &quot;itsa-button-hover&quot;);
         return (
             &lt;div className={MAIN_CLASS} &gt;
-                {iframe}
-                {element}
-                &lt;Button {...props} ref=&quot;uploadbutton&quot; showActivated={false} type=&quot;button&quot; /&gt;
+                &lt;div&gt;
+                    {iframe}
+                    {element}
+                    &lt;Button {...props} className={btnClassName} disabled={disabled} ref=&quot;uploadbutton&quot; showActivated={false} type=&quot;button&quot; /&gt;
+                &lt;/div&gt;
                 {progressBar}
                 {errorMsg}
                 {help}
@@ -684,6 +722,12 @@ const Component = React.createClass({
         );
     },
 
+    /**
+     * Resets the selected file
+     *
+     * @method reset
+     * @since 0.0.1
+     */
     reset() {
         const instance = this;
         // the only way that works with ALL browsers, is by removing the DOMnode and replacing it.
@@ -705,6 +749,7 @@ const Component = React.createClass({
      * Send the selected files. Will also invoke the onSend callback, from within &#x60;e.preventDefault()&#x60; can be used.
      *
      * @method send
+     * @return {Promise}
      * @since 0.0.1
     */
 
@@ -712,11 +757,12 @@ const Component = React.createClass({
         let hash = [],
             promisesById = {},
             prevented = false,
-            promise, ioPromise, file, i, totalsize, originalProgressFn, options, params, url, errorMsg;
+            promise, ioPromise, file, i, totalsize, originalProgressFn, options, params, url, errorMsg, returnPromise;
         const instance = this,
               props = instance.props,
               files = instance.getFiles(),
               len = files.length,
+              XHR2 = (XHR2support &amp;&amp; !props.formSubmitMode),
               onSend = props.onSend;
 
         instance._io &amp;&amp; instance._io.abort();
@@ -733,7 +779,9 @@ const Component = React.createClass({
         }
         if (errorMsg) {
             delete instance._formsubmit;
-            return errorMsg;
+            returnPromise = Promise.reject(errorMsg);
+            returnPromise.abort = NOOP;
+            return returnPromise;
         }
 
         // continue sending
@@ -743,10 +791,12 @@ const Component = React.createClass({
                          });
         if (prevented) {
             delete instance._formsubmit;
-            return &quot;default-prevented&quot;;
+            returnPromise = Promise.reject(&quot;default-prevented&quot;);
+            returnPromise.abort = NOOP;
+            return returnPromise;
         }
 
-        if (!XHR2support || props.formSubmitMode) {
+        if (!XHR2) {
             instance._io = Promise.itsa_manage();
             instance._io.abort = () =&gt; {
                 // first abort the request:
@@ -835,7 +885,9 @@ const Component = React.createClass({
             instance._handleSuccess,
             instance._handleError
         ).itsa_finally(() =&gt; delete instance._formsubmit);
-
+        instance.setState({
+            isUploading: true
+        });
         return instance._io;
     },
 
@@ -914,8 +966,11 @@ const Component = React.createClass({
     _handleClick() {
         let prevented = false;
         const instance = this,
+              props = instance.props,
+              XHR2 = (XHR2support &amp;&amp; !props.formSubmitMode),
+              uploadBlocked = props.uploadOnlyOnce &amp;&amp; instance._onlyOnceUploaded,
               onClick = instance.props.onClick;
-        if (!isNode) {
+        if (!isNode &amp;&amp; !uploadBlocked &amp;&amp; !this.state.isUploading) {
             onClick &amp;&amp; onClick({
                                     preventDefault: () =&gt; {prevented = true},
                                     target: instance
@@ -926,7 +981,11 @@ const Component = React.createClass({
                 serverSuccess: false,
                 percent: null
             });
-            prevented || instance._inputNode.click();
+            if (!prevented &amp;&amp; XHR2) {
+                // only if XHR2: without, we need the input-element itself: it NEEDS to be clicked upon in order
+                // for IE to accept the selected file(s)
+                instance._inputNode.click();
+            }
         }
     },
 
@@ -950,9 +1009,10 @@ const Component = React.createClass({
             });
         }
         this.setState({
+            isUploading: false,
+            percent: null,
             serverError: &quot;server-error: &quot; + statusMsg.toLowerCase(),
-            serverSuccess: false,
-            percent: null
+            serverSuccess: false
         });
         // remove progressBar after 1 second: when laid above the button hte button can&#x27;t be pressed
         this._setRemoveTimer();
@@ -991,21 +1051,24 @@ const Component = React.createClass({
      * @since 0.0.1
     */
     _handleSuccess(data) {
-        const props = this.props,
+        const instance = this,
+              props = instance.props,
               onSuccess = props.onSuccess;
+        instance._onlyOnceUploaded = true;
         if (onSuccess) {
             onSuccess({
                 status: (Object.itsa_isObject(data) &amp;&amp; data.status) ? data.status : ((typeof data===&quot;string&quot;) ? data : &quot;ok&quot;),
-                target: this
+                target: instance
             });
         }
-        this.setState({
+        instance.setState({
+            isUploading: false,
+            percent: 100,
             serverError: &quot;&quot;,
-            serverSuccess: true,
-            percent: 100
+            serverSuccess: true
         });
         // remove progressBar after 1 second: when laid above the button hte button can&#x27;t be pressed
-        this._setRemoveTimer();
+        instance._setRemoveTimer();
     },
 
     /**
@@ -1055,19 +1118,57 @@ const Component = React.createClass({
      *
      * @method _renderInputElement
      * @private
+     * @params [displayed=false] {boolean} whether the input-element is displayed on top of the visible upload-button (need for IE&lt;10)
      * @return {Component} The Input-element (jsx)
      * @since 0.0.1
     */
-    _renderInputElement() {
-        const inputStyles = {display: &quot;none !important&quot;};
+    _renderInputElement(displayed) {
+        let onClick, onMouseEnter, onMouseLeave;
+        const instance = this,
+              props = instance.props,
+              inputStyles = (displayed) ?
+                            {fontSize: &quot;10000%&quot;, width: &quot;100% !important&quot;, height: &quot;100% !important&quot;, opacity: &quot;0 !important&quot;, filter: &quot;alpha(opacity=0)&quot;, cursor: &quot;pointer&quot;} :
+                            {display: &quot;none !important&quot;};
         if (!this.state.inputElement) {
             // keep the number of nodes consisten to prevent shuffling of the parent childnodes
             return (&lt;div style={inputStyles} /&gt;);
         }
+        if (displayed) {
+            // need to set eventHandlers, because the underlying button needs to be styled
+            onMouseEnter = function() {
+                instance.setState({
+                    btnMouseOver: true
+                });
+            }
+            onMouseLeave = function() {
+                instance.setState({
+                    btnMouseOver: false
+                });
+            }
+            onClick = function() {
+                instance.setState({
+                    btnClicked: true,
+                    serverError: &quot;&quot;,
+                    serverSuccess: false
+
+                });
+                later(() =&gt; {
+                    instance.setState({
+                        btnClicked: false,
+                        btnMouseOver: false
+                    });
+                }, DEF_BUTTON_PRESS_TIME);
+            }
+        }
+        // need to specify name=&quot;uploadfiles&quot; --&gt; in case of formSubmitMode this field needs to be specified
         return (
             &lt;input
-                multiple={this.props.multipleFiles}
-                onChange={this._handleFileChange}
+                multiple={props.multipleFiles}
+                onChange={instance._handleFileChange}
+                onClick={onClick}
+                onMouseEnter={onMouseEnter}
+                onMouseLeave={onMouseLeave}
+                name=&quot;uploadfiles&quot;
                 ref=&quot;fileinput&quot;
                 style={inputStyles}
                 type=&quot;file&quot; /&gt;
@@ -1084,9 +1185,16 @@ const Component = React.createClass({
     */
     _renderFormElement() {
         let inputElement;
+
         const instance = this,
               props = instance.props,
-              hiddenStyles = {display: &quot;none !important&quot;},
+              XHR2 = (XHR2support &amp;&amp; !props.formSubmitMode),
+              uploadBlocked = props.uploadOnlyOnce &amp;&amp; instance._onlyOnceUploaded,
+              disabled = props.disabled || instance.state.isUploading || uploadBlocked,
+              // seems a bug that zIndex doesn&#x27;t get changed in combination with !important --&gt; therefore we don&#x27;t use !important for the z-index
+              hiddenStyles = XHR2 ?
+                             {display: &quot;none !important&quot;} :
+                             {position: &quot;absolute !important&quot;, &quot;zIndex&quot;: (disabled ? &quot;-1&quot; : &quot;1&quot;), height: &quot;100% !important&quot;},
               hiddenFields = [];
 
         props.params.itsa_each((value, key) =&gt; {
@@ -1099,21 +1207,7 @@ const Component = React.createClass({
             }
             hiddenFields.push(&lt;input key={key} type=&quot;hidden&quot; name={key} value={keyValue} /&gt;);
         })
-
-        if (!instance.state.inputElement) {
-            // keep the number of nodes consisten to prevent shuffling of the parent childnodes
-            inputElement = (&lt;div style={hiddenStyles} /&gt;);
-        }
-        else {
-            inputElement = (
-                &lt;input
-                    multiple={props.multipleFiles}
-                    name=&quot;uploadfiles&quot;
-                    onChange={instance._handleFileChange}
-                    ref=&quot;fileinput&quot;
-                    type=&quot;file&quot; /&gt;
-            );
-        }
+        inputElement = instance._renderInputElement(!XHR2);
         return (
             &lt;form
                 action={props.url}

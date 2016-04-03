@@ -12,12 +12,8 @@ const props = {
     errorMsg: "you can only select a png-file",
     helpText: "png-files only",
     maxFileSize: 15*1024*1024, // 5mb
-
-    formSubmitMode: true,
-
     autoFocus: true,
     onFileChange: function(e) {
-if (e!==1) {return;}
         props.validated = (e.target.getFiles()[0].type==="image/png");
         render();
         // reset the error-message next to the fileupload-button:
