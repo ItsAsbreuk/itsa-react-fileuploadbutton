@@ -24,7 +24,7 @@ You can force the `form-submit` mode, by setting the prop `formSubmitMode` `true
 * No onProgress
 * When CORS, the uploader is unable to detect reponse-errors, leading into the callback of onSuccess in case of a network-error.
 
-Best usage is `same-origin` with `formSubmitMode`=true (which is the default). In this case the fileupload-button will act the same on every environment, with the exeption that there is no visual progress on IE<10.
+Best usage is `same-origin` with `formSubmitMode`=false (which is the default).
 
 
 [View live example](http://projects.itsasbreuk.nl/react-components/itsa-fileuploadbutton/component.html)

@@ -1,6 +1,6 @@
 {
   "name": "itsa-react-fileuploadbutton",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "File upload-button for react, without input-element",
   "author": [
     {

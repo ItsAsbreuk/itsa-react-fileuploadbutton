@@ -1,3 +1,7 @@
+#version 0.0.9
+
+Updated readme
+
 #version 0.0.8
 
 Bugfix IE<10
