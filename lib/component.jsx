@@ -547,7 +547,8 @@ const Component = React.createClass({
               showProgress = props.showProgress,
               uploadBlocked = props.uploadOnlyOnce && instance._onlyOnceUploaded,
               disabled = props.disabled || state.isUploading || uploadBlocked,
-              onProgress = props.onProgress;
+              onProgress = props.onProgress,
+              relativeStyle = {position: "relative !important"};
 
         delete props.onClick; // we needed to create a native click-event and don't want to invoke onClick twice
 
@@ -627,7 +628,7 @@ const Component = React.createClass({
         state.btnMouseOver && (btnClassName += (btnClassName ? " " : "") + "itsa-button-hover");
         return (
             <div className={MAIN_CLASS} >
-                <div>
+                <div style={relativeStyle}>
                     {iframe}
                     {element}
                     <Button {...props} className={btnClassName} disabled={disabled} ref="uploadbutton" showActivated={false} type="button" />
@@ -1012,7 +1013,7 @@ const Component = React.createClass({
     _iframeLoad() {
         let content;
         const instance = this,
-            okStatus= {status: "ok"};
+              okStatus= {status: "ok"};
         if (instance._formsubmit) {
             try {
                 content = myIFrame.contentWindow.document.body.innerHTML;
