@@ -1,6 +1,6 @@
 {
   "name": "itsa-react-fileuploadbutton",
-  "version": "0.0.15",
+  "version": "15.2.18",
   "description": "File upload-button for react, without input-element",
   "author": [
     {
@@ -18,6 +18,7 @@
   "keywords": [
     "itsasbreuk",
     "itsa",
+    "react",
     "react-component",
     "fileupload",
     "fileuploadbutton",
@@ -32,13 +33,16 @@
   },
   "dependencies": {
     "itsa-classes": "^1.0.3",
-    "itsa-fetch": "^1.0.6",
-    "itsa-jsext": "0.0.2",
-    "itsa-react-button": "0.0.12",
-    "itsa-utils": "0.0.2",
-    "mime-db": "^1.22.0",
-    "react": "^0.14.0",
-    "react-dom": "^0.14.7"
+    "itsa-fetch": "^1.2.4",
+    "itsa-jsext": "^1.3.0",
+    "itsa-react-button": "^15.2.19",
+    "itsa-react-clone-props": "^1.0.3",
+    "itsa-utils": "^1.1.0",
+    "mime-db": "^1.22.0"
+  },
+  "peerDependencies": {
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1"
   },
   "devDependencies": {
     "babel-core": "^6.4.0",
@@ -59,7 +63,9 @@
     "json-loader": "^0.5.4",
     "mocha": "^1.21.4",
     "node-sass": "^3.4.2",
-    "react-addons-test-utils": "^0.14.0",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-addons-test-utils": "^15.0.1",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7",

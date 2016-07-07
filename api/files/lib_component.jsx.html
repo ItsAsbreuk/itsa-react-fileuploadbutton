@@ -97,13 +97,17 @@
  * @since 0.0.1
 */
 
-import &quot;itsa-jsext&quot;;
-import React, {PropTypes} from &quot;react&quot;;
-import ReactDOM from &quot;react-dom&quot;;
-import Button from &quot;itsa-react-button&quot;;
-import {io} from &quot;itsa-fetch&quot;;
-import FileLikeObject from &quot;./file-like-object&quot;;
-import {idGenerator, async, later} from &quot;itsa-utils&quot;;
+const React = require(&quot;react&quot;),
+    PropTypes = React.PropTypes,
+    ReactDOM = require(&quot;react-dom&quot;),
+    Button = require(&quot;itsa-react-button&quot;),
+    utils = require(&quot;itsa-utils&quot;),
+    itsaReactCloneProps = require(&quot;itsa-react-clone-props&quot;),
+    io = require(&quot;itsa-fetch&quot;).io,
+    FileLikeObject = require(&quot;./file-like-object&quot;),
+    idGenerator = utils.idGenerator,
+    later = utils.later,
+    async = utils.async;
 
 const isNode = (typeof global!==&quot;undefined&quot;) &amp;&amp; ({}.toString.call(global)===&quot;[object global]&quot;) &amp;&amp; (!global.document || ({}.toString.call(global.document)!==&quot;[object HTMLDocument]&quot;)),
       MAIN_CLASS = &quot;itsa-fileuploadbutton&quot;,
@@ -482,7 +486,7 @@ const Component = React.createClass({
         instance._buttonNode = ReactDOM.findDOMNode(instance.refs.uploadbutton);
         instance.IE8_Events = !instance._buttonNode.addEventListener;
         if (instance.IE8_Events) {
-            instance._buttonNode.attachEvent(&#x27;on&#x27;+CLICK, instance._handleClick);
+            instance._buttonNode.attachEvent(&quot;on&quot;+CLICK, instance._handleClick);
         }
         else {
             instance._buttonNode.addEventListener(CLICK, instance._handleClick, true);
@@ -623,14 +627,15 @@ const Component = React.createClass({
         const instance = this,
               state = instance.state,
               serverError = state.serverError,
-              props = instance.props.itsa_deepClone(),
+              props = itsaReactCloneProps.clone(instance.props),
               serverSuccess = state.serverSuccess &amp;&amp; props.validated,
               markServerSuccess = props.markSuccess &amp;&amp; serverSuccess,
               XHR2 = (XHR2support &amp;&amp; !props.formSubmitMode),
               showProgress = props.showProgress,
               uploadBlocked = props.uploadOnlyOnce &amp;&amp; instance._onlyOnceUploaded,
               disabled = props.disabled || state.isUploading || uploadBlocked,
-              onProgress = props.onProgress;
+              onProgress = props.onProgress,
+              relativeStyle = {position: &quot;relative&quot;};
 
         delete props.onClick; // we needed to create a native click-event and don&#x27;t want to invoke onClick twice
 
@@ -710,7 +715,7 @@ const Component = React.createClass({
         state.btnMouseOver &amp;&amp; (btnClassName += (btnClassName ? &quot; &quot; : &quot;&quot;) + &quot;itsa-button-hover&quot;);
         return (
             &lt;div className={MAIN_CLASS} &gt;
-                &lt;div&gt;
+                &lt;div style={relativeStyle}&gt;
                     {iframe}
                     {element}
                     &lt;Button {...props} className={btnClassName} disabled={disabled} ref=&quot;uploadbutton&quot; showActivated={false} type=&quot;button&quot; /&gt;
@@ -733,11 +738,11 @@ const Component = React.createClass({
         // the only way that works with ALL browsers, is by removing the DOMnode and replacing it.
         delete instance._inputNode;
         instance.setState({
-            inputElement: false,
+            inputElement: false
         });
         async(() =&gt; {
             instance.setState({
-                inputElement: true,
+                inputElement: true
             });
             async(() =&gt; {
                 instance._inputNode = ReactDOM.findDOMNode(instance.refs.fileinput);
@@ -972,7 +977,7 @@ const Component = React.createClass({
               onClick = instance.props.onClick;
         if (!isNode &amp;&amp; !uploadBlocked &amp;&amp; !this.state.isUploading) {
             onClick &amp;&amp; onClick({
-                                    preventDefault: () =&gt; {prevented = true},
+                                    preventDefault: () =&gt; {prevented = true;},
                                     target: instance
                                });
             instance._clearRemoveTimer();
@@ -1033,7 +1038,7 @@ const Component = React.createClass({
               props = instance.props,
               onFileChange = props.onFileChange;
         onFileChange &amp;&amp; onFileChange({
-            preventDefault: () =&gt; {prevented = true},
+            preventDefault: () =&gt; {prevented = true;},
             target: instance
         });
         if (props.autoSend &amp;&amp; !prevented) {
@@ -1080,7 +1085,7 @@ const Component = React.createClass({
      * @since 0.0.1
     */
     _iframeError() {
-        instance._io.abort();
+        this._io.abort();
     },
 
     /**
@@ -1095,10 +1100,10 @@ const Component = React.createClass({
     _iframeLoad() {
         let content;
         const instance = this,
-            okStatus= {status: &quot;ok&quot;};
+              okStatus= {status: &quot;ok&quot;};
         if (instance._formsubmit) {
             try {
-                content = myIFrame.contentWindow.document.body.innerHTML;
+                content = ReactDOM.findDOMNode(instance.refs.iframenode).contentWindow.document.body.innerHTML;
                 if (content===&quot;OK&quot;) {
                     instance._io.fulfill(okStatus);
                 }
@@ -1127,8 +1132,8 @@ const Component = React.createClass({
         const instance = this,
               props = instance.props,
               inputStyles = (displayed) ?
-                            {fontSize: &quot;10000%&quot;, width: &quot;100% !important&quot;, height: &quot;100% !important&quot;, opacity: &quot;0 !important&quot;, filter: &quot;alpha(opacity=0)&quot;, cursor: &quot;pointer&quot;} :
-                            {display: &quot;none !important&quot;};
+                            {fontSize: &quot;10000%&quot;, width: &quot;100%&quot;, height: &quot;100%&quot;, opacity: &quot;0&quot;, filter: &quot;alpha(opacity=0)&quot;, cursor: &quot;pointer&quot;} :
+                            {display: &quot;none&quot;};
         if (!this.state.inputElement) {
             // keep the number of nodes consisten to prevent shuffling of the parent childnodes
             return (&lt;div style={inputStyles} /&gt;);
@@ -1139,12 +1144,12 @@ const Component = React.createClass({
                 instance.setState({
                     btnMouseOver: true
                 });
-            }
+            };
             onMouseLeave = function() {
                 instance.setState({
                     btnMouseOver: false
                 });
-            }
+            };
             onClick = function() {
                 instance.setState({
                     btnClicked: true,
@@ -1158,7 +1163,7 @@ const Component = React.createClass({
                         btnMouseOver: false
                     });
                 }, DEF_BUTTON_PRESS_TIME);
-            }
+            };
         }
         // need to specify name=&quot;uploadfiles&quot; --&gt; in case of formSubmitMode this field needs to be specified
         return (
@@ -1191,10 +1196,9 @@ const Component = React.createClass({
               XHR2 = (XHR2support &amp;&amp; !props.formSubmitMode),
               uploadBlocked = props.uploadOnlyOnce &amp;&amp; instance._onlyOnceUploaded,
               disabled = props.disabled || instance.state.isUploading || uploadBlocked,
-              // seems a bug that zIndex doesn&#x27;t get changed in combination with !important --&gt; therefore we don&#x27;t use !important for the z-index
               hiddenStyles = XHR2 ?
-                             {display: &quot;none !important&quot;} :
-                             {position: &quot;absolute !important&quot;, &quot;zIndex&quot;: (disabled ? &quot;-1&quot; : &quot;1&quot;), height: &quot;100% !important&quot;},
+                             {display: &quot;none&quot;} :
+                             {position: &quot;absolute&quot;, &quot;zIndex&quot;: (disabled ? &quot;-1&quot; : &quot;1&quot;), height: &quot;100%&quot;},
               hiddenFields = [];
 
         props.params.itsa_each((value, key) =&gt; {
@@ -1206,7 +1210,7 @@ const Component = React.createClass({
                 keyValue = null;
             }
             hiddenFields.push(&lt;input key={key} type=&quot;hidden&quot; name={key} value={keyValue} /&gt;);
-        })
+        });
         inputElement = instance._renderInputElement(!XHR2);
         return (
             &lt;form
@@ -1233,7 +1237,7 @@ const Component = React.createClass({
     */
     _renderIframe() {
         const instance = this,
-              iframeStyles = {display: &quot;none !important&quot;};
+              iframeStyles = {display: &quot;none&quot;};
         return (
             &lt;iframe
                 src={instance.props.url}

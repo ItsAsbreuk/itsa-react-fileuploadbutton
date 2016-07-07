@@ -55,7 +55,7 @@
     "classitems": [
         {
             "file": "lib/component.jsx",
-            "line": 39,
+            "line": 43,
             "description": "Whether to autofocus the Component.",
             "itemtype": "property",
             "name": "autoFocus",
@@ -66,7 +66,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 48,
+            "line": 52,
             "description": "Whether to automaticly send the file(s) after being selected. When set `false`, you need to manually send the files\nwith the `send`-method.",
             "itemtype": "property",
             "name": "autoSend",
@@ -77,7 +77,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 58,
+            "line": 62,
             "description": "The aria-label. When not set, it will equal the buttonText",
             "itemtype": "property",
             "name": "aria-label",
@@ -88,7 +88,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 67,
+            "line": 71,
             "description": "The Button-text. Will be escaped. If you need HTML, then use `buttonHTML` instead.",
             "itemtype": "property",
             "name": "buttonText",
@@ -99,7 +99,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 76,
+            "line": 80,
             "description": "The Button-text, retaining html-code. If you don't need HTML,\nthen `buttonText` is preferred.",
             "itemtype": "property",
             "name": "buttonHTML",
@@ -110,7 +110,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 86,
+            "line": 90,
             "description": "Whether the button is disabled",
             "itemtype": "property",
             "name": "disabled",
@@ -121,7 +121,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 95,
+            "line": 99,
             "description": "Whether to empty the file(s) after sent to the server.\nDefault: true",
             "itemtype": "property",
             "name": "emptyAfterSent",
@@ -132,7 +132,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 105,
+            "line": 109,
             "description": "The error-message that appears when the element is wrong validated.",
             "itemtype": "property",
             "name": "errorMsg",
@@ -143,7 +143,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 114,
+            "line": 118,
             "description": "To force the component to use form-submit instead of XHR2. This is NOT recomended.\nIn case the browser does not support XHR2, it will automaticly fall back to form-submit.\nDefault: false",
             "itemtype": "property",
             "name": "formSubmitMode",
@@ -154,7 +154,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 125,
+            "line": 129,
             "description": "Help text to assist. Appears just below the button.",
             "itemtype": "property",
             "name": "helpText",
@@ -165,7 +165,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 134,
+            "line": 138,
             "description": "Whether to mark the Component when the file(s) are successfully sent.",
             "itemtype": "property",
             "name": "markSuccess",
@@ -176,7 +176,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 143,
+            "line": 147,
             "description": "Whether the Component should show an validate-reclamation (star)",
             "itemtype": "property",
             "name": "markRequired",
@@ -187,7 +187,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 152,
+            "line": 156,
             "description": "The maximum allowed file-size of each separate file.",
             "itemtype": "property",
             "name": "maxFileSize",
@@ -198,7 +198,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 161,
+            "line": 165,
             "description": "Whether to support the selection of multiple files.",
             "itemtype": "property",
             "name": "multipleFiles",
@@ -209,7 +209,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 170,
+            "line": 174,
             "description": "The `name` for the element.",
             "itemtype": "property",
             "name": "name",
@@ -220,7 +220,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 179,
+            "line": 183,
             "description": "The `onBlur` function, when happening on the DOM-Element.",
             "itemtype": "property",
             "name": "onBlur",
@@ -231,7 +231,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 188,
+            "line": 192,
             "description": "The `onClick` function, when happening on the DOM-Element.",
             "itemtype": "property",
             "name": "onClick",
@@ -242,7 +242,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 197,
+            "line": 201,
             "description": "The `onError` function, when filetransfer errors.",
             "itemtype": "property",
             "name": "onError",
@@ -253,7 +253,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 206,
+            "line": 210,
             "description": "The `onFileChange` function, when the users has selected files.",
             "itemtype": "property",
             "name": "onFileChange",
@@ -264,7 +264,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 215,
+            "line": 219,
             "description": "The `onFocus` function, when the Component gets focussed.",
             "itemtype": "property",
             "name": "onFocus",
@@ -275,7 +275,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 224,
+            "line": 228,
             "description": "The `onProgress` function: callback during tranfer.",
             "itemtype": "property",
             "name": "onProgress",
@@ -286,7 +286,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 233,
+            "line": 237,
             "description": "The `onSend` function, when the transfer starts.",
             "itemtype": "property",
             "name": "onSend",
@@ -297,7 +297,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 242,
+            "line": 246,
             "description": "The `onSuccess` function, transfer succeeded.",
             "itemtype": "property",
             "name": "onSuccess",
@@ -308,7 +308,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 251,
+            "line": 255,
             "description": "Additional params that can be send with the request.",
             "itemtype": "property",
             "name": "params",
@@ -319,7 +319,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 260,
+            "line": 264,
             "description": "Options to be passed through to the request.",
             "itemtype": "property",
             "name": "requestOptions",
@@ -330,7 +330,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 269,
+            "line": 273,
             "description": "Whether to show the progress inside the button.\nDefault: true",
             "itemtype": "property",
             "name": "showProgress",
@@ -341,7 +341,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 279,
+            "line": 283,
             "description": "The tabindex of the Component.",
             "itemtype": "property",
             "name": "tabIndex",
@@ -352,7 +352,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 288,
+            "line": 292,
             "description": "The total maximum allowed file-size of all files altogether.",
             "itemtype": "property",
             "name": "totalFileSize",
@@ -363,7 +363,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 297,
+            "line": 301,
             "description": "Whether the file can only be uploaded once. To reset, use `reactivate()`.",
             "itemtype": "property",
             "name": "uploadOnlyOnce",
@@ -374,7 +374,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 306,
+            "line": 310,
             "description": "The url to send to files to.",
             "required": 1,
             "itemtype": "property",
@@ -386,7 +386,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 316,
+            "line": 320,
             "description": "Whether the selected files are is validated right. This value can be set inside the `onFileChange` callback.",
             "itemtype": "property",
             "name": "validated",
@@ -397,7 +397,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 326,
+            "line": 330,
             "description": "Returns the default properties of the Component",
             "itemtype": "method",
             "name": "getDefaultProps",
@@ -411,7 +411,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 351,
+            "line": 355,
             "description": "Aborts the transfer (if files are being sent).",
             "itemtype": "method",
             "name": "abort",
@@ -428,7 +428,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 366,
+            "line": 370,
             "description": "Returns the number of files that are currently selected.",
             "itemtype": "method",
             "name": "count",
@@ -442,7 +442,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 378,
+            "line": 382,
             "description": "componentWillMount does some initialization.",
             "itemtype": "method",
             "name": "componentWillMount",
@@ -452,7 +452,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 389,
+            "line": 393,
             "description": "componentDidMount does some initialization.",
             "itemtype": "method",
             "name": "componentDidMount",
@@ -462,7 +462,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 410,
+            "line": 414,
             "description": "componentWilUnmount does some cleanup.",
             "itemtype": "method",
             "name": "componentWillUnmount",
@@ -472,7 +472,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 428,
+            "line": 432,
             "description": "Sets the focus on the Component.",
             "itemtype": "method",
             "name": "focus",
@@ -483,7 +483,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 440,
+            "line": 444,
             "description": "Returns the currently selected files. This is an `Array-like` object, not a true Array.",
             "itemtype": "method",
             "name": "getFiles",
@@ -497,7 +497,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 451,
+            "line": 455,
             "description": "Returns the last send-files.\nThis is handy to know, because after transmission, getFiles() will return empty.\nThis is an true Array with objects of this structure: {name: xxx, size: xxx}",
             "itemtype": "method",
             "name": "getLastSent",
@@ -511,7 +511,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 464,
+            "line": 468,
             "description": "Returns the initial state.",
             "itemtype": "method",
             "name": "getInitialState",
@@ -524,7 +524,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 483,
+            "line": 487,
             "description": "Returns the total size of all files that are currently selected.",
             "itemtype": "method",
             "name": "getTotalFileSize",
@@ -538,7 +538,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 503,
+            "line": 507,
             "description": "Whether there are currently files selected.",
             "itemtype": "method",
             "name": "hasFiles",
@@ -552,7 +552,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 515,
+            "line": 519,
             "description": "Reactivates the uploadbutton in case a file has been uploaded and a new upload\ncannot be done because of the props: `uploadOnlyOnce` was set `true`\n\nIs only usable in combination with `uploadOnlyOnce===true`",
             "itemtype": "method",
             "name": "reactivate",
@@ -563,7 +563,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 530,
+            "line": 534,
             "description": "React render-method --> renderes the Component.",
             "itemtype": "method",
             "name": "render",
@@ -576,7 +576,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 642,
+            "line": 647,
             "description": "Resets the selected file",
             "itemtype": "method",
             "name": "reset",
@@ -586,7 +586,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 665,
+            "line": 670,
             "description": "Send the selected files. Will also invoke the onSend callback, from within `e.preventDefault()` can be used.",
             "itemtype": "method",
             "name": "send",
@@ -600,7 +600,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 815,
+            "line": 820,
             "description": "Clears the internal timer set by `_setRemoveTimer`",
             "itemtype": "method",
             "name": "_clearRemoveTimer",
@@ -612,7 +612,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 826,
+            "line": 831,
             "description": "Returns the size of the largest file that is currently selected.",
             "itemtype": "method",
             "name": "_getLargestFileSize",
@@ -628,7 +628,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 847,
+            "line": 852,
             "description": "Returns the validation-message when file-size is exceeded.",
             "itemtype": "method",
             "name": "_getSizeValidationMsg",
@@ -644,7 +644,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 876,
+            "line": 881,
             "description": "Callback whenever the button gets clicked.",
             "itemtype": "method",
             "name": "_handleClick",
@@ -656,7 +656,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 909,
+            "line": 914,
             "description": "Error-Callback for the promised-request",
             "itemtype": "method",
             "name": "_handleError",
@@ -675,7 +675,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 938,
+            "line": 943,
             "description": "Callback whenever the `input`-element's files are changed. Will invoke `onFileChange` when present.\nIf the property `autoSend` is true (and `onFileChange` did no `preventDefault()`), then the `send()`-method gets invoked.",
             "itemtype": "method",
             "name": "_handleFileChange",
@@ -691,7 +691,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 962,
+            "line": 967,
             "description": "Error-Callback for the promised-request",
             "itemtype": "method",
             "name": "_handleSuccess",
@@ -710,7 +710,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 991,
+            "line": 996,
             "description": "Callback whenever the iframe recieves an error (most likely by an invalid server-response).\nWill abort the request-promise.",
             "itemtype": "method",
             "name": "_iframeError",
@@ -722,7 +722,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 1003,
+            "line": 1008,
             "description": "Callback whenever the iframe recieves a response from the server. Depending on the response, it will\neither fulfill or reject the request-promise.",
             "itemtype": "method",
             "name": "_iframeLoad",
@@ -738,7 +738,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 1033,
+            "line": 1038,
             "description": "Renderes the HTMLInputElement",
             "itemtype": "method",
             "name": "_renderInputElement",
@@ -763,7 +763,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 1095,
+            "line": 1100,
             "description": "Renderes a HTMLFormElement (in case no XHR2 is used)",
             "itemtype": "method",
             "name": "_renderFormElement",
@@ -779,7 +779,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 1143,
+            "line": 1147,
             "description": "Renderes an iFrame-element (in case no XHR2 is used), which is needed for the response-target of the form-submission.",
             "itemtype": "method",
             "name": "_renderIframe",
@@ -795,7 +795,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 1165,
+            "line": 1169,
             "description": "Sets a timer that will remove the progress-bar.",
             "itemtype": "method",
             "name": "_setRemoveTimer",
@@ -807,7 +807,7 @@
         },
         {
             "file": "lib/component.jsx",
-            "line": 1176,
+            "line": 1180,
             "description": "Stores the files that are sent into an internal hash, which can be read by `getLastSent()`.",
             "itemtype": "method",
             "name": "_storeLastSent",
@@ -821,19 +821,19 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " lib/component.jsx:351"
+            "line": " lib/component.jsx:355"
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " lib/component.jsx:909"
+            "line": " lib/component.jsx:914"
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " lib/component.jsx:962"
+            "line": " lib/component.jsx:967"
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " lib/component.jsx:1033"
+            "line": " lib/component.jsx:1038"
         }
     ]
 }

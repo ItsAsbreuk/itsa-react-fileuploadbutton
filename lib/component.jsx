@@ -14,24 +14,27 @@
  * @since 0.0.1
 */
 
-import "itsa-jsext";
-import React, {PropTypes} from "react";
-import ReactDOM from "react-dom";
-import Button from "itsa-react-button";
-import {io} from "itsa-fetch";
-import FileLikeObject from "./file-like-object";
-import {idGenerator, async, later} from "itsa-utils";
-
-const isNode = (typeof global!=="undefined") && ({}.toString.call(global)==="[object global]") && (!global.document || ({}.toString.call(global.document)!=="[object HTMLDocument]")),
-      MAIN_CLASS = "itsa-fileuploadbutton",
-      MAIN_CLASS_PREFIX = MAIN_CLASS+"-",
-      SPACED_MAIN_CLASS_PREFIX = " "+MAIN_CLASS_PREFIX,
-      NOOP = () => {},
-      DEF_MAX_SIZE = 100*1024*1024, // 100 Mb
-      CLICK = "click",
-      ABORTED = "Request aborted",
-      XHR2support = ("withCredentials" in new XMLHttpRequest()),
-      DEF_BUTTON_PRESS_TIME = 300;
+const React = require("react"),
+    PropTypes = React.PropTypes,
+    ReactDOM = require("react-dom"),
+    Button = require("itsa-react-button"),
+    utils = require("itsa-utils"),
+    itsaReactCloneProps = require("itsa-react-clone-props"),
+    io = require("itsa-fetch").io,
+    FileLikeObject = require("./file-like-object"),
+    idGenerator = utils.idGenerator,
+    later = utils.later,
+    async = utils.async,
+    isNode = utils.isNode,
+    MAIN_CLASS = "itsa-fileuploadbutton",
+    MAIN_CLASS_PREFIX = MAIN_CLASS+"-",
+    SPACED_MAIN_CLASS_PREFIX = " "+MAIN_CLASS_PREFIX,
+    NOOP = () => {},
+    DEF_MAX_SIZE = 100*1024*1024, // 100 Mb
+    CLICK = "click",
+    ABORTED = "Request aborted",
+    XHR2support = ("withCredentials" in new XMLHttpRequest()),
+    DEF_BUTTON_PRESS_TIME = 300;
 
 const Component = React.createClass({
 
@@ -82,6 +85,15 @@ const Component = React.createClass({
          * @since 0.0.1
         */
         buttonHTML: PropTypes.string,
+
+        /**
+         * The class that should be set on the element
+         *
+         * @property className
+         * @type String
+         * @since 0.0.1
+        */
+        className: PropTypes.string,
 
         /**
          * Whether the button is disabled
@@ -277,6 +289,15 @@ const Component = React.createClass({
         showProgress: PropTypes.bool,
 
         /**
+         * Inline style
+         *
+         * @property style
+         * @type object
+         * @since 0.0.1
+        */
+        style: PropTypes.object,
+
+        /**
          * The tabindex of the Component.
          *
          * @property tabIndex
@@ -399,7 +420,7 @@ const Component = React.createClass({
         instance._buttonNode = ReactDOM.findDOMNode(instance.refs.uploadbutton);
         instance.IE8_Events = !instance._buttonNode.addEventListener;
         if (instance.IE8_Events) {
-            instance._buttonNode.attachEvent('on'+CLICK, instance._handleClick);
+            instance._buttonNode.attachEvent("on"+CLICK, instance._handleClick);
         }
         else {
             instance._buttonNode.addEventListener(CLICK, instance._handleClick, true);
@@ -433,7 +454,7 @@ const Component = React.createClass({
      * @since 0.0.1
      */
     focus() {
-        this._buttonNode.focus();
+        this.refs.uploadbutton.focus();
         return this;
     },
 
@@ -501,6 +522,17 @@ const Component = React.createClass({
     },
 
     /**
+     * Callback that sets the focus to the descendent element by calling `focus()`
+     *
+     * @method handleContainerFocus
+     * @param e {Object} event-payload
+     * @since 0.1.0
+     */
+    handleContainerFocus(e) {
+        (e.target===e.currentTarget) && this.focus();
+    },
+
+    /**
      * Whether there are currently files selected.
      *
      * @method hasFiles
@@ -540,15 +572,16 @@ const Component = React.createClass({
         const instance = this,
               state = instance.state,
               serverError = state.serverError,
-              props = instance.props.itsa_deepClone(),
+              props = itsaReactCloneProps.clone(instance.props),
               serverSuccess = state.serverSuccess && props.validated,
               markServerSuccess = props.markSuccess && serverSuccess,
               XHR2 = (XHR2support && !props.formSubmitMode),
               showProgress = props.showProgress,
               uploadBlocked = props.uploadOnlyOnce && instance._onlyOnceUploaded,
               disabled = props.disabled || state.isUploading || uploadBlocked,
+              mainclass = MAIN_CLASS,
               onProgress = props.onProgress,
-              relativeStyle = {position: "relative !important"};
+              relativeStyle = {position: "relative"};
 
         delete props.onClick; // we needed to create a native click-event and don't want to invoke onClick twice
 
@@ -626,8 +659,12 @@ const Component = React.createClass({
         btnClassName = props.className || "";
         state.btnClicked && (btnClassName += (btnClassName ? " " : "") + "itsa-button-active");
         state.btnMouseOver && (btnClassName += (btnClassName ? " " : "") + "itsa-button-hover");
+        disabled && (mainclass+=" disabled");
         return (
-            <div className={MAIN_CLASS} >
+            <div
+                className={mainclass}
+                onFocus={instance.handleContainerFocus}
+                style={props.style} >
                 <div style={relativeStyle}>
                     {iframe}
                     {element}
@@ -651,11 +688,11 @@ const Component = React.createClass({
         // the only way that works with ALL browsers, is by removing the DOMnode and replacing it.
         delete instance._inputNode;
         instance.setState({
-            inputElement: false,
+            inputElement: false
         });
         async(() => {
             instance.setState({
-                inputElement: true,
+                inputElement: true
             });
             async(() => {
                 instance._inputNode = ReactDOM.findDOMNode(instance.refs.fileinput);
@@ -890,7 +927,7 @@ const Component = React.createClass({
               onClick = instance.props.onClick;
         if (!isNode && !uploadBlocked && !this.state.isUploading) {
             onClick && onClick({
-                                    preventDefault: () => {prevented = true},
+                                    preventDefault: () => {prevented = true;},
                                     target: instance
                                });
             instance._clearRemoveTimer();
@@ -951,7 +988,7 @@ const Component = React.createClass({
               props = instance.props,
               onFileChange = props.onFileChange;
         onFileChange && onFileChange({
-            preventDefault: () => {prevented = true},
+            preventDefault: () => {prevented = true;},
             target: instance
         });
         if (props.autoSend && !prevented) {
@@ -998,7 +1035,7 @@ const Component = React.createClass({
      * @since 0.0.1
     */
     _iframeError() {
-        instance._io.abort();
+        this._io.abort();
     },
 
     /**
@@ -1016,7 +1053,7 @@ const Component = React.createClass({
               okStatus= {status: "ok"};
         if (instance._formsubmit) {
             try {
-                content = myIFrame.contentWindow.document.body.innerHTML;
+                content = ReactDOM.findDOMNode(instance.refs.iframenode).contentWindow.document.body.innerHTML;
                 if (content==="OK") {
                     instance._io.fulfill(okStatus);
                 }
@@ -1045,8 +1082,8 @@ const Component = React.createClass({
         const instance = this,
               props = instance.props,
               inputStyles = (displayed) ?
-                            {fontSize: "10000%", width: "100% !important", height: "100% !important", opacity: "0 !important", filter: "alpha(opacity=0)", cursor: "pointer"} :
-                            {display: "none !important"};
+                            {fontSize: "10000%", width: "100%", height: "100%", opacity: "0", filter: "alpha(opacity=0)", cursor: "pointer"} :
+                            {display: "none"};
         if (!this.state.inputElement) {
             // keep the number of nodes consisten to prevent shuffling of the parent childnodes
             return (<div style={inputStyles} />);
@@ -1057,12 +1094,12 @@ const Component = React.createClass({
                 instance.setState({
                     btnMouseOver: true
                 });
-            }
+            };
             onMouseLeave = function() {
                 instance.setState({
                     btnMouseOver: false
                 });
-            }
+            };
             onClick = function() {
                 instance.setState({
                     btnClicked: true,
@@ -1076,7 +1113,7 @@ const Component = React.createClass({
                         btnMouseOver: false
                     });
                 }, DEF_BUTTON_PRESS_TIME);
-            }
+            };
         }
         // need to specify name="uploadfiles" --> in case of formSubmitMode this field needs to be specified
         return (
@@ -1109,10 +1146,9 @@ const Component = React.createClass({
               XHR2 = (XHR2support && !props.formSubmitMode),
               uploadBlocked = props.uploadOnlyOnce && instance._onlyOnceUploaded,
               disabled = props.disabled || instance.state.isUploading || uploadBlocked,
-              // seems a bug that zIndex doesn't get changed in combination with !important --> therefore we don't use !important for the z-index
               hiddenStyles = XHR2 ?
-                             {display: "none !important"} :
-                             {position: "absolute !important", "zIndex": (disabled ? "-1" : "1"), height: "100% !important"},
+                             {display: "none"} :
+                             {position: "absolute", "zIndex": (disabled ? "-1" : "1"), height: "100%"},
               hiddenFields = [];
 
         props.params.itsa_each((value, key) => {
@@ -1124,7 +1160,7 @@ const Component = React.createClass({
                 keyValue = null;
             }
             hiddenFields.push(<input key={key} type="hidden" name={key} value={keyValue} />);
-        })
+        });
         inputElement = instance._renderInputElement(!XHR2);
         return (
             <form
@@ -1151,7 +1187,7 @@ const Component = React.createClass({
     */
     _renderIframe() {
         const instance = this,
-              iframeStyles = {display: "none !important"};
+              iframeStyles = {display: "none"};
         return (
             <iframe
                 src={instance.props.url}
