@@ -1,3 +1,6 @@
+#version 15.2.21
+Isomorphic bigfix
+
 #version 15.0.0
 
 Upgrade support for react 15.0

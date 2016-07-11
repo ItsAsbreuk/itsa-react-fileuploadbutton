@@ -20,12 +20,12 @@ const React = require("react"),
     Button = require("itsa-react-button"),
     utils = require("itsa-utils"),
     itsaReactCloneProps = require("itsa-react-clone-props"),
-    io = require("itsa-fetch").io,
+    isNode = utils.isNode,
+    io = !isNode && require("itsa-fetch").io,
     FileLikeObject = require("./file-like-object"),
     idGenerator = utils.idGenerator,
     later = utils.later,
     async = utils.async,
-    isNode = utils.isNode,
     MAIN_CLASS = "itsa-fileuploadbutton",
     MAIN_CLASS_PREFIX = MAIN_CLASS+"-",
     SPACED_MAIN_CLASS_PREFIX = " "+MAIN_CLASS_PREFIX,
@@ -33,12 +33,21 @@ const React = require("react"),
     DEF_MAX_SIZE = 100*1024*1024, // 100 Mb
     CLICK = "click",
     ABORTED = "Request aborted",
-    XHR2support = ("withCredentials" in new XMLHttpRequest()),
+    XHR2support = !isNode && ("withCredentials" in new XMLHttpRequest()),
     DEF_BUTTON_PRESS_TIME = 300;
 
 const Component = React.createClass({
 
     propTypes: {
+        /**
+         * The aria-label. When not set, it will equal the buttonText
+         *
+         * @property aria-label
+         * @type String
+         * @since 0.0.1
+        */
+        "aria-label": PropTypes.string,
+
         /**
          * Whether to autofocus the Component.
          *
@@ -57,15 +66,6 @@ const Component = React.createClass({
          * @since 0.0.1
         */
         autoSend: PropTypes.bool,
-
-        /**
-         * The aria-label. When not set, it will equal the buttonText
-         *
-         * @property aria-label
-         * @type String
-         * @since 0.0.1
-        */
-        "aria-label": PropTypes.string,
 
         /**
          * The Button-text. Will be escaped. If you need HTML, then use `buttonHTML` instead.
@@ -144,15 +144,6 @@ const Component = React.createClass({
         helpText: PropTypes.string,
 
         /**
-         * Whether to mark the Component when the file(s) are successfully sent.
-         *
-         * @property markSuccess
-         * @type Boolean
-         * @since 0.0.1
-        */
-        markSuccess: PropTypes.bool,
-
-        /**
          * Whether the Component should show an validate-reclamation (star)
          *
          * @property markRequired
@@ -160,6 +151,15 @@ const Component = React.createClass({
          * @since 0.0.1
         */
         markRequired: PropTypes.bool,
+
+        /**
+         * Whether to mark the Component when the file(s) are successfully sent.
+         *
+         * @property markSuccess
+         * @type Boolean
+         * @since 0.0.1
+        */
+        markSuccess: PropTypes.bool,
 
         /**
          * The maximum allowed file-size of each separate file.
@@ -567,7 +567,8 @@ const Component = React.createClass({
      * @since 0.0.1
      */
     render() {
-        let errorMsg, help, iframe, element, sizeValidationMsg, shiftLeft, btnClassName,
+        let mainclass = MAIN_CLASS,
+            errorMsg, help, iframe, element, sizeValidationMsg, shiftLeft, btnClassName,
             progressBar, classNameProgressBar, classNameProgressBarInner, progressBarInnerStyles;
         const instance = this,
               state = instance.state,
@@ -579,7 +580,6 @@ const Component = React.createClass({
               showProgress = props.showProgress,
               uploadBlocked = props.uploadOnlyOnce && instance._onlyOnceUploaded,
               disabled = props.disabled || state.isUploading || uploadBlocked,
-              mainclass = MAIN_CLASS,
               onProgress = props.onProgress,
               relativeStyle = {position: "relative"};
 
