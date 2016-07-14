@@ -1,3 +1,12 @@
+#15.2.26
+Added property `showsuccess` to enable the `success-feedback`-icon to be shown initially.
+
+#15.2.24
+Showed error-msg when error occured before sending, like filesize exceeded
+
+#15.2.23
+Bugfix using the uploader again after whenever multiple files were uploaded (error: `instance._io.reject is not a function`)
+
 #version 15.2.21
 Isomorphic bigfix
 

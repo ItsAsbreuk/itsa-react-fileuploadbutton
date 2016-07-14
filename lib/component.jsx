@@ -34,6 +34,7 @@ const React = require("react"),
     CLICK = "click",
     ABORTED = "Request aborted",
     XHR2support = !isNode && ("withCredentials" in new XMLHttpRequest()),
+    WHITE_SPACE = "&#160;", // white-space
     DEF_BUTTON_PRESS_TIME = 300;
 
 const Component = React.createClass({
@@ -68,15 +69,6 @@ const Component = React.createClass({
         autoSend: PropTypes.bool,
 
         /**
-         * The Button-text. Will be escaped. If you need HTML, then use `buttonHTML` instead.
-         *
-         * @property buttonText
-         * @type String
-         * @since 0.0.1
-        */
-        buttonText: PropTypes.string,
-
-        /**
          * The Button-text, retaining html-code. If you don't need HTML,
          * then `buttonText` is preferred.
          *
@@ -85,6 +77,15 @@ const Component = React.createClass({
          * @since 0.0.1
         */
         buttonHTML: PropTypes.string,
+
+        /**
+         * The Button-text. Will be escaped. If you need HTML, then use `buttonHTML` instead.
+         *
+         * @property buttonText
+         * @type String
+         * @since 0.0.1
+        */
+        buttonText: PropTypes.string,
 
         /**
          * The class that should be set on the element
@@ -154,6 +155,7 @@ const Component = React.createClass({
 
         /**
          * Whether to mark the Component when the file(s) are successfully sent.
+         * This property will be overrulled whenever `props.showSuccess` is true.
          *
          * @property markSuccess
          * @type Boolean
@@ -287,6 +289,16 @@ const Component = React.createClass({
          * @since 0.0.1
         */
         showProgress: PropTypes.bool,
+
+        /**
+         * Whether to show the `success`-feedback icon always when there are no errors.
+         * This property overrules `props.markSuccess`.
+         *
+         * @property showSuccess
+         * @type Boolean
+         * @since 0.0.1
+        */
+        showSuccess: PropTypes.bool,
 
         /**
          * Inline style
@@ -568,14 +580,14 @@ const Component = React.createClass({
      */
     render() {
         let mainclass = MAIN_CLASS,
-            errorMsg, help, iframe, element, sizeValidationMsg, shiftLeft, btnClassName,
-            progressBar, classNameProgressBar, classNameProgressBarInner, progressBarInnerStyles;
+            errorMsg, help, iframe, element, sizeValidationMsg, shiftLeft, btnClassName, buttonHTML,
+            classNameProgressBar, classNameProgressBarInner, progressBarInnerStyles;
         const instance = this,
               state = instance.state,
               serverError = state.serverError,
               props = itsaReactCloneProps.clone(instance.props),
               serverSuccess = state.serverSuccess && props.validated,
-              markServerSuccess = props.markSuccess && serverSuccess,
+              markServerSuccess = (props.markSuccess && serverSuccess) || (props.showSuccess && !serverError),
               XHR2 = (XHR2support && !props.formSubmitMode),
               showProgress = props.showProgress,
               uploadBlocked = props.uploadOnlyOnce && instance._onlyOnceUploaded,
@@ -597,20 +609,17 @@ const Component = React.createClass({
         if (props.markRequired || props.markSuccess) {
             props.className += " "+MAIN_CLASS_PREFIX+"wide";
         }
+        buttonHTML = props.buttonText || props.buttonText || WHITE_SPACE;
 
         if (XHR2 && (typeof state.percent==="number")) {
             classNameProgressBar = MAIN_CLASS_PREFIX+"progress";
             classNameProgressBarInner = classNameProgressBar + "-inner";
             serverSuccess && (classNameProgressBar+=" "+classNameProgressBar+"-completed");
             shiftLeft = state.percent-100;
-            progressBarInnerStyles = {
-                marginLeft: shiftLeft+"%"
-            };
-            progressBar = (
-                <div className={classNameProgressBar}>
-                    <div className={classNameProgressBarInner} style={progressBarInnerStyles} />
-                </div>
-            );
+            progressBarInnerStyles = "margin-left: "+shiftLeft+"%";
+            buttonHTML += "<div class='"+classNameProgressBar+"'>"+
+                              "<div class='"+classNameProgressBarInner+"' style='"+progressBarInnerStyles+"'></div>"+
+                          "</div>";
         }
 
         sizeValidationMsg = instance._getSizeValidationMsg();
@@ -660,6 +669,7 @@ const Component = React.createClass({
         state.btnClicked && (btnClassName += (btnClassName ? " " : "") + "itsa-button-active");
         state.btnMouseOver && (btnClassName += (btnClassName ? " " : "") + "itsa-button-hover");
         disabled && (mainclass+=" disabled");
+
         return (
             <div
                 className={mainclass}
@@ -668,9 +678,15 @@ const Component = React.createClass({
                 <div style={relativeStyle}>
                     {iframe}
                     {element}
-                    <Button {...props} className={btnClassName} disabled={disabled} ref="uploadbutton" showActivated={false} type="button" />
+                    <Button
+                        {...props}
+                        buttonHTML={buttonHTML}
+                        className={btnClassName}
+                        disabled={disabled}
+                        ref="uploadbutton"
+                        showActivated={false}
+                        type="button" />
                 </div>
-                {progressBar}
                 {errorMsg}
                 {help}
             </div>
@@ -736,6 +752,7 @@ const Component = React.createClass({
             delete instance._formsubmit;
             returnPromise = Promise.reject(errorMsg);
             returnPromise.abort = NOOP;
+            instance.forceUpdate(); // force to show the error
             return returnPromise;
         }
 
@@ -807,14 +824,19 @@ const Component = React.createClass({
                     }
                     hash.push(ioPromise);
                 }
-                promise = window.Promise.itsa_finishAll(hash).then(function(response) {
+                // we need a manageable promise, because it has more methods than standard:
+                promise = Promise.itsa_manage();
+                window.Promise.itsa_finishAll(hash).then(function(response) {
                     var rejected = response.rejected;
-                    rejected.forEach(function(ioError) {
+                    rejected.some(function(ioError) {
                         if (ioError) {
-                            throw new Error(ioError);
+                            promise.reject(ioError);
+                            return true;
                         }
                     });
+                    promise.fulfill(response.fulfilled);
                 });
+
                 promise.abort = function() {
                     if (!promise._aborted) {
                         hash.forEach(function(ioPromise) {
@@ -826,7 +848,9 @@ const Component = React.createClass({
                 };
             }
             else {
-                promise = Promise.reject("No files selected");
+                // we need a manageable promise, because it has more methods than standard:
+                promise = Promise.itsa_manage();
+                promise.reject("No files selected");
                 promise.abort = NOOP;
             }
             instance._io = promise;
