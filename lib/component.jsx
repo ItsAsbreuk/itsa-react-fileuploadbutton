@@ -581,7 +581,7 @@ const Component = React.createClass({
     render() {
         let mainclass = MAIN_CLASS,
             errorMsg, help, iframe, element, sizeValidationMsg, shiftLeft, btnClassName, buttonHTML,
-            classNameProgressBar, classNameProgressBarInner, progressBarInnerStyles;
+            classNameProgressBar, classNameProgressBarInner, progressBarInnerStyles, errMessage;
         const instance = this,
               state = instance.state,
               serverError = state.serverError,
@@ -624,7 +624,8 @@ const Component = React.createClass({
 
         sizeValidationMsg = instance._getSizeValidationMsg();
         if (serverError || (props.validated===false) || sizeValidationMsg) {
-            errorMsg = (<div className={MAIN_CLASS_PREFIX+"error-text"}>{serverError || ((props.validated===false) ? props.errorMsg : sizeValidationMsg)}</div>);
+            errMessage = serverError || ((props.validated===false) ? props.errorMsg : sizeValidationMsg);
+            errMessage && (errorMsg=(<div className={MAIN_CLASS_PREFIX+"error-text"}>{errMessage}</div>));
             props.className += SPACED_MAIN_CLASS_PREFIX+"error";
         }
 
@@ -751,6 +752,7 @@ const Component = React.createClass({
         if (errorMsg) {
             delete instance._formsubmit;
             returnPromise = Promise.reject(errorMsg);
+            returnPromise.catch(NOOP); // prevent uncaugth promise-error
             returnPromise.abort = NOOP;
             instance.forceUpdate(); // force to show the error
             return returnPromise;

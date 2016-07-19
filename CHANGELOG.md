@@ -1,3 +1,7 @@
+#15.2.27
+When errored without a error-message, no empty error-box will be shown
+Caught promise on validation-error -> no uncaught-error will be shown in the console
+
 #15.2.26
 Added property `showsuccess` to enable the `success-feedback`-icon to be shown initially.
 
