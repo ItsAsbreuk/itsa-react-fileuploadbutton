@@ -103,26 +103,35 @@ const React = require(&quot;react&quot;),
     Button = require(&quot;itsa-react-button&quot;),
     utils = require(&quot;itsa-utils&quot;),
     itsaReactCloneProps = require(&quot;itsa-react-clone-props&quot;),
-    io = require(&quot;itsa-fetch&quot;).io,
+    isNode = utils.isNode,
+    io = !isNode &amp;&amp; require(&quot;itsa-fetch&quot;).io,
     FileLikeObject = require(&quot;./file-like-object&quot;),
     idGenerator = utils.idGenerator,
     later = utils.later,
-    async = utils.async;
-
-const isNode = (typeof global!==&quot;undefined&quot;) &amp;&amp; ({}.toString.call(global)===&quot;[object global]&quot;) &amp;&amp; (!global.document || ({}.toString.call(global.document)!==&quot;[object HTMLDocument]&quot;)),
-      MAIN_CLASS = &quot;itsa-fileuploadbutton&quot;,
-      MAIN_CLASS_PREFIX = MAIN_CLASS+&quot;-&quot;,
-      SPACED_MAIN_CLASS_PREFIX = &quot; &quot;+MAIN_CLASS_PREFIX,
-      NOOP = () =&gt; {},
-      DEF_MAX_SIZE = 100*1024*1024, // 100 Mb
-      CLICK = &quot;click&quot;,
-      ABORTED = &quot;Request aborted&quot;,
-      XHR2support = (&quot;withCredentials&quot; in new XMLHttpRequest()),
-      DEF_BUTTON_PRESS_TIME = 300;
+    async = utils.async,
+    MAIN_CLASS = &quot;itsa-fileuploadbutton&quot;,
+    MAIN_CLASS_PREFIX = MAIN_CLASS+&quot;-&quot;,
+    SPACED_MAIN_CLASS_PREFIX = &quot; &quot;+MAIN_CLASS_PREFIX,
+    NOOP = () =&gt; {},
+    DEF_MAX_SIZE = 100*1024*1024, // 100 Mb
+    CLICK = &quot;click&quot;,
+    ABORTED = &quot;Request aborted&quot;,
+    XHR2support = !isNode &amp;&amp; (&quot;withCredentials&quot; in new XMLHttpRequest()),
+    WHITE_SPACE = &quot;&amp;#160;&quot;, // white-space
+    DEF_BUTTON_PRESS_TIME = 300;
 
 const Component = React.createClass({
 
     propTypes: {
+        /**
+         * The aria-label. When not set, it will equal the buttonText
+         *
+         * @property aria-label
+         * @type String
+         * @since 0.0.1
+        */
+        &quot;aria-label&quot;: PropTypes.string,
+
         /**
          * Whether to autofocus the Component.
          *
@@ -143,13 +152,14 @@ const Component = React.createClass({
         autoSend: PropTypes.bool,
 
         /**
-         * The aria-label. When not set, it will equal the buttonText
+         * The Button-text, retaining html-code. If you don&#x27;t need HTML,
+         * then &#x60;buttonText&#x60; is preferred.
          *
-         * @property aria-label
+         * @property buttonHTML
          * @type String
          * @since 0.0.1
         */
-        &quot;aria-label&quot;: PropTypes.string,
+        buttonHTML: PropTypes.string,
 
         /**
          * The Button-text. Will be escaped. If you need HTML, then use &#x60;buttonHTML&#x60; instead.
@@ -161,14 +171,22 @@ const Component = React.createClass({
         buttonText: PropTypes.string,
 
         /**
-         * The Button-text, retaining html-code. If you don&#x27;t need HTML,
-         * then &#x60;buttonText&#x60; is preferred.
+         * The class that should be set on the button
          *
-         * @property buttonHTML
+         * @property className
          * @type String
          * @since 0.0.1
         */
-        buttonHTML: PropTypes.string,
+        className: PropTypes.string,
+
+        /**
+         * The class that should be set on the container-component
+         *
+         * @property containerClass
+         * @type String
+         * @since 15.2.29
+        */
+        containerClass: PropTypes.string,
 
         /**
          * Whether the button is disabled
@@ -219,15 +237,6 @@ const Component = React.createClass({
         helpText: PropTypes.string,
 
         /**
-         * Whether to mark the Component when the file(s) are successfully sent.
-         *
-         * @property markSuccess
-         * @type Boolean
-         * @since 0.0.1
-        */
-        markSuccess: PropTypes.bool,
-
-        /**
          * Whether the Component should show an validate-reclamation (star)
          *
          * @property markRequired
@@ -235,6 +244,16 @@ const Component = React.createClass({
          * @since 0.0.1
         */
         markRequired: PropTypes.bool,
+
+        /**
+         * Whether to mark the Component when the file(s) are successfully sent.
+         * This property will be overrulled whenever &#x60;props.showSuccess&#x60; is true.
+         *
+         * @property markSuccess
+         * @type Boolean
+         * @since 0.0.1
+        */
+        markSuccess: PropTypes.bool,
 
         /**
          * The maximum allowed file-size of each separate file.
@@ -362,6 +381,25 @@ const Component = React.createClass({
          * @since 0.0.1
         */
         showProgress: PropTypes.bool,
+
+        /**
+         * Whether to show the &#x60;success&#x60;-feedback icon always when there are no errors.
+         * This property overrules &#x60;props.markSuccess&#x60;.
+         *
+         * @property showSuccess
+         * @type Boolean
+         * @since 0.0.1
+        */
+        showSuccess: PropTypes.bool,
+
+        /**
+         * Inline style
+         *
+         * @property style
+         * @type object
+         * @since 0.0.1
+        */
+        style: PropTypes.object,
 
         /**
          * The tabindex of the Component.
@@ -520,7 +558,7 @@ const Component = React.createClass({
      * @since 0.0.1
      */
     focus() {
-        this._buttonNode.focus();
+        this.refs.uploadbutton.focus();
         return this;
     },
 
@@ -588,6 +626,17 @@ const Component = React.createClass({
     },
 
     /**
+     * Callback that sets the focus to the descendent element by calling &#x60;focus()&#x60;
+     *
+     * @method handleContainerFocus
+     * @param e {Object} event-payload
+     * @since 0.1.0
+     */
+    handleContainerFocus(e) {
+        (e.target===e.currentTarget) &amp;&amp; this.focus();
+    },
+
+    /**
      * Whether there are currently files selected.
      *
      * @method hasFiles
@@ -622,14 +671,15 @@ const Component = React.createClass({
      * @since 0.0.1
      */
     render() {
-        let errorMsg, help, iframe, element, sizeValidationMsg, shiftLeft, btnClassName,
-            progressBar, classNameProgressBar, classNameProgressBarInner, progressBarInnerStyles;
+        let mainclass = MAIN_CLASS,
+            errorMsg, help, iframe, element, sizeValidationMsg, shiftLeft, btnClassName, buttonHTML,
+            classNameProgressBar, classNameProgressBarInner, progressBarInnerStyles, errMessage;
         const instance = this,
               state = instance.state,
               serverError = state.serverError,
               props = itsaReactCloneProps.clone(instance.props),
               serverSuccess = state.serverSuccess &amp;&amp; props.validated,
-              markServerSuccess = props.markSuccess &amp;&amp; serverSuccess,
+              markServerSuccess = (props.markSuccess &amp;&amp; serverSuccess) || (props.showSuccess &amp;&amp; !serverError),
               XHR2 = (XHR2support &amp;&amp; !props.formSubmitMode),
               showProgress = props.showProgress,
               uploadBlocked = props.uploadOnlyOnce &amp;&amp; instance._onlyOnceUploaded,
@@ -639,38 +689,38 @@ const Component = React.createClass({
 
         delete props.onClick; // we needed to create a native click-event and don&#x27;t want to invoke onClick twice
 
-        props.className || (props.className=&quot;&quot;);
-        props.className += (props.className ? &quot; &quot; : &quot;&quot;) + MAIN_CLASS;
+        props.containerClass &amp;&amp; (mainclass+=&quot; &quot;+props.containerClass);
+
+        btnClassName = props.className || &quot;&quot;;
+        btnClassName += (btnClassName ? &quot; &quot; : &quot;&quot;) + MAIN_CLASS;
 
         if (markServerSuccess) {
-            props.className += &quot; &quot;+MAIN_CLASS_PREFIX+&quot;feedback-success&quot;;
+            btnClassName += &quot; &quot;+MAIN_CLASS_PREFIX+&quot;feedback-success&quot;;
         }
         else if (!instance.hasFiles() &amp;&amp; !serverSuccess) {
-            props.markRequired &amp;&amp; (props.className+=&quot; &quot;+MAIN_CLASS_PREFIX+&quot;required&quot;);
+            props.markRequired &amp;&amp; (btnClassName+=&quot; &quot;+MAIN_CLASS_PREFIX+&quot;required&quot;);
         }
         if (props.markRequired || props.markSuccess) {
-            props.className += &quot; &quot;+MAIN_CLASS_PREFIX+&quot;wide&quot;;
+            btnClassName += &quot; &quot;+MAIN_CLASS_PREFIX+&quot;wide&quot;;
         }
+        buttonHTML = props.buttonText || props.buttonText || WHITE_SPACE;
 
         if (XHR2 &amp;&amp; (typeof state.percent===&quot;number&quot;)) {
             classNameProgressBar = MAIN_CLASS_PREFIX+&quot;progress&quot;;
             classNameProgressBarInner = classNameProgressBar + &quot;-inner&quot;;
             serverSuccess &amp;&amp; (classNameProgressBar+=&quot; &quot;+classNameProgressBar+&quot;-completed&quot;);
             shiftLeft = state.percent-100;
-            progressBarInnerStyles = {
-                marginLeft: shiftLeft+&quot;%&quot;
-            };
-            progressBar = (
-                &lt;div className={classNameProgressBar}&gt;
-                    &lt;div className={classNameProgressBarInner} style={progressBarInnerStyles} /&gt;
-                &lt;/div&gt;
-            );
+            progressBarInnerStyles = &quot;margin-left: &quot;+shiftLeft+&quot;%&quot;;
+            buttonHTML += &quot;&lt;div class=&#x27;&quot;+classNameProgressBar+&quot;&#x27;&gt;&quot;+
+                              &quot;&lt;div class=&#x27;&quot;+classNameProgressBarInner+&quot;&#x27; style=&#x27;&quot;+progressBarInnerStyles+&quot;&#x27;&gt;&lt;/div&gt;&quot;+
+                          &quot;&lt;/div&gt;&quot;;
         }
 
         sizeValidationMsg = instance._getSizeValidationMsg();
         if (serverError || (props.validated===false) || sizeValidationMsg) {
-            errorMsg = (&lt;div className={MAIN_CLASS_PREFIX+&quot;error-text&quot;}&gt;{serverError || ((props.validated===false) ? props.errorMsg : sizeValidationMsg)}&lt;/div&gt;);
-            props.className += SPACED_MAIN_CLASS_PREFIX+&quot;error&quot;;
+            errMessage = serverError || ((props.validated===false) ? props.errorMsg : sizeValidationMsg);
+            errMessage &amp;&amp; (errorMsg=(&lt;div className={MAIN_CLASS_PREFIX+&quot;error-text&quot;}&gt;{errMessage}&lt;/div&gt;));
+            btnClassName += SPACED_MAIN_CLASS_PREFIX+&quot;error&quot;;
         }
 
         if (props.helpText &amp;&amp; !errorMsg) {
@@ -710,17 +760,27 @@ const Component = React.createClass({
             element = instance._renderFormElement();
         }
 
-        btnClassName = props.className || &quot;&quot;;
         state.btnClicked &amp;&amp; (btnClassName += (btnClassName ? &quot; &quot; : &quot;&quot;) + &quot;itsa-button-active&quot;);
         state.btnMouseOver &amp;&amp; (btnClassName += (btnClassName ? &quot; &quot; : &quot;&quot;) + &quot;itsa-button-hover&quot;);
+        disabled &amp;&amp; (mainclass+=&quot; disabled&quot;);
+
         return (
-            &lt;div className={MAIN_CLASS} &gt;
+            &lt;div
+                className={mainclass}
+                onFocus={instance.handleContainerFocus}
+                style={props.style} &gt;
                 &lt;div style={relativeStyle}&gt;
                     {iframe}
                     {element}
-                    &lt;Button {...props} className={btnClassName} disabled={disabled} ref=&quot;uploadbutton&quot; showActivated={false} type=&quot;button&quot; /&gt;
+                    &lt;Button
+                        {...props}
+                        buttonHTML={buttonHTML}
+                        className={btnClassName}
+                        disabled={disabled}
+                        ref=&quot;uploadbutton&quot;
+                        showActivated={false}
+                        type=&quot;button&quot; /&gt;
                 &lt;/div&gt;
-                {progressBar}
                 {errorMsg}
                 {help}
             &lt;/div&gt;
@@ -785,7 +845,9 @@ const Component = React.createClass({
         if (errorMsg) {
             delete instance._formsubmit;
             returnPromise = Promise.reject(errorMsg);
+            returnPromise.catch(NOOP); // prevent uncaugth promise-error
             returnPromise.abort = NOOP;
+            instance.forceUpdate(); // force to show the error
             return returnPromise;
         }
 
@@ -857,14 +919,19 @@ const Component = React.createClass({
                     }
                     hash.push(ioPromise);
                 }
-                promise = window.Promise.itsa_finishAll(hash).then(function(response) {
+                // we need a manageable promise, because it has more methods than standard:
+                promise = Promise.itsa_manage();
+                window.Promise.itsa_finishAll(hash).then(function(response) {
                     var rejected = response.rejected;
-                    rejected.forEach(function(ioError) {
+                    rejected.some(function(ioError) {
                         if (ioError) {
-                            throw new Error(ioError);
+                            promise.reject(ioError);
+                            return true;
                         }
                     });
+                    promise.fulfill(response.fulfilled);
                 });
+
                 promise.abort = function() {
                     if (!promise._aborted) {
                         hash.forEach(function(ioPromise) {
@@ -876,7 +943,9 @@ const Component = React.createClass({
                 };
             }
             else {
-                promise = Promise.reject(&quot;No files selected&quot;);
+                // we need a manageable promise, because it has more methods than standard:
+                promise = Promise.itsa_manage();
+                promise.reject(&quot;No files selected&quot;);
                 promise.abort = NOOP;
             }
             instance._io = promise;

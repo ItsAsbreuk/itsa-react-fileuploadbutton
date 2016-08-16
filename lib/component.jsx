@@ -88,13 +88,22 @@ const Component = React.createClass({
         buttonText: PropTypes.string,
 
         /**
-         * The class that should be set on the element
+         * The class that should be set on the button
          *
          * @property className
          * @type String
          * @since 0.0.1
         */
         className: PropTypes.string,
+
+        /**
+         * The class that should be set on the container-component
+         *
+         * @property containerClass
+         * @type String
+         * @since 15.2.29
+        */
+        containerClass: PropTypes.string,
 
         /**
          * Whether the button is disabled
@@ -597,17 +606,19 @@ const Component = React.createClass({
 
         delete props.onClick; // we needed to create a native click-event and don't want to invoke onClick twice
 
-        props.className || (props.className="");
-        props.className += (props.className ? " " : "") + MAIN_CLASS;
+        props.containerClass && (mainclass+=" "+props.containerClass);
+
+        btnClassName = props.className || "";
+        btnClassName += (btnClassName ? " " : "") + MAIN_CLASS;
 
         if (markServerSuccess) {
-            props.className += " "+MAIN_CLASS_PREFIX+"feedback-success";
+            btnClassName += " "+MAIN_CLASS_PREFIX+"feedback-success";
         }
         else if (!instance.hasFiles() && !serverSuccess) {
-            props.markRequired && (props.className+=" "+MAIN_CLASS_PREFIX+"required");
+            props.markRequired && (btnClassName+=" "+MAIN_CLASS_PREFIX+"required");
         }
         if (props.markRequired || props.markSuccess) {
-            props.className += " "+MAIN_CLASS_PREFIX+"wide";
+            btnClassName += " "+MAIN_CLASS_PREFIX+"wide";
         }
         buttonHTML = props.buttonText || props.buttonText || WHITE_SPACE;
 
@@ -626,7 +637,7 @@ const Component = React.createClass({
         if (serverError || (props.validated===false) || sizeValidationMsg) {
             errMessage = serverError || ((props.validated===false) ? props.errorMsg : sizeValidationMsg);
             errMessage && (errorMsg=(<div className={MAIN_CLASS_PREFIX+"error-text"}>{errMessage}</div>));
-            props.className += SPACED_MAIN_CLASS_PREFIX+"error";
+            btnClassName += SPACED_MAIN_CLASS_PREFIX+"error";
         }
 
         if (props.helpText && !errorMsg) {
@@ -666,7 +677,6 @@ const Component = React.createClass({
             element = instance._renderFormElement();
         }
 
-        btnClassName = props.className || "";
         state.btnClicked && (btnClassName += (btnClassName ? " " : "") + "itsa-button-active");
         state.btnMouseOver && (btnClassName += (btnClassName ? " " : "") + "itsa-button-hover");
         disabled && (mainclass+=" disabled");
