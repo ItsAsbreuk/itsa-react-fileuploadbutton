@@ -22865,7 +22865,8 @@
 	            classNameProgressBar = void 0,
 	            classNameProgressBarInner = void 0,
 	            progressBarInnerStyles = void 0,
-	            errMessage = void 0;
+	            errMessage = void 0,
+	            buttonText = void 0;
 	        var instance = this,
 	            state = instance.state,
 	            serverError = state.serverError,
@@ -22894,7 +22895,11 @@
 	        if (props.markRequired || props.markSuccess) {
 	            btnClassName += " " + MAIN_CLASS_PREFIX + "wide";
 	        }
-	        buttonHTML = props.buttonText || props.buttonText || WHITE_SPACE;
+	        buttonText = props.buttonText;
+	        buttonHTML = props.buttonHTML;
+	        if (!buttonText) {
+	            buttonHTML = props.buttonHTML || WHITE_SPACE;
+	        }
 
 	        if (XHR2 && typeof state.percent === "number") {
 	            classNameProgressBar = MAIN_CLASS_PREFIX + "progress";
@@ -22902,6 +22907,7 @@
 	            serverSuccess && (classNameProgressBar += " " + classNameProgressBar + "-completed");
 	            shiftLeft = state.percent - 100;
 	            progressBarInnerStyles = "margin-left: " + shiftLeft + "%";
+	            buttonHTML = buttonHTML || buttonText;
 	            buttonHTML += "<div class='" + classNameProgressBar + "'>" + "<div class='" + classNameProgressBarInner + "' style='" + progressBarInnerStyles + "'></div>" + "</div>";
 	        }
 
@@ -22959,7 +22965,6 @@
 	        state.btnClicked && (btnClassName += (btnClassName ? " " : "") + "itsa-button-active");
 	        state.btnMouseOver && (btnClassName += (btnClassName ? " " : "") + "itsa-button-hover");
 	        disabled && (mainclass += " disabled");
-
 	        return React.createElement(
 	            "div",
 	            {
@@ -22973,6 +22978,7 @@
 	                element,
 	                React.createElement(Button, _extends({}, props, {
 	                    buttonHTML: buttonHTML,
+	                    buttonText: buttonText,
 	                    className: btnClassName,
 	                    disabled: disabled,
 	                    ref: "uploadbutton",
@@ -23128,7 +23134,7 @@
 	                }
 	                // we need a manageable promise, because it has more methods than standard:
 	                promise = Promise.itsa_manage();
-	                window.Promise.itsa_finishAll(hash).then(function (response) {
+	                Promise.itsa_finishAll(hash).then(function (response) {
 	                    var rejected = response.rejected;
 	                    rejected.some(function (ioError) {
 	                        if (ioError) {

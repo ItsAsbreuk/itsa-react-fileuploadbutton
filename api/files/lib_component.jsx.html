@@ -673,7 +673,7 @@ const Component = React.createClass({
     render() {
         let mainclass = MAIN_CLASS,
             errorMsg, help, iframe, element, sizeValidationMsg, shiftLeft, btnClassName, buttonHTML,
-            classNameProgressBar, classNameProgressBarInner, progressBarInnerStyles, errMessage;
+            classNameProgressBar, classNameProgressBarInner, progressBarInnerStyles, errMessage, buttonText;
         const instance = this,
               state = instance.state,
               serverError = state.serverError,
@@ -703,7 +703,11 @@ const Component = React.createClass({
         if (props.markRequired || props.markSuccess) {
             btnClassName += &quot; &quot;+MAIN_CLASS_PREFIX+&quot;wide&quot;;
         }
-        buttonHTML = props.buttonText || props.buttonText || WHITE_SPACE;
+        buttonText = props.buttonText;
+        buttonHTML = props.buttonHTML;
+        if (!buttonText) {
+            buttonHTML = props.buttonHTML || WHITE_SPACE;
+        }
 
         if (XHR2 &amp;&amp; (typeof state.percent===&quot;number&quot;)) {
             classNameProgressBar = MAIN_CLASS_PREFIX+&quot;progress&quot;;
@@ -711,6 +715,7 @@ const Component = React.createClass({
             serverSuccess &amp;&amp; (classNameProgressBar+=&quot; &quot;+classNameProgressBar+&quot;-completed&quot;);
             shiftLeft = state.percent-100;
             progressBarInnerStyles = &quot;margin-left: &quot;+shiftLeft+&quot;%&quot;;
+            buttonHTML = buttonHTML || buttonText;
             buttonHTML += &quot;&lt;div class=&#x27;&quot;+classNameProgressBar+&quot;&#x27;&gt;&quot;+
                               &quot;&lt;div class=&#x27;&quot;+classNameProgressBarInner+&quot;&#x27; style=&#x27;&quot;+progressBarInnerStyles+&quot;&#x27;&gt;&lt;/div&gt;&quot;+
                           &quot;&lt;/div&gt;&quot;;
@@ -763,7 +768,6 @@ const Component = React.createClass({
         state.btnClicked &amp;&amp; (btnClassName += (btnClassName ? &quot; &quot; : &quot;&quot;) + &quot;itsa-button-active&quot;);
         state.btnMouseOver &amp;&amp; (btnClassName += (btnClassName ? &quot; &quot; : &quot;&quot;) + &quot;itsa-button-hover&quot;);
         disabled &amp;&amp; (mainclass+=&quot; disabled&quot;);
-
         return (
             &lt;div
                 className={mainclass}
@@ -775,6 +779,7 @@ const Component = React.createClass({
                     &lt;Button
                         {...props}
                         buttonHTML={buttonHTML}
+                        buttonText={buttonText}
                         className={btnClassName}
                         disabled={disabled}
                         ref=&quot;uploadbutton&quot;
@@ -921,7 +926,7 @@ const Component = React.createClass({
                 }
                 // we need a manageable promise, because it has more methods than standard:
                 promise = Promise.itsa_manage();
-                window.Promise.itsa_finishAll(hash).then(function(response) {
+                Promise.itsa_finishAll(hash).then(function(response) {
                     var rejected = response.rejected;
                     rejected.some(function(ioError) {
                         if (ioError) {
