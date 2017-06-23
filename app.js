@@ -30,13 +30,13 @@ const propsMsg = {
     msg: ""
 };
 
-const Msg = React.createClass({
+class Msg extends React.Component {
     render() {
         return (
             <div>{this.props.msg}</div>
         );
     }
-});
+}
 
 var render = function() {
     ReactDOM.render(
