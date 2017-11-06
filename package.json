@@ -1,6 +1,6 @@
 {
   "name": "itsa-react-fileuploadbutton",
-  "version": "16.0.0",
+  "version": "16.0.4",
   "description": "File upload-button for react, without input-element",
   "author": [
     {
@@ -33,17 +33,16 @@
   },
   "dependencies": {
     "itsa-classes": "^1.0.3",
-    "itsa-fetch": "^1.4.0",
+    "itsa-fetch": "^1.4.1",
     "itsa-jsext": "^1.4.0",
-    "itsa-react-button": "^16.0.0",
+    "itsa-react-button": "^16.0.4",
     "itsa-react-clone-props": "^1.1.0",
     "itsa-utils": "^1.4.0",
     "mime-db": "^1.22.0",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
-    "react": ">=15",
-    "react-dom": ">=15"
+    "react": ">=15"
   },
   "devDependencies": {
     "babel-core": "^6.4.0",

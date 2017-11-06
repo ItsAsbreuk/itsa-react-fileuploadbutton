@@ -23005,7 +23005,7 @@
 
 
 	// module
-	exports.push([module.id, "button.itsa-button {\n  margin: 0;\n  padding: 0.5em 1em;\n  font: inherit;\n  /* 2 */\n  font-family: inherit;\n  font-size: 100%;\n  color: #444;\n  /* rgba not supported (IE 8) */\n  color: rgba(0, 0, 0, 0.8);\n  /* rgba supported */\n  border: 1px solid #999;\n  /*IE 6/7/8*/\n  border: none transparent;\n  /*IE9 + everything else*/\n  background-color: #E6E6E6;\n  text-decoration: none;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;\n  display: inline-block;\n  position: relative;\n  vertical-align: middle;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  text-transform: none;\n  line-height: normal;\n  white-space: nowrap;\n  vertical-align: baseline;\n  text-align: center;\n  cursor: pointer; }\n\nbutton.itsa-button.readonly {\n  cursor: default; }\n\nbutton.itsa-button-primary {\n  background-color: #0078E7;\n  color: #FFF; }\n\nbutton.itsa-button-toggled {\n  background-color: #0078E7;\n  color: #FFF; }\n\nbutton.itsa-button:hover:not(.readonly), button.itsa-button.itsa-button-hover:not(.readonly), button.itsa-button:hover:focus:not(.readonly), button.itsa-button.itsa-button-hover:focus:not(.readonly) {\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000',GradientType=0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0, 0, 0, 0.05)), to(rgba(0, 0, 0, 0.15)));\n  background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  background-image: -o-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset; }\n\nbutton.itsa-button:focus {\n  outline: 0; }\n\nbutton.itsa-button:focus:not(.readonly) {\n  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000',GradientType=0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0, 0, 0, 0.05)), to(rgba(0, 0, 0, 0.1)));\n  background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  background-image: -o-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6) inset; }\n\nbutton.itsa-button::-moz-focus-inner {\n  /* firefox focusring */\n  border: 0; }\n\nbutton.itsa-button-active:not(.readonly) {\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset, 0 0 10px rgba(0, 0, 0, 0.4) inset; }\n\nbutton.itsa-button:not(.itsa-button-togglebtn):not(.readonly):active:hover, button.itsa-button:not(.itsa-button-togglebtn):not(.readonly).itsa-button-hover:active, button.itsa-button:not(.itsa-button-togglebtn):not(.readonly):active:focus, button.itsa-button:not(.itsa-button-togglebtn):not(.readonly):active:hover:focus, button.itsa-button:not(.itsa-button-togglebtn):not(.readonly).itsa-button-hover:active:focus, button.itsa-button-active:not(.itsa-button-togglebtn):not(.readonly):hover, button.itsa-button-active:not(.itsa-button-togglebtn):not(.readonly).itsa-button-hover, button.itsa-button-active:not(.itsa-button-togglebtn):not(.readonly):focus, button.itsa-button-active:not(.itsa-button-togglebtn):not(.readonly):hover:focus, button.itsa-button-active:not(.itsa-button-togglebtn):not(.readonly).itsa-button-hover:focus {\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset, 0 0 10px black inset; }\n\nbutton.itsa-button[disabled], button.itsa-button[disabled]:focus, button.itsa-button[disabled]:hover, button.itsa-button[disabled].itsa-button-hover, button.itsa-button[disabled]:active, button.itsa-button[disabled].itsa-button-active, button.itsa-button[disabled]:active:hover, button.itsa-button[disabled].itsa-button-hover:active, button.itsa-button[disabled].itsa-button-active:hover, button.itsa-button[disabled].itsa-button-active.itsa-button-hover, button.itsa-button[disabled]:active:focus, button.itsa-button[disabled].itsa-button-active:focus, button.itsa-button[disabled]:active:focus:hover, button.itsa-button[disabled].itsa-button-hover:active:focus, button.itsa-button[disabled].itsa-button-active:focus:hover, button.itsa-button[disabled].itsa-button-hover.itsa-button-active:focus {\n  border: none;\n  background-image: none !important;\n  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);\n  filter: alpha(opacity=60);\n  -khtml-opacity: 0.6;\n  -moz-opacity: 0.6;\n  opacity: 0.6;\n  cursor: not-allowed;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset !important;\n  cursor: default; }\n\nbutton.itsa-button-smoothrounded {\n  border-radius: 2px; }\n\nbutton.itsa-button-rounded {\n  border-radius: 0.3em; }\n\nbutton.itsa-button-heavyrounded {\n  border-radius: 0.5em; }\n\nbutton.itsa-button-oval {\n  border-radius: 50%; }\n\nbutton.itsa-button-halfoval {\n  border-radius: 25%; }\n", ""]);
+	exports.push([module.id, "button.itsa-button {\n  margin: 0;\n  padding: 0.5em 1em;\n  font: inherit;\n  /* 2 */\n  font-family: inherit;\n  font-size: 100%;\n  color: #444;\n  /* rgba not supported (IE 8) */\n  color: rgba(0, 0, 0, 0.8);\n  /* rgba supported */\n  border: 1px solid #999;\n  /* IE 6/7/8 */\n  border: none transparent;\n  /* IE9 + everything else */\n  background-color: #E6E6E6;\n  text-decoration: none;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset;\n  display: inline-block;\n  position: relative;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  -webkit-touch-callout: none;\n  -webkit-user-select: none;\n  -khtml-user-select: none;\n  -moz-user-select: none;\n  -ms-user-select: none;\n  user-select: none;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  text-transform: none;\n  line-height: normal;\n  white-space: nowrap;\n  vertical-align: baseline;\n  text-align: center;\n  cursor: pointer; }\n\nbutton.itsa-button.readonly {\n  cursor: default; }\n\nbutton.itsa-button-primary {\n  background-color: #0078E7;\n  color: #FFF; }\n\nbutton.itsa-button-toggled {\n  background-color: #0078E7;\n  color: #FFF; }\n\nbutton.itsa-button:hover:not(.readonly), button.itsa-button.itsa-button-hover:not(.readonly), button.itsa-button:hover:focus:not(.readonly), button.itsa-button.itsa-button-hover:focus:not(.readonly) {\n  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000', GradientType=0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0, 0, 0, 0.05)), to(rgba(0, 0, 0, 0.15)));\n  background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  background-image: -o-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.15));\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset; }\n\nbutton.itsa-button:focus {\n  outline: 0; }\n\nbutton.itsa-button:focus:not(.readonly) {\n  filter: progid:dximagetransform.microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000', GradientType=0);\n  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0, 0, 0, 0.05)), to(rgba(0, 0, 0, 0.1)));\n  background-image: -webkit-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  background-image: -o-linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05) 40%, rgba(0, 0, 0, 0.1));\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6) inset; }\n\nbutton.itsa-button::-moz-focus-inner {\n  /* firefox focusring */\n  border: 0; }\n\nbutton.itsa-button-active:not(.readonly) {\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset, 0 0 10px rgba(0, 0, 0, 0.4) inset; }\n\nbutton.itsa-button:not(.itsa-button-togglebtn):not(.readonly):active:hover, button.itsa-button:not(.itsa-button-togglebtn):not(.readonly).itsa-button-hover:active, button.itsa-button:not(.itsa-button-togglebtn):not(.readonly):active:focus, button.itsa-button:not(.itsa-button-togglebtn):not(.readonly):active:hover:focus, button.itsa-button:not(.itsa-button-togglebtn):not(.readonly).itsa-button-hover:active:focus, button.itsa-button-active:not(.itsa-button-togglebtn):not(.readonly):hover, button.itsa-button-active:not(.itsa-button-togglebtn):not(.readonly).itsa-button-hover, button.itsa-button-active:not(.itsa-button-togglebtn):not(.readonly):focus, button.itsa-button-active:not(.itsa-button-togglebtn):not(.readonly):hover:focus, button.itsa-button-active:not(.itsa-button-togglebtn):not(.readonly).itsa-button-hover:focus {\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.8) inset, 0 0 10px black inset; }\n\nbutton.itsa-button[disabled], button.itsa-button[disabled]:focus, button.itsa-button[disabled]:hover, button.itsa-button[disabled].itsa-button-hover, button.itsa-button[disabled]:active, button.itsa-button[disabled].itsa-button-active, button.itsa-button[disabled]:active:hover, button.itsa-button[disabled].itsa-button-hover:active, button.itsa-button[disabled].itsa-button-active:hover, button.itsa-button[disabled].itsa-button-active.itsa-button-hover, button.itsa-button[disabled]:active:focus, button.itsa-button[disabled].itsa-button-active:focus, button.itsa-button[disabled]:active:focus:hover, button.itsa-button[disabled].itsa-button-hover:active:focus, button.itsa-button[disabled].itsa-button-active:focus:hover, button.itsa-button[disabled].itsa-button-hover.itsa-button-active:focus {\n  border: none;\n  background-image: none !important;\n  filter: progid:dximagetransform.microsoft.gradient(enabled = false);\n  filter: alpha(opacity=60);\n  -khtml-opacity: 0.6;\n  -moz-opacity: 0.6;\n  opacity: 0.6;\n  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15) inset !important;\n  cursor: default; }\n\nbutton.itsa-button-smoothrounded {\n  border-radius: 2px; }\n\nbutton.itsa-button-rounded {\n  border-radius: 0.3em; }\n\nbutton.itsa-button-heavyrounded {\n  border-radius: 0.5em; }\n\nbutton.itsa-button-oval {\n  border-radius: 50%; }\n\nbutton.itsa-button-halfoval {\n  border-radius: 25%; }\n", ""]);
 
 	// exports
 
@@ -23352,7 +23352,7 @@
 
 
 	// module
-	exports.push([module.id, ".itsa-fileuploadbutton {\n  position: relative;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  margin-bottom: 1.5em;\n  /* keep space for help- and error-messages */\n  vertical-align: baseline; }\n\nbutton.itsa-button.itsa-fileuploadbutton-wide {\n  padding-right: 2em; }\n\nbutton.itsa-button.itsa-fileuploadbutton-error {\n  box-shadow: 0 0 0 1px #FF6A6A inset; }\n\n.itsa-fileuploadbutton-required::after {\n  content: \"*\";\n  position: absolute;\n  font-size: 2em;\n  top: 0.1em;\n  right: 0.2em;\n  color: #FF6A6A; }\n\n.itsa-fileuploadbutton-feedback-success::after {\n  content: url(" + __webpack_require__(195) + ");\n  position: absolute;\n  top: 0.5em;\n  right: 0.3em; }\n\n.itsa-fileuploadbutton-error input {\n  border-color: #FF6A6A !important;\n  -webkit-transition: all 0.2s ease-out 0s;\n  -moz-transition: all 0.2s ease-out 0s;\n  -ms-transition: all 0.2s ease-out 0s;\n  -o-transition: all 0.2s ease-out 0s;\n  transition: all 0.2s ease-out 0s; }\n\n.itsa-fileuploadbutton-error-text {\n  white-space: nowrap;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  color: #F34F4F;\n  font-size: 0.8em;\n  line-height: 1em;\n  opacity: 1;\n  position: absolute;\n  z-index: 1;\n  background-color: #F9F9F9;\n  border: 1px solid #FF6A6A;\n  bottom: -1.3em;\n  left: 0;\n  padding: 0.15em 0.4em 0.1em;\n  -webkit-transition: all 0.2s ease-out 0s;\n  -moz-transition: all 0.2s ease-out 0s;\n  -ms-transition: all 0.2s ease-out 0s;\n  -o-transition: all 0.2s ease-out 0s;\n  transition: all 0.2s ease-out 0s; }\n\n.itsa-fileuploadbutton-help-text {\n  white-space: nowrap;\n  color: #999;\n  font-size: 0.8em;\n  bottom: -1.3em;\n  left: 1px;\n  position: absolute;\n  z-index: 1;\n  padding: 0.15em 0.4em 0.1em;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n.itsa-fileuploadbutton-progress {\n  display: block;\n  position: absolute;\n  width: 96%;\n  /* IE8 */\n  width: calc(100% - 0.4em);\n  margin-left: -48%;\n  /* IE8 */\n  margin-left: calc(-50% + 0.2em);\n  left: 50%;\n  overflow: hidden;\n  opacity: 1;\n  border: solid 1px #444;\n  background-color: rgba(255, 255, 255, 0.1);\n  border-radius: 1em;\n  height: 0.4em;\n  bottom: 1px;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n/*$progress-smooth-delay: \"50ms\";*/\n.itsa-fileuploadbutton-progress-inner {\n  position: relative;\n  background-color: #444;\n  opacity: 0.8;\n  width: 100%;\n  height: 100%;\n  -webkit-transition: margin-left 50ms linear;\n  -moz-transition: margin-left 50ms linear;\n  -ms-transition: margin-left 50ms linear;\n  -o-transition: margin-left 50ms linear;\n  transition: margin-left 50ms linear; }\n\n.itsa-fileuploadbutton-progress.itsa-fileuploadbutton-progress-completed {\n  -webkit-transition: opacity 0.5s ease-out 0.5s;\n  -moz-transition: opacity 0.5s ease-out 0.5s;\n  -ms-transition: opacity 0.5s ease-out 0.5s;\n  -o-transition: opacity 0.5s ease-out 0.5s;\n  transition: opacity 0.5s ease-out 0.5s;\n  opacity: 0; }\n", ""]);
+	exports.push([module.id, ".itsa-fileuploadbutton {\n  position: relative;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  margin-bottom: 1.5em;\n  /* keep space for help- and error-messages */\n  vertical-align: baseline; }\n\nbutton.itsa-button.itsa-fileuploadbutton-wide {\n  padding-right: 2em; }\n\nbutton.itsa-button.itsa-fileuploadbutton-error {\n  box-shadow: 0 0 0 1px #FF6A6A inset; }\n\n.itsa-fileuploadbutton-required::after {\n  content: \"*\";\n  position: absolute;\n  font-size: 2em;\n  top: 0.1em;\n  right: 0.2em;\n  color: #FF6A6A; }\n\n.itsa-fileuploadbutton-feedback-success::after {\n  content: url(" + __webpack_require__(195) + ");\n  position: absolute;\n  top: 0.5em;\n  right: 0.3em; }\n\n.itsa-fileuploadbutton-error input {\n  border-color: #FF6A6A !important;\n  -webkit-transition: all 0.2s ease-out 0s;\n  -moz-transition: all 0.2s ease-out 0s;\n  -ms-transition: all 0.2s ease-out 0s;\n  -o-transition: all 0.2s ease-out 0s;\n  transition: all 0.2s ease-out 0s; }\n\n.itsa-fileuploadbutton-error-text {\n  white-space: nowrap;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box;\n  color: #F34F4F;\n  font-size: 0.8em;\n  line-height: 1em;\n  opacity: 1;\n  position: absolute;\n  z-index: 1;\n  background-color: #F9F9F9;\n  border: 1px solid #FF6A6A;\n  bottom: -1.3em;\n  left: 0;\n  padding: 0.15em 0.4em 0.1em;\n  -webkit-transition: all 0.2s ease-out 0s;\n  -moz-transition: all 0.2s ease-out 0s;\n  -ms-transition: all 0.2s ease-out 0s;\n  -o-transition: all 0.2s ease-out 0s;\n  transition: all 0.2s ease-out 0s; }\n\n.itsa-fileuploadbutton-help-text {\n  white-space: nowrap;\n  color: #999;\n  font-size: 0.8em;\n  bottom: -1.3em;\n  left: 1px;\n  position: absolute;\n  z-index: 1;\n  padding: 0.15em 0.4em 0.1em;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n.itsa-fileuploadbutton-progress {\n  display: block;\n  position: absolute;\n  width: 96%;\n  /* IE8 */\n  width: calc(100% - 0.4em);\n  margin-left: -48%;\n  /* IE8 */\n  margin-left: calc(-50% + 0.2em);\n  left: 50%;\n  overflow: hidden;\n  opacity: 1;\n  border: solid 1px #444;\n  background-color: rgba(255, 255, 255, 0.1);\n  border-radius: 1em;\n  height: 0.4em;\n  bottom: 1px;\n  -webkit-box-sizing: border-box;\n  -moz-box-sizing: border-box;\n  box-sizing: border-box; }\n\n/* $progress-smooth-delay: \"50ms\"; */\n.itsa-fileuploadbutton-progress-inner {\n  position: relative;\n  background-color: #444;\n  opacity: 0.8;\n  width: 100%;\n  height: 100%;\n  -webkit-transition: margin-left 50ms linear;\n  -moz-transition: margin-left 50ms linear;\n  -ms-transition: margin-left 50ms linear;\n  -o-transition: margin-left 50ms linear;\n  transition: margin-left 50ms linear; }\n\n.itsa-fileuploadbutton-progress.itsa-fileuploadbutton-progress-completed {\n  -webkit-transition: opacity 0.5s ease-out 0.5s;\n  -moz-transition: opacity 0.5s ease-out 0.5s;\n  -ms-transition: opacity 0.5s ease-out 0.5s;\n  -o-transition: opacity 0.5s ease-out 0.5s;\n  transition: opacity 0.5s ease-out 0.5s;\n  opacity: 0; }\n", ""]);
 
 	// exports
 
@@ -23397,7 +23397,6 @@
 
 	var React = __webpack_require__(6),
 	    PropTypes = __webpack_require__(197),
-	    ReactDOM = __webpack_require__(41),
 	    Button = __webpack_require__(199),
 	    utils = __webpack_require__(201),
 	    itsaReactCloneProps = __webpack_require__(219),
@@ -23528,14 +23527,6 @@
 	        value: function componentDidMount() {
 	            var instance = this;
 	            instance._onlyOnceUploaded = false;
-	            instance._inputNode = ReactDOM.findDOMNode(instance.refs.fileinput);
-	            instance._buttonNode = ReactDOM.findDOMNode(instance.refs.uploadbutton);
-	            instance.IE8_Events = !instance._buttonNode.addEventListener;
-	            if (instance.IE8_Events) {
-	                instance._buttonNode.attachEvent("on" + CLICK, instance._handleClick);
-	            } else {
-	                instance._buttonNode.addEventListener(CLICK, instance._handleClick, true);
-	            }
 	            instance.props.autoFocus && instance.focus();
 	        }
 
@@ -23551,11 +23542,6 @@
 	        value: function componentWillUnmount() {
 	            var instance = this;
 	            instance._clearRemoveTimer();
-	            if (instance.IE8_Events) {
-	                instance._buttonNode.detachEvent("on" + CLICK, instance._handleClick);
-	            } else {
-	                instance._buttonNode.removeEventListener(CLICK, instance._handleClick, true);
-	            }
 	            instance._io && instance._io.abort();
 	        }
 
@@ -23570,7 +23556,7 @@
 	    }, {
 	        key: "focus",
 	        value: function focus() {
-	            this.refs.uploadbutton.focus();
+	            this._button.focus();
 	            return this;
 	        }
 
@@ -23813,7 +23799,10 @@
 	                        buttonText: buttonText,
 	                        className: btnClassName,
 	                        disabled: disabled,
-	                        ref: "uploadbutton",
+	                        onClick: instance._handleClick,
+	                        ref: function ref(node) {
+	                            return instance._button = node;
+	                        },
 	                        showActivated: false,
 	                        type: "button" }))
 	                ),
@@ -23834,16 +23823,12 @@
 	        value: function reset() {
 	            var instance = this;
 	            // the only way that works with ALL browsers, is by removing the DOMnode and replacing it.
-	            delete instance._inputNode;
 	            instance.setState({
 	                inputElement: false
 	            });
 	            async(function () {
 	                instance.setState({
 	                    inputElement: true
-	                });
-	                async(function () {
-	                    instance._inputNode = ReactDOM.findDOMNode(instance.refs.fileinput);
 	                });
 	            });
 	        }
@@ -23927,7 +23912,7 @@
 	                    instance._io.reject(ABORTED);
 	                };
 	                instance._formsubmit = true;
-	                instance.refs.fileform.submit();
+	                instance._formNode.submit();
 	            } else {
 	                options = props.requestOptions.itsa_deepClone();
 	                options.progressfn = instance.progressfn; // is set during `render`
@@ -24255,7 +24240,7 @@
 	                okStatus = { status: "ok" };
 	            if (instance._formsubmit) {
 	                try {
-	                    content = ReactDOM.findDOMNode(instance.refs.iframenode).contentWindow.document.body.innerHTML;
+	                    content = instance._iframeNode.contentWindow.document.body.innerHTML;
 	                    if (content === "OK") {
 	                        instance._io.fulfill(okStatus);
 	                    } else {
@@ -24326,7 +24311,9 @@
 	                onMouseEnter: onMouseEnter,
 	                onMouseLeave: onMouseLeave,
 	                name: "uploadfiles",
-	                ref: "fileinput",
+	                ref: function ref(node) {
+	                    return instance._inputNode = node;
+	                },
 	                style: inputStyles,
 	                type: "file" });
 	        }
@@ -24370,7 +24357,9 @@
 	                    encType: "multipart/form-data",
 	                    method: "post",
 	                    noValidate: true,
-	                    ref: "fileform",
+	                    ref: function ref(node) {
+	                        return instance._formNode = node;
+	                    },
 	                    style: hiddenStyles,
 	                    target: instance._iframeName },
 	                hiddenFields,
@@ -24394,7 +24383,9 @@
 	                iframeStyles = { display: "none" };
 	            return React.createElement("iframe", {
 	                src: instance.props.url,
-	                ref: "iframenode",
+	                ref: function ref(node) {
+	                    return instance._iframeNode = node;
+	                },
 	                name: instance._iframeName,
 	                onLoad: instance._iframeLoad,
 	                onError: instance._iframeError,

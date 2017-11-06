@@ -200,3 +200,11 @@ with the property `formSubmitMode :true`.
 
 Reason for this is, that older browsers (<IE10) are using this mode for uploading files. The `X-Frame-Origin` rules might prevent
 this module from working right when you're uploading CORS: you may need to set these headers to accept a specific cross-domain you're uploading to.
+
+
+#### If you want to express your appreciation
+
+Feel free to donate to one of these addresses; my thanks will be great :)
+
+* Ether: 0xE096EBC2D19eaE7dA8745AA5D71d4830Ef3DF963
+* Bitcoin: 37GgB6MrvuxyqkQnGjwxcn7vkcdont1Vmg

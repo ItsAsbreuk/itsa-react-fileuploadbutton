@@ -99,7 +99,6 @@
 
 const React = require(&quot;react&quot;),
     PropTypes = require(&quot;prop-types&quot;),
-    ReactDOM = require(&quot;react-dom&quot;),
     Button = require(&quot;itsa-react-button&quot;),
     utils = require(&quot;itsa-utils&quot;),
     itsaReactCloneProps = require(&quot;itsa-react-clone-props&quot;),
@@ -207,15 +206,6 @@ class Component extends React.Component {
     componentDidMount() {
         const instance = this;
         instance._onlyOnceUploaded = false;
-        instance._inputNode = ReactDOM.findDOMNode(instance.refs.fileinput);
-        instance._buttonNode = ReactDOM.findDOMNode(instance.refs.uploadbutton);
-        instance.IE8_Events = !instance._buttonNode.addEventListener;
-        if (instance.IE8_Events) {
-            instance._buttonNode.attachEvent(&quot;on&quot;+CLICK, instance._handleClick);
-        }
-        else {
-            instance._buttonNode.addEventListener(CLICK, instance._handleClick, true);
-        }
         instance.props.autoFocus &amp;&amp; instance.focus();
     }
 
@@ -228,12 +218,6 @@ class Component extends React.Component {
     componentWillUnmount() {
         const instance = this;
         instance._clearRemoveTimer();
-        if (instance.IE8_Events) {
-            instance._buttonNode.detachEvent(&quot;on&quot;+CLICK, instance._handleClick);
-        }
-        else {
-            instance._buttonNode.removeEventListener(CLICK, instance._handleClick, true);
-        }
         instance._io &amp;&amp; instance._io.abort();
     }
 
@@ -245,7 +229,7 @@ class Component extends React.Component {
      * @since 0.0.1
      */
     focus() {
-        this.refs.uploadbutton.focus();
+        this._button.focus();
         return this;
     }
 
@@ -449,7 +433,8 @@ class Component extends React.Component {
                         buttonText={buttonText}
                         className={btnClassName}
                         disabled={disabled}
-                        ref=&quot;uploadbutton&quot;
+                        onClick={instance._handleClick}
+                        ref={node =&gt; instance._button = node}
                         showActivated={false}
                         type=&quot;button&quot; /&gt;
                 &lt;/div&gt;
@@ -468,16 +453,12 @@ class Component extends React.Component {
     reset() {
         const instance = this;
         // the only way that works with ALL browsers, is by removing the DOMnode and replacing it.
-        delete instance._inputNode;
         instance.setState({
             inputElement: false
         });
         async(() =&gt; {
             instance.setState({
                 inputElement: true
-            });
-            async(() =&gt; {
-                instance._inputNode = ReactDOM.findDOMNode(instance.refs.fileinput);
             });
         });
     }
@@ -549,7 +530,7 @@ class Component extends React.Component {
                 instance._io.reject(ABORTED);
             };
             instance._formsubmit = true;
-            instance.refs.fileform.submit();
+            instance._formNode.submit();
         }
         else {
             options = props.requestOptions.itsa_deepClone();
@@ -844,7 +825,7 @@ class Component extends React.Component {
               okStatus= {status: &quot;ok&quot;};
         if (instance._formsubmit) {
             try {
-                content = ReactDOM.findDOMNode(instance.refs.iframenode).contentWindow.document.body.innerHTML;
+                content = instance._iframeNode.contentWindow.document.body.innerHTML;
                 if (content===&quot;OK&quot;) {
                     instance._io.fulfill(okStatus);
                 }
@@ -915,7 +896,7 @@ class Component extends React.Component {
                 onMouseEnter={onMouseEnter}
                 onMouseLeave={onMouseLeave}
                 name=&quot;uploadfiles&quot;
-                ref=&quot;fileinput&quot;
+                ref={node =&gt; instance._inputNode = node}
                 style={inputStyles}
                 type=&quot;file&quot; /&gt;
         );
@@ -959,7 +940,7 @@ class Component extends React.Component {
                 encType=&quot;multipart/form-data&quot;
                 method=&quot;post&quot;
                 noValidate={true}
-                ref=&quot;fileform&quot;
+                ref={node =&gt; instance._formNode = node}
                 style={hiddenStyles}
                 target={instance._iframeName} &gt;
                 {hiddenFields}
@@ -982,7 +963,7 @@ class Component extends React.Component {
         return (
             &lt;iframe
                 src={instance.props.url}
-                ref=&quot;iframenode&quot;
+                ref={node =&gt; instance._iframeNode = node}
                 name={instance._iframeName}
                 onLoad={instance._iframeLoad}
                 onError={instance._iframeError}
